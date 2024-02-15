@@ -2,9 +2,11 @@ import { useState } from 'react';
 import NavBar from '../components/NavBar.jsx';
 import Footer from '../components/Footer.jsx';
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 
 function Contact() {
-  const navigate = useNavigate() ; 
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -21,13 +23,32 @@ function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you can add your logic to handle form submission, such as sending form data to a server
-    console.log(formData); // For demonstration, logging form data to console
+  const form = useRef();
 
-    navigate('/responseContact') ;
-    // Contact information is to be mailed to the desired email id
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    for (const key in formData) {
+      if (formData[key] === '') {
+        alert('Please fill out all fields');
+        return;
+      }
+    }
+
+    emailjs
+      .sendForm('service_m822i0d', 'template_l5ua8b3', form.current, {
+        publicKey: 'yDSuHSxCTnMGd2jvo',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+
+          navigate('/responseContact');
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
   };
 
   return (
@@ -39,7 +60,7 @@ function Contact() {
             <div className="col-md-6 mx-auto">
               <h2 className="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
               <p className="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within a matter of hours to help you.</p>
-              <form id="contact-form" name="contact-form" onSubmit={handleSubmit}>
+              <form id="contact-form" name="contact-form" ref={form} onSubmit={sendEmail}>
                 <div className="row">
                   <div className="col-md-12 mb-4">
                     <div className="md-form">
@@ -89,7 +110,7 @@ function Contact() {
           </div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
