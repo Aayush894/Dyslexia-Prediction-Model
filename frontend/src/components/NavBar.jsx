@@ -1,4 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+
 export default function NavBar() {
 
   
@@ -36,7 +38,10 @@ export default function NavBar() {
             </div>
             : 
             <div className="d-flex">
-              <Link className="nav-link fw-bold text-white mx-1" to="/contact">Contact Us</Link>
+              <Link className="nav-link fw-bold text-white mx-1" to="/contact">
+               <ContactSupportIcon
+               fontSize = "medium" />
+              </Link>
 
               <div className='btn bg-white text-danger mx-1' onClick={handleLogout}>
                 Logout
