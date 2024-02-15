@@ -13,12 +13,9 @@ export default function NavBar() {
   
   return (
     <>
-      <nav className="navbar navbar-expand-sm bg-success navbar-dark">
+      <nav className="navbar navbar-expand-sm bg-success navbar-dark fixed-top">
         <div className="container-fluid">
           <ul className="navbar-nav me-auto mb-2">
-            <li className="nav-item">
-              <img src="../assets/logo.png" alt="logo" width={40} height={40} style={{borderRadius: 40}} />
-            </li>
             <li className="nav-item">
               <Link className="nav-link fw-bold text-white" to="/">Home</Link>
             </li>

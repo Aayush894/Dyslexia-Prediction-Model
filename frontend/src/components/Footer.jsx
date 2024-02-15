@@ -1,19 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Footer() {
-    return (
-        <div className='w-100%'>
-            <footer className="d-flex flex-wrap justify-content-center align-text-center py-3 border-top" style={{ textAlign: 'center' }}>
-                <div className="col-md-4 d-flex align-items-center">
-                    <Link to="/" className="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                        <svg className="bi" width="30" height="24"><use xlinkHref="#bootstrap"></use></svg>
-                    </Link>
-                    <p className="mx-auto">© 2024 Disgraphia Prediction Model, Inc</p>
-                </div>
-                
-            </footer>
-        </div>
-    );
+  return (
+    <>
+    
+    <footer className="text-white text-center text-lg-start fixed-bottom" style={{backgroundColor: "#C0C0C0"}}>
+        <div
+        className="text-center p-1"
+      >
+        © 2024 Copyright:
+        <Link className="text-dark bold" to="">
+        @Disgraphia Prediction Model
+        </Link>
+      </div>
+    </footer>
+    </>
+  );
 }
 
 export default Footer;

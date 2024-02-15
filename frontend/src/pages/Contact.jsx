@@ -99,12 +99,6 @@ function Contact() {
                 <li><i className="fas fa-map-marker-alt"></i>
                   <p>@Team Disgraphia Prediction</p>
                 </li>
-                <li><i className="fas fa-phone"></i>
-                  <p>+91 8287353295</p>
-                </li>
-                <li><i className="fas fa-envelope"></i>
-                  <p>aayushs894@gmail.com</p>
-                </li>
               </ul>
             </div>
           </div>

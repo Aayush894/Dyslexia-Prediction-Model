@@ -8,7 +8,7 @@ export default function Home() {
       <div>
         <NavBar />
       </div>
-      <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" ,marginTop:"5px"}}>
+      <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" ,marginTop :"50px", padding: "20px"}}>
         <div style={{ width: "100%" }}>
           <Corousel />
         </div>

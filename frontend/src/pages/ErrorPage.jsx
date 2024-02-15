@@ -1,8 +1,13 @@
+import NavBar from '../components/NavBar' ; 
+import Footer from '../components/Footer' ; 
 
 import {Link} from "react-router-dom"
 function ErrorPage() {
   return (
     <>
+      <div>
+        <NavBar />
+      </div>
       <div className="d-flex align-items-center justify-content-center vh-100">
         <div className="text-center">
           <h1 className="display-1 fw-bold">404</h1>
@@ -16,6 +21,10 @@ function ErrorPage() {
           </Link>
         </div>
       </div>
+      <div>
+        <Footer />
+      </div>
+      
     </>
   );
 }

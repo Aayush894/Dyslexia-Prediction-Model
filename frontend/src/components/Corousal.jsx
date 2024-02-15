@@ -18,13 +18,13 @@ export default function Corousel() {
                         </form>
                     </div>
                     <div className="carousel-item">
-                        <img src="../assets/disgraphia1.png" className="rounded mx-auto d-block w-75 h-75 img-thumbnail img-fluid" style={{filter: "brightness(50%)", height: "120px", objectFit: "fill"}} alt="..." />
+                        <img src="../assets/disgraphia1.png" className="rounded mx-auto d-block w-100 h-100 img-thumbnail img-fluid" style={{filter: "brightness(50%)", height: "120px", objectFit: "fill"}} alt="..." />
                     </div>
                     <div className="carousel-item">
-                        <img src="../assets/disgraphia2.png" className="rounded mx-auto d-block w-75 h-75 img-thumbnail img-fluid" style={{filter: "brightness(50%)" , height: "120px", objectFit: "fill"}} alt="..." />
+                        <img src="../assets/disgraphia2.png" className="rounded mx-auto d-block w-100 h-100 img-thumbnail img-fluid" style={{filter: "brightness(50%)" , height: "120px", objectFit: "fill"}} alt="..." />
                     </div>
                     <div className="carousel-item active">
-                        <img src="../assets/disgraphia3.png" className="rounded mx-auto d-block w-75 h-75 img-thumbnail img-fluid" style={{filter: "brightness(50%)", height: "120px", objectFit: "fill"}} alt="..." />
+                        <img src="../assets/disgraphia3.png" className="rounded mx-auto d-block w-100 h-100 img-thumbnail img-fluid" style={{filter: "brightness(50%)", height: "120px", objectFit: "fill"}} alt="..." />
                     </div>
                 </div>
 

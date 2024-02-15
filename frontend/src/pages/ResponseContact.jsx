@@ -1,8 +1,13 @@
 
 import {Link} from "react-router-dom"
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 function ErrorPage() {
   return (
     <>
+    <div>
+      <NavBar />
+    </div>
       <div className="d-flex align-items-center justify-content-center vh-100">
         <div className="text-center">
           <h1 className="display-3 fw-bold">Thank You</h1>
@@ -15,6 +20,9 @@ function ErrorPage() {
             Go Home
           </Link>
         </div>
+      </div>
+      <div>
+        <Footer />
       </div>
     </>
   );
