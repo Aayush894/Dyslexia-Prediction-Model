@@ -3,7 +3,6 @@ import NavBar from '../components/NavBar.jsx';
 import Footer from '../components/Footer.jsx';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
-import emailjs from '@emailjs/browser';
 
 function Contact() {
   const navigate = useNavigate();
@@ -25,31 +24,26 @@ function Contact() {
 
   const form = useRef();
 
-  const sendEmail = (e) => {
-    e.preventDefault();
+  const sendEmail = async () => {
 
-    for (const key in formData) {
-      if (formData[key] === '') {
-        alert('Please fill out all fields');
-        return;
+    await fetch(`http://localhost:5000/api/sendemail`, {
+      method: "POST", 
+      body: JSON.stringify(formData),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
       }
-    }
-
-    emailjs
-      .sendForm('service_m822i0d', 'template_l5ua8b3', form.current, {
-        publicKey: 'yDSuHSxCTnMGd2jvo',
-      })
-      .then(
-        () => {
-          console.log('SUCCESS!');
-
-          navigate('/responseContact');
-        },
-        (error) => {
-          console.log('FAILED...', error.text);
-        },
-      );
-  };
+    })
+    .then((res) => {
+      console.log(res); 
+      if (res.status > 199 && res.status < 300) {
+        navigate("/responseContact"); 
+      }
+    })
+    .catch((err) => {
+      console.log("Error occur while fetching sendmail api", err) ; 
+    })
+  }
 
   return (
     <div className="vh-100 d-flex flex-column">

@@ -2,7 +2,7 @@ import 'dotenv/config';
 import cors from 'cors'; 
 import express from 'express';
 import connectDB from "./db.js"; 
-import router from './routes/CreateUser.js'; 
+import router from './routes/user.router.js'; 
 
 const app = express();
 
