@@ -1,26 +1,22 @@
-import 'dotenv/config';
-import cors from 'cors'; 
-import express from 'express';
-import connectDB from "./db.js"; 
-import router from './routes/user.router.js'; 
+import dotenv from "dotenv";
+import connectDB from "./db/db.js";
+import { app } from "./app.js";
 
-const app = express();
-
-// Apply CORS middleware for all routes
-app.use(cors());
-
-
-app.use(express.json());
-app.use('/api', router);
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
+dotenv.config({
+  path: "./.env",
 });
 
-connectDB();
+connectDB()
+  .then(() => {
+    app.on("error", (error) => {
+      console.log("Error: ", error);
+      throw error;
+    });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Example app listening on port ${process.env.PORT}`);
-});
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`Server is listening on ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log(`MongoDB connection failed`, err);
+  });

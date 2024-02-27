@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
@@ -6,8 +5,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from 'jwt-decode';
 
 function Signup() {
-
-    const [credentials, setCredentials] = useState({ name: "", email: "", password: ""});
+    const [credentials, setCredentials] = useState({ username: "", email: "", password: "", age: "", phoneno: ""}); // Changed address to phoneNo
 
     const navigate = useNavigate();
 
@@ -21,17 +19,16 @@ function Signup() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // synthetic event. 
+        e.preventDefault();
         const response = await fetch("http://localhost:5000/api/signup", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({name: credentials.name, email: credentials.email, password: credentials.password})
+            body: JSON.stringify({username: credentials.username, email: credentials.email, password: credentials.password, age: credentials.age, phoneno: credentials.phoneno}) // Changed address to phoneNo
         });
 
-        const json = await response.json()
-        // console.log(json) ; 
+        const json = await response.json();
 
         if (!json.success) {
             alert("Enter Valid Credentials")
@@ -76,9 +73,9 @@ function Signup() {
                       id="form3Example2"
                       className="form-control form-control-lg"
                       placeholder="Enter a valid username"
-                      name="name" // Added name attribute
-                      value={credentials.name} // Added value attribute
-                      onChange={onChange} // Added onChange handler
+                      name="username"
+                      value={credentials.username}
+                      onChange={onChange}
                     />
                     <label className="form-label" htmlFor="form3Example2">
                       Username
@@ -91,9 +88,9 @@ function Signup() {
                       id="form3Example3"
                       className="form-control form-control-lg"
                       placeholder="Enter a valid email address"
-                      name="email" // Added name attribute
-                      value={credentials.email} // Added value attribute
-                      onChange={onChange} // Added onChange handler
+                      name="email"
+                      value={credentials.email}
+                      onChange={onChange}
                     />
                     <label className="form-label" htmlFor="form3Example3">
                       Email address
@@ -106,20 +103,50 @@ function Signup() {
                       id="form3Example4"
                       className="form-control form-control-lg"
                       placeholder="Enter password"
-                      name="password" // Added name attribute
-                      value={credentials.password} // Added value attribute
-                      onChange={onChange} // Added onChange handler
+                      name="password"
+                      value={credentials.password}
+                      onChange={onChange}
                     />
                     <label className="form-label" htmlFor="form3Example4">
                       Password
                     </label>
                   </div>
-  
+
+                  <div className="form-outline mb-4">
+                    <input
+                      type="number"
+                      id="form3Example5"
+                      className="form-control form-control-lg"
+                      placeholder="Enter a valid age"
+                      name="age"
+                      value={credentials.age}
+                      onChange={onChange}
+                    />
+                    <label className="form-label" htmlFor="form3Example2">
+                      Age
+                    </label>
+                  </div>
+
+                  <div className="form-outline mb-4">
+                    <input
+                      type="text"
+                      id="form3Example6"
+                      className="form-control form-control-lg"
+                      placeholder="Enter a valid phone number" // Updated placeholder
+                      name="phoneno" // Changed name to phoneNo
+                      value={credentials.phoneno} // Changed value to phoneNo
+                      onChange={onChange}
+                    />
+                    <label className="form-label" htmlFor="form3Example6">
+                      Phone No
+                    </label>
+                  </div>
+                  
                   <div className="text-center text-lg-start mt-4 pt-2">
                     <button
-                      type="submit" // Changed button type to submit
+                      type="submit"
                       className="btn btn-primary btn-lg"
-                      style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }} // Added double curly braces for inline styles
+                      style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }}
                     >
                       SignUp
                     </button>
