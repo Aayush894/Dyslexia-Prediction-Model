@@ -365,4 +365,38 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { sendEmail, registerUser, loginUser, updatePass, updateUser };
+const UserProfile = asyncHandler(async (req, res) => {
+  // console.log(req);
+  try {
+    const authToken =
+      req.cookies?.accessToken ||
+      req.header("Authorization")?.replace("Bearer ", "") ||
+      "";
+
+    if (!authToken) {
+      throw new ApiError(401, "Unauthorised request");
+    }
+
+    const decodedToken = jwt.verify(authToken, process.env.ACCESS_TOKEN_SECRET);
+
+    const user = await User.findById(decodedToken?._id);
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    return res
+      .status(200)
+      .json({ success: true, user, message: "Fetched Data" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while sending response",
+    });
+  }
+
+})
+export { sendEmail, registerUser, loginUser, updatePass, updateUser, UserProfile };

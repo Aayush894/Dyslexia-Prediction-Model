@@ -8,7 +8,7 @@ function Footer() {
         <div
         className="text-center p-1"
       >
-        © 2024 Copyright:
+        © 2024 Copyright
         <Link className="text-dark bold" to="">
         @Disgraphia Prediction Model
         </Link>

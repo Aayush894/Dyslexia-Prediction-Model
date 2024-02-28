@@ -1,4 +1,3 @@
-import Home from "./pages/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "../node_modules/bootstrap-dark-5/dist/css/bootstrap-dark.min.css";
@@ -8,15 +7,17 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 // components imports
+import Home from "./pages/Home/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import Test from './pages/Test.jsx'
 import Contact from "./pages/Contact.jsx";
 import TestRecord from './pages/TestRecord.jsx'
 import ResponseContact from "./pages/ResponseContact.jsx";
-import Profile from "./pages/Profile.jsx";
-import UpdateUser from './pages/UpdateUser.jsx'
-import UpdatePass from './pages/UpdatePass.jsx'
+import Profile from "./pages/Profile/Profile.jsx";
+import UpdateUser from './pages/Update/UpdateUser.jsx'
+import UpdatePass from './pages/Update/UpdatePass.jsx'
+import Team from './pages/Team/Team.jsx'
 
 function App() {
   const clientId =
@@ -32,16 +33,14 @@ function App() {
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/test" element={<Test />} />
             <Route exact path="/contact" element={<Contact />} />
-            <Route exact path="/test" element={<Test />} />
             <Route exact path="/testrecord" element={<TestRecord />} />
             <Route exact path="/responseContact" element={<ResponseContact/>} />
             <Route exact path="/profile" element={<Profile/>} />
             <Route exact path="/updatePass" element={<UpdatePass/>} />
             <Route exact path="/updateUser" element={<UpdateUser/>} />
+            <Route exact path="/team" element={<Team/>} />
 
 
-
-            {/* <Route exact path="/cart" element={<Cart />} /> */}
           </Routes>
         </div>
       </Router>

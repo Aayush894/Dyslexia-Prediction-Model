@@ -11,15 +11,19 @@ export default function NavBar() {
 
   return (
     <>
-      <nav className="navbar navbar-expand-sm bg-success navbar-dark fixed-top">
+      <nav className="navbar navbar-expand-sm bg-warning navbar-dark fixed-top">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/profile">
-            <img
-              src="./assets/avatar_icon.png"
-              alt="Avatar Logo"
-              style={{ width: 40, height: 40, borderRadius: "50%" }}
-            />
-          </Link>
+          {localStorage.getItem("authToken") ? (
+            <Link className="navbar-brand" to="/profile">
+              <img
+                src="./assets/avatar_icon.png"
+                alt="Avatar Logo"
+                style={{ width: 40, height: 40, borderRadius: "50%" }}
+              />
+            </Link>
+          ) : (
+            ""
+          )}
 
           <ul className="navbar-nav me-auto mb-2">
             <li className="nav-item">
@@ -28,13 +32,26 @@ export default function NavBar() {
               </Link>
             </li>
 
+            <li className="nav-item">
+              <Link className="nav-link fw-bold text-white" to="/team">
+                Team
+              </Link>
+            </li>
             {localStorage.getItem("authToken") ? (
+              <>
+              <li className="nav-item">
+              <Link className="nav-link fw-bold text-white" to="/test">
+                {" "}
+                Test{" "}
+              </Link>
+             </li>
               <li className="nav-item">
                 <Link className="nav-link fw-bold text-white" to="/testrecord">
                   {" "}
-                  Records{" "}
+                  History{" "}
                 </Link>
               </li>
+              </>
             ) : (
               ""
             )}

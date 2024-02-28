@@ -1,18 +1,18 @@
-/* eslint-disable no-unused-vars */
-import React from 'react'
 import ReactDom from 'react-dom'
 
 const MODEL_STYLES = {
   position: 'fixed',
-  top: '50%',
-  left: '50%',
-  backgroundColor: 'rgb(34,34,34)',
-  transform: 'translate(-50%, -50%)',
+  top: '10%', 
+  right: '10%', 
+  backgroundColor: 'rgb(34, 34, 34)',
+  transform: 'translate(0, 0)', 
   zIndex: 1000,
-  height: '90%',
-  width: '90%',
-  overflow: 'auto'
-}
+  height: '80%', 
+  width: '80%', 
+  overflow: 'auto',
+  borderRadius: '10px', 
+  boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)'
+};
 
 const OVERLAY_STYLES = {
   position: 'fixed',
@@ -23,7 +23,7 @@ const OVERLAY_STYLES = {
   backgroundColor: 'rgba(0, 0, 0, .7)',
   zIndex: 1000,
   overflow: 'auto'
-}
+};
 
 export default function Model({ children, onClose }) {
 
