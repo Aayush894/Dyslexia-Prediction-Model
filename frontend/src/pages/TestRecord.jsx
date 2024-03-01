@@ -9,7 +9,7 @@ function TestRecord() {
       </div>
       <div className="d-flex align-items-center justify-content-center vh-100">
         <div className="text-center">
-          <span className="display-6 fw-bold">You have nothing here.</span>
+          <span className="display-6 fw-bold">You have nothing here!</span>
         </div>
       </div>
       <div>
