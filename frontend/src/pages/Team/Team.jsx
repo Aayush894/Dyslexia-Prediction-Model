@@ -90,9 +90,9 @@ function Team() {
                 <div className="col-md-12 text-center">
                   <div className="pt-2">
                     <h5 className="mt-4 font-weight-medium mb-0">
-                      Abhishek Verma
+                      Kartik Verma
                     </h5>
-                    <h6 className="subtitle mb-3">Machine Learning</h6>
+                    <h6 className="subtitle mb-3">Frontend Development</h6>
                     <p>
                       You can relay on our amazing features list and also our
                       customer services will be great experience.
@@ -206,9 +206,9 @@ function Team() {
                 <div className="col-md-12 text-center">
                   <div className="pt-2">
                     <h5 className="mt-4 font-weight-medium mb-0">
-                      Kartik Verma
+                      Abhishek Verma
                     </h5>
-                    <h6 className="subtitle mb-3">Frontend Developer</h6>
+                    <h6 className="subtitle mb-3">Machine Learning</h6>
                     <p>
                       You can relay on our amazing features list and also our
                       customer services will be great experience.

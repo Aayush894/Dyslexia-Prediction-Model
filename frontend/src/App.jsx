@@ -10,7 +10,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import Home from "./pages/Home/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
-import Test from './pages/Test.jsx'
+import Test from './pages/Test/Test.jsx'
 import Contact from "./pages/Contact.jsx";
 import TestRecord from './pages/TestRecord.jsx'
 import ResponseContact from "./pages/ResponseContact.jsx";

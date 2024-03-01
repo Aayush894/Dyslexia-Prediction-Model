@@ -1,54 +1,49 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
-import expressAsyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { User } from "../models/user.model.js";
 import { validationResult } from "express-validator";
 import nodemailer from "nodemailer";
 
-// Create transporter with SMTP configuration
-let transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD,
-  },
-});
+const sendEmail = async (req, res) => {
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: true, // Indicates whether to use SSL/TLS
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: true, 
+      ciphers: 'SSLv3',
+    },
+  });
 
-const sendEmail = expressAsyncHandler(async (req, res) => {
   console.log("Credentials obtained, sending message...");
   const { name, email, subject, message } = req.body;
-  console.log(name, email, subject, message);
 
   var mailOptions = {
-    from: email,
+    from: process.env.SMTP_USER,
     to: "nicolatesladummy@gmail.com",
     subject: `username: ${name} || ${subject}`,
     text: message,
     html: "<h1>Mail is Sent</h1>",
   };
 
-  transporter.sendMail(mailOptions, (err, info) => {
-    if (err) {
-      console.log("Error occurred. " + err.message);
-      res
-        .status(500)
-        .json({
-          success: false,
-          message: "Error occurred while sending email",
-        });
-    } else {
-      console.log("Message sent: %s", info.messageId);
-      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-      res
-        .status(200)
-        .json({ success: true, message: "Email sent successfully" });
-    }
-  });
-});
+  console.log(mailOptions);
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Message sent: " + info.response);
+    res.send("Email sent successfully");
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).send("Error sending email");
+  }
+};
+
 
 const registerUser = asyncHandler(async (req, res) => {
   const errors = validationResult(req);
@@ -85,10 +80,10 @@ const registerUser = asyncHandler(async (req, res) => {
   };
 
   // check for valid phoneno
-const isValidPhoneNo = (phoneno) => {
-  const phoneNoRegex = /^\d{10}$/; 
-  return phoneNoRegex.test(phoneno);
-};
+  const isValidPhoneNo = (phoneno) => {
+    const phoneNoRegex = /^\d{10}$/;
+    return phoneNoRegex.test(phoneno);
+  };
 
   // check for valid password min length is 8.
   const isValidPassword = (password) => {
@@ -302,10 +297,9 @@ const updateUser = asyncHandler(async (req, res) => {
 
   // check for valid phone number
   const isValidPhoneNo = (phoneno) => {
-    const phoneNoRegex = /^\d{10}$/; 
+    const phoneNoRegex = /^\d{10}$/;
     return phoneNoRegex.test(phoneno);
   };
-  
 
   if (!isValidUsername(username)) {
     throw new ApiError(
@@ -397,6 +391,12 @@ const UserProfile = asyncHandler(async (req, res) => {
       message: "An error occurred while sending response",
     });
   }
-
-})
-export { sendEmail, registerUser, loginUser, updatePass, updateUser, UserProfile };
+});
+export {
+  sendEmail,
+  registerUser,
+  loginUser,
+  updatePass,
+  updateUser,
+  UserProfile,
+};
