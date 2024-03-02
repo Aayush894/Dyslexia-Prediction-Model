@@ -10,14 +10,12 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import Home from "./pages/Home/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
-import Test from './pages/Test/Test.jsx'
-import Contact from "./pages/Contact.jsx";
-import TestRecord from './pages/TestRecord.jsx'
-import ResponseContact from "./pages/ResponseContact.jsx";
+import Test from "./pages/Test/Test.jsx";
+import TestRecord from "./pages/TestRecord.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
-import UpdateUser from './pages/Update/UpdateUser.jsx'
-import UpdatePass from './pages/Update/UpdatePass.jsx'
-import Team from './pages/Team/Team.jsx'
+import UpdateUser from "./pages/Update/UpdateUser.jsx";
+import UpdatePass from "./pages/Update/UpdatePass.jsx";
+import About from "./pages/About/About.jsx";
 
 function App() {
   const clientId =
@@ -32,15 +30,11 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/test" element={<Test />} />
-            <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/testrecord" element={<TestRecord />} />
-            <Route exact path="/responseContact" element={<ResponseContact/>} />
-            <Route exact path="/profile" element={<Profile/>} />
-            <Route exact path="/updatePass" element={<UpdatePass/>} />
-            <Route exact path="/updateUser" element={<UpdateUser/>} />
-            <Route exact path="/team" element={<Team/>} />
-
-
+            <Route exact path="/profile" element={<Profile />} />
+            <Route exact path="/updatePass" element={<UpdatePass />} />
+            <Route exact path="/updateUser" element={<UpdateUser />} />
+            <Route exact path="/about" element={<About />} />
           </Routes>
         </div>
       </Router>
