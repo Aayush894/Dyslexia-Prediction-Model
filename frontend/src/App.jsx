@@ -8,7 +8,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 
 // components imports
 import Home from "./pages/Home/Home.jsx";
-import Login from "./pages/Login.jsx";
+import LoginPage from "./pages/LoginSignup/LoginPage.jsx";
 import Signup from "./pages/Signup.jsx";
 import Test from "./pages/Test/Test.jsx";
 import TestRecord from "./pages/TestRecord.jsx";
@@ -27,7 +27,7 @@ function App() {
         <div>
           <Routes>
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/login" element={<LoginPage />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/test" element={<Test />} />
             <Route exact path="/testrecord" element={<TestRecord />} />
