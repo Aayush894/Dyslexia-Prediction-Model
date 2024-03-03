@@ -9,7 +9,6 @@ import {
   Textarea,
   Checkbox,
 } from "@material-tailwind/react";
-import { FingerPrintIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
@@ -87,9 +86,6 @@ export function Home() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
           <div className="mt-32 flex flex-wrap items-center">
             <div className="mx-auto -mt-8 w-full px-4 md:w-5/12">
-              <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-blue-gray-900 p-2 text-center shadow-lg">
-                <FingerPrintIcon className="h-8 w-8 text-white " />
-              </div>
               <Typography
                 variant="h3"
                 className="mb-3 font-bold"
@@ -441,41 +437,43 @@ export function Home() {
               />
             </div>
             <div className="pb-10">
-            <Textarea
-              variant="outlined"
-              size="lg"
-              label="Message"
-              rows={8}
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-            />
+              <Textarea
+                variant="outlined"
+                size="lg"
+                label="Message"
+                rows={8}
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+              />
             </div>
-            <Checkbox
-              label={
-                <Typography
-                  variant="small"
-                  color="gray"
-                  className="flex items-center font-normal"
+
+            <div className="flex items-center mb-4">
+              <Checkbox containerProps={{ className: "-ml-2.5 mr-2" }} />
+              <Typography
+                variant="small"
+                color="gray"
+                className="flex items-center font-normal"
+              >
+                I agree to the
+                <Link
+                  to="#"
+                  className="font-medium transition-colors hover:text-gray-900 ml-1"
                 >
-                  I agree the
-                  <a
-                    href="#"
-                    className="font-medium transition-colors hover:text-gray-900"
-                  >
-                    &nbsp;Terms and Conditions
-                  </a>
-                  <div className=" mt-4"></div>
-                </Typography>
-              }
-              containerProps={{ className: "-ml-2.5" }}
-            />
-            
-            <div className="text-center text-md-left">
-                <button type="submit" className="text-white bg-indigo-600 rounded-md lg:ml-5 btn btn-primary">Submit</button>
+                  Terms and Conditions
+                </Link>
+              </Typography>
             </div>
-            
+
+            <div className="text-center text-md-left">
+              <button
+                type="submit"
+                className="text-white bg-indigo-600 rounded-md lg:ml-5 btn btn-primary"
+              >
+                Submit
+              </button>
+            </div>
           </form>
         </div>
       </section>
