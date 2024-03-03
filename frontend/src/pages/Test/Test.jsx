@@ -52,18 +52,17 @@ function Test() {
         <div className="flex-grow-1 d-flex justify-content-center align-items-center">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="formmGroupExampleInput">Language Vocubulary Score</label>
+              <label htmlFor="formGroupExampleInput1">Language Vocubulary Score</label>
               <input
                 type="text"
                 className="form-control"
-                id="formGroupExampleInput"
+                id="formGroupExampleInput1"
                 placeholder="Example input"
                 name="vocabScore" // Added name attribute
                 value={credentials.vocabScore} // Added value attribute
                 onChange={onChange}
               />
-            </div>
-            <div className="form-group">
+        
               <label htmlFor="formGroupExampleInput2">Memory Score</label>
               <input
                 type="text"
@@ -74,49 +73,45 @@ function Test() {
                 value={credentials.memScore} // Added value attribute
                 onChange={onChange}
               />
-            </div>
-            <div className="form-group">
-              <label htmlFor="formGroupExampleInput2">Speed Score</label>
+          
+              <label htmlFor="formGroupExampleInput3">Speed Score</label>
               <input
                 type="text"
                 className="form-control"
-                id="formGroupExampleInput2"
+                id="formGroupExampleInput3"
                 placeholder="Another input"
                 name="speedScore" // Added name attribute
                 value={credentials.speedScore} // Added value attribute
                 onChange={onChange}
               />
-            </div>
-            <div className="form-group">
-              <label htmlFor="formGroupExampleInput2">Visual Discrimination Score</label>
+          
+              <label htmlFor="formGroupExampleInput4">Visual Discrimination Score</label>
               <input
                 type="text"
                 className="form-control"
-                id="formGroupExampleInput2"
+                id="formGroupExampleInput4"
                 placeholder="Another input"
                 name="visualScore" // Added name attribute
                 value={credentials.visualScore} // Added value attribute
                 onChange={onChange}
               />
-            </div>
-            <div className="form-group">
-              <label htmlFor="formGroupExampleInput2">Audio Discrimination Score</label>
+          
+              <label htmlFor="formGroupExampleInput5">Audio Discrimination Score</label>
               <input
                 type="text"
                 className="form-control"
-                id="formGroupExampleInput2"
+                id="formGroupExampleInput5"
                 placeholder="Another input"
                 name="audioScore" // Added name attribute
                 value={credentials.audioScore} // Added value attribute
                 onChange={onChange}
               />
-            </div>
-            <div className="form-group">
-              <label htmlFor="formGroupExampleInput2">Survey Score</label>
+        
+              <label htmlFor="formGroupExampleInput6">Survey Score</label>
               <input
                 type="text"
                 className="form-control"
-                id="formGroupExampleInput2"
+                id="formGroupExampleInput6"
                 placeholder="Another input"
                 name="surveyScore" // Added name attribute
                 value={credentials.surveyScore} // Added value attribute
