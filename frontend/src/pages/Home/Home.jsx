@@ -36,6 +36,8 @@ export function Home() {
   const form = useRef();
 
   const sendEmail = async () => {
+    console.log("Submit conatct details");
+
     await fetch(`http://localhost:5000/api/sendemail`, {
       method: "POST",
       body: JSON.stringify(formData),
@@ -406,24 +408,40 @@ export function Home() {
               directly.
             </p>
             <div className="mb-8 flex gap-8">
-              <Input
-                variant="outlined"
-                size="lg"
-                id="name"
-                name="name"
-                label="Full Name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-              <Input
-                variant="outlined"
-                size="lg"
-                id="email"
-                name="email"
-                label="Email Address"
-                value={formData.email}
-                onChange={handleChange}
-              />
+              <div className="w-100">
+                <Input
+                  variant="outlined"
+                  size="lg"
+                  id="name"
+                  name="name"
+                  autoComplete="off"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Full Name
+                </label>
+              </div>
+              <div className="w-100">
+                <Input
+                  variant="outlined"
+                  size="lg"
+                  id="email"
+                  name="email"
+                  autoComplete="off"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email Address
+                </label>
+              </div>
             </div>
             <div className="pb-10">
               <Input
@@ -431,22 +449,34 @@ export function Home() {
                 size="lg"
                 id="subject"
                 name="subject"
-                label="Subject"
+                autoComplete="off"
                 value={formData.subject}
                 onChange={handleChange}
               />
+              <label
+                htmlFor="subject"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Subject
+              </label>
             </div>
             <div className="pb-10">
               <Textarea
                 variant="outlined"
                 size="lg"
-                label="Message"
-                rows={8}
+                rows={5}
                 id="message"
                 name="message"
+                autoComplete="off"
                 value={formData.message}
                 onChange={handleChange}
               />
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Message
+              </label>
             </div>
 
             <div className="flex items-center mb-4">
