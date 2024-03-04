@@ -1,9 +1,11 @@
-import { Dialog } from '@mui/material'
 function Message() {
   return (
-    <Dialog>
+    <>
+      <div>
         Hi there
-    </Dialog>
+      </div>
+       
+    </>
   )
 }
 

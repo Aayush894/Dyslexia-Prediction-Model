@@ -12,7 +12,7 @@ const sendEmail = async (req, res) => {
     port: process.env.SMTP_PORT,
     secure: true, // Indicates whether to use SSL/TLS
     auth: {
-      user: process.env.SMTP_USER,
+      user: process.env.SMTP_MAIL,
       pass: process.env.SMTP_PASSWORD,
     },
     tls: {
@@ -25,7 +25,7 @@ const sendEmail = async (req, res) => {
   const { name, email, subject, message } = req.body;
 
   var mailOptions = {
-    from: process.env.SMTP_USER,
+    from: process.env.SMTP_MAIL,
     to: "nicolatesladummy@gmail.com",
     subject: `username: ${name} || ${subject}`,
     text: message,
