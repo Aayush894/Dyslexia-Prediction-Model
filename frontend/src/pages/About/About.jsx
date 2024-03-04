@@ -1,5 +1,7 @@
+import React from "react";
 import Navbar from "../../components/NavBar";
 import Footer from "../../components/Footer";
+import { Link } from "react-router-dom";
 
 function About() {
   return (
@@ -7,7 +9,8 @@ function About() {
       <div>
         <Navbar />
       </div>
-      <div>About</div>
+     
+
       <div>
         <Footer />
       </div>
