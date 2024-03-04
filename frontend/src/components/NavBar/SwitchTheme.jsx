@@ -1,15 +1,5 @@
-import React from 'react';
-
-const SwitchTheme = () => {
-  const [theme, setTheme] = React.useState(
-    localStorage.getItem("theme") || "light"
-  );
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
+/* eslint-disable react/prop-types */
+const SwitchTheme = ({ theme, toggleTheme }) => {
 
   return (
     <div className="flex items-center">

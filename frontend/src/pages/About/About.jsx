@@ -1,4 +1,4 @@
-import Navbar from "../../components/NavBar";
+import Navbar from "../../components/NavBar/NavBar.jsx";
 import Footer from "../../components/Footer";
 
 function About() {

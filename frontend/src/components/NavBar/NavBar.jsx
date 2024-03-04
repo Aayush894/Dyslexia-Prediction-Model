@@ -2,9 +2,18 @@ import { Link } from "react-router-dom";
 import ThemeChanger from "./SwitchTheme.jsx";
 import { Disclosure } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    console.log(theme);
+    localStorage.setItem("theme", newTheme);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
@@ -12,7 +21,11 @@ const Navbar = () => {
   };
 
   return (
-    <div className="w-full bg-dark">
+    <div
+      className={`w-full ${
+        theme === "dark" ? "bg-dark text-light" : "bg-light text-dark"
+      }`}
+    >
       <nav className="container relative flex flex-wrap items-center justify-between p-6 mx-auto lg:justify-between xl:px-0">
         <Disclosure>
           {({ open }) => (
@@ -30,7 +43,7 @@ const Navbar = () => {
                   ""
                 )}
                 <Link to="/">
-                  <span className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100">
+                  <span className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100 font-sans">
                     <span>DysLexiLens</span>
                   </span>
                 </Link>
@@ -179,7 +192,7 @@ const Navbar = () => {
             </div>
           )}
 
-          <ThemeChanger />
+          <ThemeChanger theme={theme} toggleTheme={toggleTheme} />
         </div>
       </nav>
     </div>
