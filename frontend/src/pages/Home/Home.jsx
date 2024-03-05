@@ -1,18 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Typography,
-  Button,
-  Input,
-  Textarea,
-  Checkbox,
-} from "@material-tailwind/react";
-import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../components/NavBar/NavBar.jsx";
 import Footer from "../../components/Footer";
 
 export function Home() {
@@ -21,7 +11,7 @@ export function Home() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
+    phoneno: "",
     message: "",
   });
 
@@ -36,6 +26,8 @@ export function Home() {
   const form = useRef();
 
   const sendEmail = async () => {
+    console.log("Submit conatct details");
+
     await fetch(`http://localhost:5000/api/sendemail`, {
       method: "POST",
       body: JSON.stringify(formData),
@@ -47,13 +39,14 @@ export function Home() {
       .then((res) => {
         console.log(res);
         if (res.status > 199 && res.status < 300) {
-          navigate("/responseContact");
+          navigate("/");
         }
       })
       .catch((err) => {
         console.log("Error occur while fetching sendmail api", err);
       });
   };
+
   return (
     <>
       <div>
@@ -66,23 +59,18 @@ export function Home() {
         <div className="max-w-8xl container relative mx-auto">
           <div className="flex flex-wrap items-center">
             <div className="ml-auto mr-auto w-full px-4 text-center lg:w-8/12">
-              <Typography
-                variant="h1"
-                color="white"
-                className="mb-6 font-black"
-              >
+              <h1 className="text-white mb-6 font-black">
                 Your story starts with us.
-              </Typography>
-              <Typography variant="lead" color="white" className="opacity-80">
+              </h1>
+              <p className="text-white opacity-80">
                 This is a simple example of a Landing Page you can build using
                 Material Tailwind. It features multiple components based on the
                 Tailwind CSS and Material Design by Google.
-              </Typography>
+              </p>
             </div>
           </div>
         </div>
       </div>
-      
 
       {/* about us*/}
       <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
@@ -110,18 +98,60 @@ export function Home() {
                     <img className="lg:hidden sm:block hidden w-full h-3/4" src="https://bollybits.in/wp-content/uploads/2022/03/l_1646791325.jpeg" alt="people discussing on board" />
                     <img className="sm:hidden block w-full" src="https://bollybits.in/wp-content/uploads/2022/03/l_1646791325.jpeg" alt="people discussing on board" />
                 </div>
-            </div>
-        </div>
-  
 
+      <section className="-mt-32 bg-white px-4 pb-20 pt-4">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
+          <div className="mt-32 flex flex-wrap items-center">
+            <div className="mx-auto -mt-8 w-full px-4 md:w-5/12">
+              <h3 className="text-blue-gray mb-3 font-bold">
+                Lorem ipsum dolor sit amet.
+              </h3>
+              <p className="text-blue-gray-500 mb-8">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
+                maiores iure ullam itaque soluta doloribus quia ad quaerat
+                dolore dignissimos quasi at alias cumque veritatis eum ex,
+                aspernatur inventore pariatur.
+                <br />
+                <br />
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos
+                eveniet rem sed minus rerum, nemo molestiae reiciendis cum
+                placeat perferendis, harum beatae velit? Illo minima sed, totam
+                laborum dolorum similique.
+              </p>
+              <button className="btn btn-primary">Read More</button>
+            </div>
+            <div className="mx-auto mt-24 flex w-full justify-center px-4 md:w-4/12 lg:mt-0">
+              <div className="shadow-lg border shadow-gray-500/10 rounded-lg">
+                <div className="relative h-56">
+                  <img
+                    alt="Card Image"
+                    src="/img/teamwork.png"
+                    className="h-full w-full"
+                  />
+                </div>
+                <div className="p-4">
+                  <p className="text-blue-gray font-normal mb-2">Enterprise</p>
+                  <h5 className="text-blue-gray font-bold mb-3 mt-2">
+                    Top Notch Services
+                  </h5>
+                  <p className="text-blue-gray-500 font-normal">
+                    The Arctic Ocean freezes every winter and much of the
+                    sea-ice then thaws every summer, and that process will
+                    continue whatever happens.
+                  </p>
+                </div>
+        </div>
+
+      </section>
       {/* Team Info */}
-      <div className="py-5 team4">
+      <section className="py-5 team4" id="team">
         <div className="container">
           <div className="row justify-content-center mb-4">
             <div className="col-md-7 text-center">
               <h3 className="mb-3 display-5">Team</h3>
               <h6 className="subtitle">
-                You can relay on our amazing features list and also our customer
+                You can rely on our amazing features list and also our customer
                 services will be great experience for you without doubt and in
                 no-time
               </h6>
@@ -162,22 +192,6 @@ export function Home() {
                           className="text-decoration-none d-block px-1"
                         >
                           <i className="icon-social-twitter"></i>
-                        </Link>
-                      </li>
-                      <li className="list-inline-item">
-                        <Link
-                          to="#"
-                          className="text-decoration-none d-block px-1"
-                        >
-                          <i className="icon-social-instagram"></i>
-                        </Link>
-                      </li>
-                      <li className="list-inline-item">
-                        <Link
-                          to="#"
-                          className="text-decoration-none d-block px-1"
-                        >
-                          <i className="icon-social-behance"></i>
                         </Link>
                       </li>
                     </ul>
@@ -222,22 +236,6 @@ export function Home() {
                           <i className="icon-social-twitter"></i>
                         </Link>
                       </li>
-                      <li className="list-inline-item">
-                        <Link
-                          to="#"
-                          className="text-decoration-none d-block px-1"
-                        >
-                          <i className="icon-social-instagram"></i>
-                        </Link>
-                      </li>
-                      <li className="list-inline-item">
-                        <Link
-                          to="#"
-                          className="text-decoration-none d-block px-1"
-                        >
-                          <i className="icon-social-behance"></i>
-                        </Link>
-                      </li>
                     </ul>
                   </div>
                 </div>
@@ -278,22 +276,6 @@ export function Home() {
                           className="text-decoration-none d-block px-1"
                         >
                           <i className="icon-social-twitter"></i>
-                        </Link>
-                      </li>
-                      <li className="list-inline-item">
-                        <Link
-                          to="#"
-                          className="text-decoration-none d-block px-1"
-                        >
-                          <i className="icon-social-instagram"></i>
-                        </Link>
-                      </li>
-                      <li className="list-inline-item">
-                        <Link
-                          to="#"
-                          className="text-decoration-none d-block px-1"
-                        >
-                          <i className="icon-social-behance"></i>
                         </Link>
                       </li>
                     </ul>
@@ -338,22 +320,6 @@ export function Home() {
                           <i className="icon-social-twitter"></i>
                         </Link>
                       </li>
-                      <li className="list-inline-item">
-                        <Link
-                          to="#"
-                          className="text-decoration-none d-block px-1"
-                        >
-                          <i className="icon-social-instagram"></i>
-                        </Link>
-                      </li>
-                      <li className="list-inline-item">
-                        <Link
-                          to="#"
-                          className="text-decoration-none d-block px-1"
-                        >
-                          <i className="icon-social-behance"></i>
-                        </Link>
-                      </li>
                     </ul>
                   </div>
                 </div>
@@ -361,7 +327,7 @@ export function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* contact Info */}
       <div className="container mx-auto pt-16">
@@ -400,7 +366,7 @@ export function Home() {
                     </div>
                 </div>
                 <div className="xl:w-3/5 lg:w-3/5 bg-gray-200 h-full pt-5 pb-5 xl:pr-5 xl:pl-0 rounded-tr rounded-br">
-                    <form id="contact" className="bg-white py-4 px-8 rounded-tr rounded-br">
+                    <form id="contact" className="bg-white py-4 px-8 rounded-tr rounded-br" ref={form} onSubmit={sendEmail}>
                         <h1 className="text-4xl text-gray-800 font-extrabold mb-6">Enter Details</h1>
                         <div className="block xl:flex w-full flex-wrap justify-between mb-6">
                             <div className="w-2/4 max-w-xs mb-6 xl:mb-0">
@@ -408,7 +374,8 @@ export function Home() {
                                     <label htmlFor="full_name" className="text-grey-800 text-sm font-semibold leading-tight tracking-normal mb-2">
                                         Full Name
                                     </label>
-                                    <input required id="full_name" name="full_name" type="text" className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder />
+                                    <input required id="full_name" name="name" type="text" value={formData.name}
+                  onChange={handleChange} className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder />
                                 </div>
                             </div>
                             <div className="w-2/4 max-w-xs xl:flex xl:justify-end">
@@ -416,7 +383,7 @@ export function Home() {
                                     <label htmlFor="email" className="text-gray-800 text-sm font-semibold leading-tight tracking-normal mb-2">
                                         Email
                                     </label>
-                                    <input required id="email" name="email" type="email" className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder />
+                                    <input required id="email" name="email" type="email" value={formData.email} onChange={handleChange} className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder />
                                 </div>
                             </div>
                         </div>
@@ -426,7 +393,7 @@ export function Home() {
                                     <label htmlFor="phone" className="text-gray-800 text-sm font-semibold leading-tight tracking-normal mb-2">
                                         Phone
                                     </label>
-                                    <input required id="phone" name="phone" type="tel" className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder />
+                                    <input required id="phone" name="phone" type="tel" value={formData.phoneno} onChange={handleChange} className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder />
                                 </div>
                             </div>
                         </div>
@@ -435,7 +402,7 @@ export function Home() {
                                 <label className="text-sm font-semibold text-gray-800 mb-2" htmlFor="message">
                                     Message
                                 </label>
-                                <textarea placeholder name="message" className="border-gray-300 border mb-4 rounded py-2 text-sm outline-none resize-none px-3 focus:border focus:border-indigo-700" rows={8} id="message" defaultValue={""} />
+                                <textarea placeholder name="message" value={formData.message} onChange={handleChange} className="border-gray-300 border mb-4 rounded py-2 text-sm outline-none resize-none px-3 focus:border focus:border-indigo-700" rows={8} id="message" defaultValue={""} />
                             </div>
                             <button type="submit" className="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-8 py-3 text-sm leading-6">
                                 Submit
@@ -443,9 +410,8 @@ export function Home() {
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
-      <div className="bg-white">
+
+      <div>
         <Footer />
       </div>
     </>
