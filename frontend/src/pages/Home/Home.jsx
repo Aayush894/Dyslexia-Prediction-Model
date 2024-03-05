@@ -13,7 +13,7 @@ export function Home() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
+    phoneno: "",
     message: "",
   });
 
@@ -116,10 +116,8 @@ export function Home() {
                     continue whatever happens.
                   </p>
                 </div>
-              </div>
-            </div>
-          </div>
         </div>
+
       </section>
 
       {/* Team Info */}
