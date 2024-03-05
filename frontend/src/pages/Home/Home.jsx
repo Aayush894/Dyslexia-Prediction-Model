@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar.jsx";
 import Footer from "../../components/Footer";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 export function Home() {
   const navigate = useNavigate();
@@ -72,87 +74,6 @@ export function Home() {
         </div>
       </div>
 
-      {/* about us*/}
-      <div className="2xl:container 2xl:mx-auto lg:py-16 lg:px-20 md:py-12 md:px-6 py-9 px-4">
-        <h3 className=" row mb-12 display-5 justify-content-center">
-          About us
-        </h3>
-        <div className="lg:w-10/12 w-full">
-          <h2 className="xl:w-8/12 lg:w-10/12 w-full font-bold text-gray-800 lg:text-4xl text-3xl lg:leading-10 leading-9 mt-2">
-            We are here to make great design accessible and delightfull for
-            everyone
-          </h2>
-          <p className="font-normal text-base leading-6 text-gray-600 mt-6">
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum.In the first place we have granted to God, and
-            by this our present charter confirmed for us and our heirs forever
-            that the English Church shall be free, and shall have her rights
-            entire,
-          </p>
-        </div>
-
-        <div className="lg:mt-14 sm:mt-10 mt-12">
-          <img
-            className="lg:block hidden w-full"
-            src="https://i.ibb.co/GvwJnvn/Group-736.png"
-            alt="Group of people Chilling"
-          />
-          <img
-            className="lg:hidden sm:block hidden w-full"
-            src="https://i.ibb.co/5sZTmHq/Rectangle-116.png"
-            alt="Group of people Chilling"
-          />
-          <img
-            className="sm:hidden block w-full"
-            src="https://i.ibb.co/zSxXJGQ/Rectangle-122.png"
-            alt="Group of people Chilling"
-          />
-        </div>
-
-        <div className="lg:mt-16 sm:mt-12 mt-16 flex lg:flex-row justify-between flex-col lg:gap-8 gap-12">
-          <div className="w-full xl:w-5/12 lg:w-6/12">
-            <h2 className="font-bold lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-800">
-              Our Mission
-            </h2>
-            <p className="font-normal text-base leading-6 text-gray-600 mt-4">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout. The
-              point of using Lorem Ipsum.In the first place we have granted to
-              God, and by this our present charter confirmed for us and our
-              heirs forever that the English Church shall be free, and shall
-              have her rights entire, and her liberties inviolate; and we will
-              that it be thus observed; which is apparent from
-            </p>
-            <p className="font-normal text-base leading-6 text-gray-600 mt-6">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout. The
-              point of using Lorem Ipsum.In the first place we have granted to
-              God, and by this our present charter confirmed for us and our
-              heirs forever that the English Church shall be free, and shall
-              have her rights entire, and her liberties inviolate; and we will
-              that it be thus observed; which is apparent from
-            </p>
-          </div>
-          <div className="lg:flex items-center w-full lg:w-1/2 ">
-            <img
-              className="lg:block hidden w-full"
-              src="https://bollybits.in/wp-content/uploads/2022/03/l_1646791325.jpeg"
-              alt="people discussing on board"
-            />
-            <img
-              className="lg:hidden sm:block hidden w-full h-3/4"
-              src="https://bollybits.in/wp-content/uploads/2022/03/l_1646791325.jpeg"
-              alt="people discussing on board"
-            />
-            <img
-              className="sm:hidden block w-full"
-              src="https://bollybits.in/wp-content/uploads/2022/03/l_1646791325.jpeg"
-              alt="people discussing on board"
-            />
-          </div>
-        </div>
-      </div>
       <section className="-mt-32 bg-white px-4 pb-20 pt-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
@@ -200,6 +121,7 @@ export function Home() {
           </div>
         </div>
       </section>
+
       {/* Team Info */}
       <section className="py-5 team4" id="team">
         <div className="container">
@@ -214,7 +136,7 @@ export function Home() {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-3 mb-4 shadow-sm">
+            <div className="col-lg-3 col-md-6 mb-2 shadow-sm">
               <div className="row">
                 <div className="col-md-12">
                   <img
@@ -230,24 +152,24 @@ export function Home() {
                     </h5>
                     <h6 className="subtitle mb-3">Backend Developer</h6>
                     <p>
-                      You can relay on our amazing features list and also our
-                      customer services will be great experience.
+                      You can rely on our amazing features list and also our
+                      customer services will be a great experience.
                     </p>
                     <ul className="list-inline">
                       <li className="list-inline-item">
                         <Link
-                          to="/"
+                          to="#"
                           className="text-decoration-none d-block px-1"
                         >
-                          <i className="icon-social-facebook"></i>
+                          <LinkedInIcon fontSize="medium" />
                         </Link>
                       </li>
                       <li className="list-inline-item">
                         <Link
-                          to="/"
+                          to="#"
                           className="text-decoration-none d-block px-1"
                         >
-                          <i className="icon-social-twitter"></i>
+                          <GitHubIcon fontSize="medium" />
                         </Link>
                       </li>
                     </ul>
@@ -256,7 +178,7 @@ export function Home() {
               </div>
             </div>
 
-            <div className="col-lg-3 mb-4 shadow-sm">
+            <div className="col-lg-3 col-md-6 mb-2 shadow-sm">
               <div className="row">
                 <div className="col-md-12">
                   <img
@@ -270,10 +192,10 @@ export function Home() {
                     <h5 className="mt-4 font-weight-medium mb-0">
                       Kartik Verma
                     </h5>
-                    <h6 className="subtitle mb-3">Frontend Development</h6>
+                    <h6 className="subtitle mb-3">Frontend Developer</h6>
                     <p>
-                      You can relay on our amazing features list and also our
-                      customer services will be great experience.
+                      You can rely on our amazing features list and also our
+                      customer services will be a great experience.
                     </p>
                     <ul className="list-inline">
                       <li className="list-inline-item">
@@ -281,7 +203,7 @@ export function Home() {
                           to="#"
                           className="text-decoration-none d-block px-1"
                         >
-                          <i className="icon-social-facebook"></i>
+                          <LinkedInIcon fontSize="medium" />
                         </Link>
                       </li>
                       <li className="list-inline-item">
@@ -289,7 +211,7 @@ export function Home() {
                           to="#"
                           className="text-decoration-none d-block px-1"
                         >
-                          <i className="icon-social-twitter"></i>
+                          <GitHubIcon fontSize="medium" />
                         </Link>
                       </li>
                     </ul>
@@ -298,7 +220,7 @@ export function Home() {
               </div>
             </div>
 
-            <div className="col-lg-3 mb-4 shadow-sm">
+            <div className="col-lg-3 col-md-6 mb-2 shadow-sm">
               <div className="row">
                 <div className="col-md-12">
                   <img
@@ -314,8 +236,8 @@ export function Home() {
                     </h5>
                     <h6 className="subtitle mb-3">Machine Learning</h6>
                     <p>
-                      You can relay on our amazing features list and also our
-                      customer services will be great experience.
+                      You can rely on our amazing features list and also our
+                      customer services will be a great experience.
                     </p>
                     <ul className="list-inline">
                       <li className="list-inline-item">
@@ -323,7 +245,7 @@ export function Home() {
                           to="#"
                           className="text-decoration-none d-block px-1"
                         >
-                          <i className="icon-social-facebook"></i>
+                          <LinkedInIcon fontSize="medium" />
                         </Link>
                       </li>
                       <li className="list-inline-item">
@@ -331,7 +253,7 @@ export function Home() {
                           to="#"
                           className="text-decoration-none d-block px-1"
                         >
-                          <i className="icon-social-twitter"></i>
+                          <GitHubIcon fontSize="medium" />
                         </Link>
                       </li>
                     </ul>
@@ -340,7 +262,7 @@ export function Home() {
               </div>
             </div>
 
-            <div className="col-lg-3 mb-4 shadow-sm">
+            <div className="col-lg-3 col-md-6 mb-2 shadow-sm">
               <div className="row">
                 <div className="col-md-12">
                   <img
@@ -356,8 +278,8 @@ export function Home() {
                     </h5>
                     <h6 className="subtitle mb-3">Machine Learning</h6>
                     <p>
-                      You can relay on our amazing features list and also our
-                      customer services will be great experience.
+                      You can rely on our amazing features list and also our
+                      customer services will be a great experience.
                     </p>
                     <ul className="list-inline">
                       <li className="list-inline-item">
@@ -365,7 +287,7 @@ export function Home() {
                           to="#"
                           className="text-decoration-none d-block px-1"
                         >
-                          <i className="icon-social-facebook"></i>
+                          <LinkedInIcon fontSize="medium" />
                         </Link>
                       </li>
                       <li className="list-inline-item">
@@ -373,7 +295,7 @@ export function Home() {
                           to="#"
                           className="text-decoration-none d-block px-1"
                         >
-                          <i className="icon-social-twitter"></i>
+                          <GitHubIcon fontSize="medium" />
                         </Link>
                       </li>
                     </ul>
@@ -443,7 +365,7 @@ export function Home() {
                   </svg>
                 </div>
                 <p className="pl-4 text-white text-base">
-                  kartik.2125cs1011@kiet.edu
+                  team.dyslexilens@gmail.com
                 </p>
               </div>
               <p className="text-lg text-white pt-10 tracking-wide">
@@ -466,20 +388,19 @@ export function Home() {
                 <div className="w-2/4 max-w-xs mb-6 xl:mb-0">
                   <div className="flex flex-col">
                     <label
-                      htmlFor="full_name"
+                      htmlFor="name"
                       className="text-grey-800 text-sm font-semibold leading-tight tracking-normal mb-2"
                     >
                       Full Name
                     </label>
                     <input
-                      required
-                      id="full_name"
+                      id="name"
                       name="name"
                       type="text"
                       value={formData.name}
                       onChange={handleChange}
-                      className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-                      placeholder
+                      className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border bg-white"
+                      autoComplete={true}
                     />
                   </div>
                 </div>
@@ -492,14 +413,13 @@ export function Home() {
                       Email
                     </label>
                     <input
-                      required
                       id="email"
                       name="email"
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-                      placeholder
+                      className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border bg-white"
+                      autoComplete={true}
                     />
                   </div>
                 </div>
@@ -508,20 +428,18 @@ export function Home() {
                 <div className="w-2/4 max-w-xs">
                   <div className="flex flex-col">
                     <label
-                      htmlFor="phone"
+                      htmlFor="subject"
                       className="text-gray-800 text-sm font-semibold leading-tight tracking-normal mb-2"
                     >
-                      Phone
+                      Subject
                     </label>
                     <input
-                      required
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      value={formData.phoneno}
+                      id="subject"
+                      name="subject"
+                      type="text"
+                      value={formData.subject}
                       onChange={handleChange}
-                      className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-                      placeholder
+                      className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border bg-white"
                     />
                   </div>
                 </div>
@@ -535,14 +453,13 @@ export function Home() {
                     Message
                   </label>
                   <textarea
-                    placeholder
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    className="border-gray-300 border mb-4 rounded py-2 text-sm outline-none resize-none px-3 focus:border focus:border-indigo-700"
-                    rows={8}
+                    className="border-gray-300 border mb-4 rounded py-2 text-sm outline-none resize-none px-3 focus:border focus:border-indigo-700 bg-white"
+                    rows={5}
+                    autoComplete={true}
                     id="message"
-                    defaultValue={""}
                   />
                 </div>
                 <button
