@@ -131,7 +131,7 @@ export function Home() {
               <h6 className="subtitle">
                 You can rely on our amazing features list and also our customer
                 services will be great experience for you without doubt and in
-                no-time
+                no-time...
               </h6>
             </div>
           </div>
