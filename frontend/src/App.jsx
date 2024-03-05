@@ -17,6 +17,10 @@ import UpdateUser from "./pages/Update/UpdateUser.jsx";
 import UpdatePass from "./pages/Update/UpdatePass.jsx";
 import About from "./pages/About/About.jsx";
 
+import AudioPrediction from './pages/Prediction/AudioPrediction.jsx'
+import ImagePrediction from './pages/Prediction/ImagePrediction.jsx'
+import TextPrediction from './pages/Prediction/TextPrediction.jsx'
+
 function App() {
   const clientId =
     "715277608713-sgtqudvfba9sr26avhok47041iskncu4.apps.googleusercontent.com";
@@ -35,6 +39,11 @@ function App() {
             <Route exact path="/updatePass" element={<UpdatePass />} />
             <Route exact path="/updateUser" element={<UpdateUser />} />
             <Route exact path="/about" element={<About />} />
+
+            <Route exact path="/test/imagePrediction" element={<ImagePrediction />} />
+            <Route exact path="/test/audioPrediction" element={<AudioPrediction />} />
+            <Route exact path="/test/textPrediction" element={<TextPrediction />} />
+
           </Routes>
         </div>
       </Router>

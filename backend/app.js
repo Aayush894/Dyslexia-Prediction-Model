@@ -15,6 +15,9 @@ app.use(
 );
 
 app.use(cookieParser());
+// use public folder to store the image uploaded by the user locally
+
+app.use(express.static('public'));
 
 // routes import
 import userRouter from "./routes/user.routes.js";
