@@ -16,8 +16,8 @@ const sendEmail = async (req, res) => {
       pass: process.env.SMTP_PASSWORD,
     },
     tls: {
-      rejectUnauthorized: true, 
-      ciphers: 'SSLv3',
+      rejectUnauthorized: true,
+      ciphers: "SSLv3",
     },
   });
 
@@ -43,7 +43,6 @@ const sendEmail = async (req, res) => {
     res.status(500).send("Error sending email");
   }
 };
-
 
 const registerUser = asyncHandler(async (req, res) => {
   const errors = validationResult(req);
@@ -392,6 +391,13 @@ const UserProfile = asyncHandler(async (req, res) => {
     });
   }
 });
+
+const uploadImage = asyncHandler(async (req, res) => {
+  const imagePath = req.file.path; // Path to the uploaded image file
+
+  res.json({ imagePath: imagePath });
+});
+
 export {
   sendEmail,
   registerUser,
@@ -399,4 +405,5 @@ export {
   updatePass,
   updateUser,
   UserProfile,
+  uploadImage,
 };

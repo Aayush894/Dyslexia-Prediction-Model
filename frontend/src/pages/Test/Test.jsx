@@ -1,130 +1,95 @@
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar/NavBar";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
+import { Link } from "react-router-dom";
+
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
+
 function Test() {
-  const [credentials, setCredentials] = useState({ vocabScore: "", memScore: "", speedScore: "", visualScore: "", audioScore: "", surveyScore: "" });
-  const navigate = useNavigate();
-
-  const url = "";
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(credentials) ;
-
-    // const response = await fetch(url, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     vocabScore: credentials.vocabScore,
-    //     memScore: credentials.memScore,
-    //     speedScore: credentials.speedScore, 
-    //     visualScore:credentials.visualScore ,
-    //     audioScore: credentials.audioScore,
-    //     surveyScore: credentials.surveyScore,
-    //   }),
-    // });
-
-    // const json = await response.json();
-
-    // if (!json.success) {
-    //   alert("Enter Valid Credentials");
-    // } else {
-    //   localStorage.setItem("userEmail", credentials.email);
-    //   localStorage.setItem("authToken", json.authToken);
-    //   navigate("/");
-    // }
-  };
-
-  const onChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
-
   return (
     <>
-      <div className="vh-100 d-flex flex-column">
+      <div>
         <NavBar />
-        <div className=" d-flex flex-column bd-highlight mb-1 flex-grow-1 justify-content-center align-items-center">
-        <span className="p-2 bd-highlight display-5">Please Enter the following Score</span>
-        <span className="p-2 bd-highlight dipalay-6">NOTE: Enter the following Score between 0 and 1</span>
+      </div>
+      <div className="d-flex">
+        <div className="m-5 p-2">
+          <Link to="/test/imagePrediction">
+            <Card sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="https://assets-global.website-files.com/5a9423a3f702750001758d4f/60eef1e484ba20a41ad763bf_%230592D0%20(1).png"
+                  alt="image"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    Image Prediction
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Laudantium quod rerum sint voluptas quibusdam. Unde rem
+                    quasi illo molestiae expedita.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Link>
         </div>
-        <div className="flex-grow-1 d-flex justify-content-center align-items-center">
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="formGroupExampleInput1">Language Vocubulary Score</label>
-              <input
-                type="text"
-                className="form-control"
-                id="formGroupExampleInput1"
-                placeholder="Example input"
-                name="vocabScore" // Added name attribute
-                value={credentials.vocabScore} // Added value attribute
-                onChange={onChange}
-              />
-        
-              <label htmlFor="formGroupExampleInput2">Memory Score</label>
-              <input
-                type="text"
-                className="form-control"
-                id="formGroupExampleInput2"
-                placeholder="Another input"
-                name="memScore" // Added name attribute
-                value={credentials.memScore} // Added value attribute
-                onChange={onChange}
-              />
-          
-              <label htmlFor="formGroupExampleInput3">Speed Score</label>
-              <input
-                type="text"
-                className="form-control"
-                id="formGroupExampleInput3"
-                placeholder="Another input"
-                name="speedScore" // Added name attribute
-                value={credentials.speedScore} // Added value attribute
-                onChange={onChange}
-              />
-          
-              <label htmlFor="formGroupExampleInput4">Visual Discrimination Score</label>
-              <input
-                type="text"
-                className="form-control"
-                id="formGroupExampleInput4"
-                placeholder="Another input"
-                name="visualScore" // Added name attribute
-                value={credentials.visualScore} // Added value attribute
-                onChange={onChange}
-              />
-          
-              <label htmlFor="formGroupExampleInput5">Audio Discrimination Score</label>
-              <input
-                type="text"
-                className="form-control"
-                id="formGroupExampleInput5"
-                placeholder="Another input"
-                name="audioScore" // Added name attribute
-                value={credentials.audioScore} // Added value attribute
-                onChange={onChange}
-              />
-        
-              <label htmlFor="formGroupExampleInput6">Survey Score</label>
-              <input
-                type="text"
-                className="form-control"
-                id="formGroupExampleInput6"
-                placeholder="Another input"
-                name="surveyScore" // Added name attribute
-                value={credentials.surveyScore} // Added value attribute
-                onChange={onChange}
-              />
-            </div>
-            <div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </div>
-          </form>
+        <div className="m-5 p-2">
+          <Link to="/test/audioPrediction">
+            <Card sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="https://assets-global.website-files.com/5a9423a3f702750001758d4f/60eef1e484ba20a41ad763bf_%230592D0%20(1).png"
+                  alt="image"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    Audio Prediction
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Laudantium quod rerum sint voluptas quibusdam. Unde rem
+                    quasi illo molestiae expedita.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Link>
         </div>
+        <div className="m-5 p-2">
+          <Link to="/test/textPrediction">
+            <Card sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="https://assets-global.website-files.com/5a9423a3f702750001758d4f/60eef1e484ba20a41ad763bf_%230592D0%20(1).png"
+                  alt="image"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    Text Prediction
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Laudantium quod rerum sint voluptas quibusdam. Unde rem
+                    quasi illo molestiae expedita.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Link>
+        </div>
+      </div>
+      <div>
         <Footer />
       </div>
     </>
