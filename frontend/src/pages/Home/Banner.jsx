@@ -33,7 +33,7 @@ export default function Banner() {
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="./public/assets/disgraphia1.png"
+                  src="./public/assets/disgraphia3.png"
                   alt="Second slide"
                 />
 
@@ -46,7 +46,7 @@ export default function Banner() {
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="./public/assets/disgraphia1.png"
+                  src="./public/assets/disgraphia2.png"
                   alt="Third slide"
                 />
                 <Carousel.Caption>
