@@ -1,9 +1,7 @@
 import React from 'react'
 import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import img1 from "../Images/slider-01.jpg"
-// import img2 from "../Images/slider-02.jpg"
-// import img3 from "../Images/slider-03.jpg"
+
 
 
 
@@ -20,13 +18,13 @@ export default function Banner() {
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="./public/assets/disgraphia1.png"
+                  src="./public/assets/slider-02.jpg"
                   alt="First slide"
 
                 />
-                <Carousel.Caption>
-                  <h3 class='text-dark'>First slide label</h3>
-                  <p class='text-dark'>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                <Carousel.Caption >
+                  <h3 class='text-dark justify-center'>First slide label</h3>
+                  <p class='text-dark'>Unlocking Potential, Embracing Differences: Advocating for a Dyslexia-Inclusive Future.</p>
                 </Carousel.Caption>
               </Carousel.Item>
 
