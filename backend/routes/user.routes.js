@@ -13,6 +13,7 @@ import path from 'path';
 import fs from 'fs'; 
 
 import multer from "multer"; 
+import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -63,5 +64,6 @@ router.route("/sendemail").post(sendEmail) ;
 router.route("/profile").get(UserProfile) ; 
 
 router.post('/upload', clearTempDirectory, upload.single('image'), uploadImage);
+router.post('/uploadOnCloudinary', uploadOnCloudinary); 
 
 export default router;
