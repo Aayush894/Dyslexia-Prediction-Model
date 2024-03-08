@@ -1,16 +1,19 @@
 import Footer from "../../components/Footer";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ImagePrediction() {
   const [imageUrl, setImageUrl] = useState(null);
   const [imageAlt, setImageAlt] = useState(null);
 
-  const handleImageUpload = (event) => {
+  const navigate = useNavigate(); 
+
+  const handleImageUpload = async (event) => {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('image', file);
   
-    fetch('http://localhost:5000/api/upload', {
+    await fetch('http://localhost:5000/api/upload', {
       method: 'POST',
       body: formData,
     })
@@ -29,7 +32,40 @@ function ImagePrediction() {
     .catch(error => {
       console.error('Error uploading image:', error);
     });
+  }; 
+
+  const handleImageSubmit = async () => {
+    console.log(imageAlt);
+    try {
+      const response = await fetch("http://localhost:5000/api/uploadOnCloudinary", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          imageAlt: imageAlt,
+        })
+      });
+  
+      if (response.success) {
+        // Handle success
+        console.log('Image uploaded successfully.');
+        // Write prediction logic
+        const json = await response.json();
+        const cloudinaryUrl = json.url;
+        const publicId = json.public_id; // Additional metadata
+
+        console.log(cloudinaryUrl, publicId);
+
+        navigate("/");
+      } else {
+        console.error('Error uploading image:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error uploading image to Cloudinary:', error);
+    }
   };
+  
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
@@ -43,7 +79,7 @@ function ImagePrediction() {
             <button
               type="submit"
               className="btn btn-primary w-20 h-10 btn-block mt-4 p-1"
-              onClick={handleImageUpload}
+              onClick={handleImageSubmit}
             >
               Submit
             </button>
