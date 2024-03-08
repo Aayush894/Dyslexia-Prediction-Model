@@ -6,7 +6,7 @@ import NavBar from "../../components/NavBar/NavBar.jsx";
 import Footer from "../../components/Footer";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-
+import Banner from "./Banner.jsx"
 export function Home() {
   const navigate = useNavigate();
 
@@ -55,72 +55,11 @@ export function Home() {
         <NavBar />
       </div>
 
-      <div className="relative flex h-screen content-center items-center justify-center pt-16 pb-32">
-        <div className="absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center" />
-        <div className="absolute top-0 h-full w-full bg-indigo-700 bg-cover bg-center" />
-        <div className="max-w-8xl container relative mx-auto">
-          <div className="flex flex-wrap items-center">
-            <div className="ml-auto mr-auto w-full px-4 text-center lg:w-8/12">
-              <h1 className="text-white mb-6 font-black">
-                Your story starts with us.
-              </h1>
-              <p className="text-white opacity-80">
-                This is a simple example of a Landing Page you can build using
-                Material Tailwind. It features multiple components based on the
-                Tailwind CSS and Material Design by Google.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div>
+        <Banner/>
       </div>
 
-      <section className="-mt-32 bg-white px-4 pb-20 pt-4">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
-          <div className="mt-32 flex flex-wrap items-center">
-            <div className="mx-auto -mt-8 w-full px-4 md:w-5/12">
-              <h3 className="text-blue-gray mb-3 font-bold">
-                Lorem ipsum dolor sit amet.
-              </h3>
-              <p className="text-blue-gray-500 mb-8">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-                maiores iure ullam itaque soluta doloribus quia ad quaerat
-                dolore dignissimos quasi at alias cumque veritatis eum ex,
-                aspernatur inventore pariatur.
-                <br />
-                <br />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos
-                eveniet rem sed minus rerum, nemo molestiae reiciendis cum
-                placeat perferendis, harum beatae velit? Illo minima sed, totam
-                laborum dolorum similique.
-              </p>
-              <button className="btn btn-primary">Read More</button>
-            </div>
-            <div className="mx-auto mt-24 flex w-full justify-center px-4 md:w-4/12 lg:mt-0">
-              <div className="shadow-lg border shadow-gray-500/10 rounded-lg">
-                <div className="relative h-56">
-                  <img
-                    alt="Card Image"
-                    src="/img/teamwork.png"
-                    className="h-full w-full"
-                  />
-                </div>
-                <div className="p-4">
-                  <p className="text-blue-gray font-normal mb-2">Enterprise</p>
-                  <h5 className="text-blue-gray font-bold mb-3 mt-2">
-                    Top Notch Services
-                  </h5>
-                  <p className="text-blue-gray-500 font-normal">
-                    The Arctic Ocean freezes every winter and much of the
-                    sea-ice then thaws every summer, and that process will
-                    continue whatever happens.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  
 
       {/* Team Info */}
       <section className="py-5 team4" id="team">
