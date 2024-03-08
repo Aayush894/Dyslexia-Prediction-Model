@@ -9,7 +9,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 // components imports
 import Home from "./pages/Home/Home.jsx";
 import LoginPage from "./pages/LoginSignup/LoginPage.jsx";
-import Signup from "./pages/Signup.jsx";
+import Signup from "./pages/LoginSignup/SignupPage.jsx";
 import Test from "./pages/Test/Test.jsx";
 import TestRecord from "./pages/TestRecord.jsx";
 import Profile from "./pages/Profile/Profile.jsx";

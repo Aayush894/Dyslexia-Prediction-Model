@@ -158,17 +158,11 @@ const loginUser = asyncHandler(async (req, res) => {
     return res.status(400).json({ errors: error.array() });
   }
 
-  const { email, username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!email && !username) {
-    throw new ApiError(400, "username or email is required");
+  if (!email) {
+    throw new ApiError(400, "email is required");
   }
-
-  // check for valid username format ie. only in lowercase
-  const isValidUsername = (username) => {
-    const usernameRegex = /^[a-z]+\d*$/;
-    return usernameRegex.test(username);
-  };
 
   // check for valid email id
   const isValidEmail = (email) => {
@@ -176,16 +170,12 @@ const loginUser = asyncHandler(async (req, res) => {
     return emailRegex.test(email);
   };
 
-  if (username && !isValidUsername(username)) {
-    throw new ApiError(400, "Enter valid username");
-  }
-
-  if (email && !isValidEmail(email)) {
+  if (!isValidEmail(email)) {
     throw new ApiError(400, "Invalid email address");
   }
 
   const user = await User.findOne({
-    $or: [{ username }, { email }],
+     email,
   });
 
   if (!user) {
@@ -398,6 +388,50 @@ const uploadImage = asyncHandler(async (req, res) => {
   res.json({ imagePath: imagePath });
 });
 
+const GoogleloginUser = asyncHandler(async (req, res) => {
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return res.status(400).json({ errors: error.array() });
+  }
+
+  const { email} = req.body;
+
+  if (!email) {
+    throw new ApiError(400, "email is required");
+  }
+
+  // check for valid email id
+  const isValidEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail.com$/;
+    return emailRegex.test(email);
+  };
+
+  if (!isValidEmail(email)) {
+    throw new ApiError(400, "Invalid email address");
+  }
+
+  const user = await User.findOne({
+     email,
+  });
+
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+
+  const authToken = await user.generateAuthToken();
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  return res
+    .status(200)
+    .cookie("authToken", authToken, options)
+    .json({ success: true, authToken });
+
+})
+
 export {
   sendEmail,
   registerUser,
@@ -406,4 +440,5 @@ export {
   updateUser,
   UserProfile,
   uploadImage,
+  GoogleloginUser,
 };

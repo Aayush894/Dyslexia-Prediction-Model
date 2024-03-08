@@ -419,7 +419,7 @@ export function Home() {
                       value={formData.email}
                       onChange={handleChange}
                       className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border bg-white"
-                      autoComplete={true}
+                      autoComplete="true"
                     />
                   </div>
                 </div>
@@ -458,7 +458,7 @@ export function Home() {
                     onChange={handleChange}
                     className="border-gray-300 border mb-4 rounded py-2 text-sm outline-none resize-none px-3 focus:border focus:border-indigo-700 bg-white"
                     rows={5}
-                    autoComplete={true}
+                    autoComplete="true"
                     id="message"
                   />
                 </div>
