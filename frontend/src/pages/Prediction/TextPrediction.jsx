@@ -3,7 +3,7 @@ import Footer from "../../components/Footer";
 import { useState, useEffect } from "react";
 
 function TextPrediction() {
-  const [words, setWords] = useState(""); 
+  const [word, setWords] = useState(""); 
   const [spoken_text, setSpokenText] = useState([]);
   const [score, setScore] = useState(0); 
 
@@ -12,46 +12,77 @@ function TextPrediction() {
   }, []); 
 
   const fetchSpokenText = () => {
-    fetch("http://127.0.0.1:8000/api/fetchWords")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch spoken text");
-        }
-        console.log(response) ;
-        return response.json();
-      })
-      .then(data => {
-        // Set fetched spoken text in state
-        setSpokenText(data);
-      })
-      .catch(error => {
-        console.error("Error fetching spoken text:", error);
-      });
+    fetch('http://127.0.0.1:8000/api/fetchWords', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // Optionally, you can include a request body if needed
+      body: JSON.stringify({}),
+    })
+    .then(response => response.json())
+    .then(data => {
+      const spokenText = data.random_words ; 
+      setSpokenText(spokenText) ; 
+      
+      console.log(data.message);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   };
 
-  console.log(spoken_text) ; 
+  const handleSpeak = (e) => {
+    e.preventDefault() ;
 
-  const handleSpeak = () => {
-    // Join the spoken text array into a single string
-    const spokenText = spoken_text.join(' ');
-    // Create a new SpeechSynthesisUtterance instance with the spoken text
-    const utterance = new SpeechSynthesisUtterance(spokenText);
-    // Speak the text
-    window.speechSynthesis.speak(utterance);
+    // Fetch available voices
+    const voices = window.speechSynthesis.getVoices();
+    const indianEnglishVoice = voices.find(voice => voice.name.includes('Google en-IN'));
+  
+    spoken_text.forEach((word, index) => {
+      const utterance = new SpeechSynthesisUtterance(word);
+      utterance.voice = indianEnglishVoice; // Set the Indian English accent voice
+      utterance.onstart = () => {
+        console.log(`Speaking word ${index + 1}: ${word}`);
+      };
+      setTimeout(() => {
+        window.speechSynthesis.speak(utterance);
+      }, index * 3000); // Delay 3 seconds for each word
+    });
   };
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
     let inputWords = ""; 
-    const form = event.target;
-    const formData = new FormData(form);
-  
+    const formData = new FormData(event.target);
+    const words = {};
+    
     for (let i = 1; i <= 10; i++) {
-      const word = formData.get(`word${i}`);
-      inputWords += word + " ";
-      form.elements[`word${i}`].value = "";
+      words[`word${i}`] = formData.get(`word${i}`);
+      inputWords += words[`word${i}`] + " ";
     }
-    setWords(inputWords.trim());
+
+    setWords(inputWords); 
+
+    fetch('http://127.0.0.1:8000/api/submitWords', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(words),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.message);
+      setScore(data.score); 
+
+      console.log("Score:", data.score);
+      event.target.reset();
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   };
 
   return (
@@ -78,19 +109,21 @@ function TextPrediction() {
               <button type="submit" className="mt-4 bg-green-500 text-white px-4 py-2 rounded">Submit</button>
             </form>
 
-            <div className="info-section mt-8">
+            <div className="text-center">
+            <div className="mt-8 mb-2">
               <h2 className="text-xl font-bold">What you wrote:</h2>
-              {words ? <p>{words}</p> : <p>No words submitted yet.</p>}
+              {word ? <p>{word}</p> : <p>No words submitted yet.</p>}
             </div>
 
-            <div className="info-section">
+            <div className="mb-2">
               <h2 className="text-xl font-bold">What Google Assistant said:</h2>
               {spoken_text.length > 0 ? <p>{spoken_text.join(' ')}</p> : <p>No text spoken yet.</p>}
             </div>
 
-            <div className="info-section">
+            <div className="mb-2">
               <h2 className="text-xl font-bold">Score (minimum is better):</h2>
               {score ? <p>{score}</p> : <p>No text spoken yet.</p>}
+            </div>
             </div>
           </div>
         </div>

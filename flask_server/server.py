@@ -9,7 +9,7 @@ from testdir.test import levenshtein, get_feature_array, score
 from flask import jsonify
 
 app = Flask(__name__)
-CORS(app, origins="http://localhost:3000", supports_credentials=True, methods=["GET", "POST", "PUT", "PATCH", "DELETE"], allow_headers=["Content-Type", "Authorization"], expose_headers=["Content-Length", "Authorization"])
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 
 # Computer will speak almost 10 words
 spoken_words = []
@@ -27,11 +27,18 @@ def fetch_words():
     # Store the selected random words in the spoken_words array
     spoken_words.extend(random_words)
 
-    return jsonify(random_words)
+    response = {
+        "ok": True,
+        "message": "Fetch word successfully",
+        "random_words": random_words
+    }
+
+    return jsonify(response)
+
 
 def load_elementary_vocabulary():
     vocabulary = []
-    resources_folder = os.path.join(os.getcwd(), 'resources')
+    resources_folder = os.path.join(os.getcwd(), 'resource')
     csv_file_path = os.path.join(resources_folder, 'elementary_voc.csv')
 
     with open(csv_file_path, 'r') as file:
@@ -45,7 +52,14 @@ def load_elementary_vocabulary():
 def submit_words():
     submitted_words = [request.form.get(f'word{i}', '') for i in range(1, 11)]
     score = levenshtein(spoken_words, submitted_words)
-    return Response({score})
+    
+    response = {
+        "ok": True,
+        "message": "Score Available",
+        "score": score
+    }
+    
+    return jsonify(response)
 
 # # Submit text from form
 # @app.route('/submit_text', methods=['POST'])
