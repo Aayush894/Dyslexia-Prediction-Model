@@ -48,7 +48,7 @@ function ImagePrediction() {
           imageAlt: imageAlt,
         })
       });
-
+      console.log(response);
       if (response.success) {
         // Handle success
         console.log('Image uploaded successfully.');
@@ -61,17 +61,20 @@ function ImagePrediction() {
 
         navigate("/");
       } else {
-        console.error('Error uploading image:', response.statusText);
+        console.error('Error uploading image:', response);
       }
     } catch (error) {
       console.error('Error uploading image to Cloudinary:', error);
+      navigate("/");
     }
   };
 
 
   return (
     <>
+      <div>
       <Navbar />
+      </div>
       <div className="flex mt-10 ml-10 justify-center ">
         <div className="max-w-2xl rounded-lg shadow-xl bg-gray-50 m-5">
           <div className="m-4">
@@ -99,12 +102,12 @@ function ImagePrediction() {
               Submit</button>
           </div>
         </div>
-        <div classNameName="col-md-6 m-5">
-            <div classNameName="border p-4 m-2 justify-center">
-              <h4 classNameName="mb-4 text-center">Preview</h4>
-              <div classNameName="text-center mb-4">The resulting image will be displayed here</div>
+        <div className="col-md-6 m-5">
+            <div className="border p-4 m-2 justify-center">
+              <h4 className="mb-4 text-center">Preview</h4>
+              <div className="text-center mb-4">The resulting image will be displayed here</div>
               {imageUrl && (
-                <img src={imageUrl} alt={imageAlt} classNameName="img-fluid displayed-image" />
+                <img src={imageUrl} alt={imageAlt} className="img-fluid displayed-image" />
               )}
             </div>
           </div>
@@ -112,29 +115,29 @@ function ImagePrediction() {
 
 
 
-      <div classNameName="container d-flex justify-content-center align-items-center vh-100">
-        <div classNameName="row">
-          {/* <div classNameName="col-md-6">
-          <form classNameName="border p-4">
-            <h4 classNameName="mb-4 text-center">Upload Image</h4>
-            <div classNameName="form-group">
-              <input type="file" classNameName="form-control-file" onChange={handleImageUpload} />
+      <div className="container d-flex justify-content-center align-items-center vh-100">
+        <div className="row">
+          {/* <div className="col-md-6">
+          <form className="border p-4">
+            <h4 className="mb-4 text-center">Upload Image</h4>
+            <div className="form-group">
+              <input type="file" className="form-control-file" onChange={handleImageUpload} />
             </div>
             <button
               type="submit"
-              classNameName="btn btn-primary w-20 h-10 btn-block mt-4 p-1"
+              className="btn btn-primary w-20 h-10 btn-block mt-4 p-1"
               onClick={handleImageSubmit}
             >
               Submit
             </button>
           </form>
         </div> */}
-          {/* <div classNameName="col-md-6">
-            <div classNameName="border p-4 m-2">
-              <h4 classNameName="mb-4 text-center">Preview</h4>
-              <div classNameName="text-center mb-4">The resulting image will be displayed here</div>
+          {/* <div className="col-md-6">
+            <div className="border p-4 m-2">
+              <h4 className="mb-4 text-center">Preview</h4>
+              <div className="text-center mb-4">The resulting image will be displayed here</div>
               {imageUrl && (
-                <img src={imageUrl} alt={imageAlt} classNameName="img-fluid displayed-image" />
+                <img src={imageUrl} alt={imageAlt} className="img-fluid displayed-image" />
               )}
             </div>
           </div> */}

@@ -80,7 +80,7 @@ export function Home() {
               <div className="row">
                 <div className="col-md-12">
                   <img
-                    src="./public/assets/Profile_pic.png"
+                    src="/assets/Profile_pic.png"
                     alt="wrapkit"
                     className="img-fluid"
                   />
@@ -92,8 +92,8 @@ export function Home() {
                     </h5>
                     <h6 className="subtitle mb-3">Backend Developer</h6>
                     <p>
-                      You can rely on our amazing features list and also our
-                      customer services will be a great experience.
+                      {/* You can rely on our amazing features list and also our
+                      customer services will be a great experience. */} 
                     </p>
                     <ul className="list-inline">
                       <li className="list-inline-item">
@@ -134,8 +134,8 @@ export function Home() {
                     </h5>
                     <h6 className="subtitle mb-3">Frontend Developer</h6>
                     <p>
-                      You can rely on our amazing features list and also our
-                      customer services will be a great experience.
+                      {/* You can rely on our amazing features list and also our
+                      customer services will be a great experience. */}
                     </p>
                     <ul className="list-inline">
                       <li className="list-inline-item">
@@ -176,8 +176,8 @@ export function Home() {
                     </h5>
                     <h6 className="subtitle mb-3">Machine Learning</h6>
                     <p>
-                      You can rely on our amazing features list and also our
-                      customer services will be a great experience.
+                      {/* You can rely on our amazing features list and also our
+                      customer services will be a great experience. */}
                     </p>
                     <ul className="list-inline">
                       <li className="list-inline-item">
@@ -206,7 +206,7 @@ export function Home() {
               <div className="row">
                 <div className="col-md-12">
                   <img
-                    src="./public/assets/Achishek.jpg"
+                    src="/assets/Achishek.jpg"
                     alt="wrapkit"
                     className="img-fluid"
                   />
@@ -218,8 +218,8 @@ export function Home() {
                     </h5>
                     <h6 className="subtitle mb-3">Machine Learning</h6>
                     <p>
-                      You can rely on our amazing features list and also our
-                      customer services will be a great experience.
+                      {/* You can rely on our amazing features list and also our
+                      customer services will be a great experience. */}
                     </p>
                     <ul className="list-inline">
                       <li className="list-inline-item">

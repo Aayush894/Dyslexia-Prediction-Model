@@ -34,7 +34,7 @@ const Navbar = () => {
                 {localStorage.getItem("authToken") ? (
                   <Link className="navbar-brand" to="/profile">
                     <img
-                      src="./assets/avatar_icon.png"
+                      src="/assets/avatar_icon.png"
                       alt="Avatar Logo"
                       style={{ width: 40, height: 40, borderRadius: "50%" }}
                     />
@@ -43,7 +43,7 @@ const Navbar = () => {
                   ""
                 )}
                 <Link to="/">
-                  <span className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100 font-sans">
+                  <span className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100 font-sans ml-2">
                     <span>DysLexiLens</span>
                   </span>
                 </Link>

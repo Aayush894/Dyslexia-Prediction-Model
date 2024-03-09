@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Navbar from "../../components/NavBar/NavBar.jsx";
 import Footer from "../../components/Footer";
 
@@ -50,11 +51,7 @@ function About() {
 
                 Our primary goal is to bring awareness to dyslexia, a neurodevelopmental disorder that can significantly impact a child's academic journey. By harnessing the power of data-driven insights, we aim to develop an accurate Dyslexia Prediction Model that can efficiently identify potential indicators of dyslexia in children.
 
-                We recognize the critical role parents play in a child's development, and we strive to empower them with knowledge and understanding. Through our predictive model, we aspire to create a bridge between technology and parental awareness, ensuring that parents are informed about the possibility of dyslexia in their child.
-
-                
-
-                
+                We recognize the critical role parents play in a childs development, and we strive to empower them with knowledge and understanding. Through our predictive model, we aspire to create a bridge between technology and parental awareness, ensuring that parents are informed about the possibility of dyslexia in their child.
               </p>
               <p className="font-normal text-base leading-6 text-gray-600 mt-6">
                 we are dedicated to shaping a future where every child has the opportunity to reach their full potential, unencumbered by undiagnosed dyslexia. Through our innovative approach, we aim to contribute to a world that values neurodiversity and provides equal opportunities for every child, regardless of their unique learning profile.
@@ -65,17 +62,17 @@ function About() {
             <div className="lg:flex items-center w-full lg:w-1/2 ">
               <img
                 className="lg:block hidden w-full"
-                src="https://bollybits.in/wp-content/uploads/2022/03/l_1646791325.jpeg"
+                src="/assets/about_page.png"
                 alt="people discussing on board"
               />
               <img
                 className="lg:hidden sm:block hidden w-full h-3/4"
-                src="https://bollybits.in/wp-content/uploads/2022/03/l_1646791325.jpeg"
+                src="/assets/about_page.png"
                 alt="people discussing on board"
               />
               <img
                 className="sm:hidden block w-full"
-                src="https://bollybits.in/wp-content/uploads/2022/03/l_1646791325.jpeg"
+                src="/assets/about_page.png"
                 alt="people discussing on board"
               />
             </div>
