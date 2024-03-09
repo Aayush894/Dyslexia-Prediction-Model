@@ -55,7 +55,7 @@ export function Home() {
         <NavBar />
       </div>
 
-      <div>
+      <div className="mt-2">
         <Banner/>
       </div>
 
@@ -74,17 +74,18 @@ export function Home() {
               </h6>
             </div>
           </div>
+          
           <div className="row">
             <div className="col-lg-3 col-md-6 mb-2 shadow-sm">
               <div className="row">
                 <div className="col-md-12">
                   <img
-                    src="https://static.vecteezy.com/system/resources/previews/026/619/142/non_2x/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg"
+                    src="./public/assets/Profile_pic.png"
                     alt="wrapkit"
                     className="img-fluid"
                   />
                 </div>
-                <div className="col-md-12 text-center">
+                <div className="col-md-12 text-center ">
                   <div className="pt-2">
                     <h5 className="mt-4 font-weight-medium mb-0">
                       Aayush Kumar Shrivastava
@@ -121,7 +122,7 @@ export function Home() {
               <div className="row">
                 <div className="col-md-12">
                   <img
-                    src="https://static.vecteezy.com/system/resources/previews/026/619/142/non_2x/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg"
+                    src="./assets/Kartik.jpg"
                     alt="wrapkit"
                     className="img-fluid"
                   />
@@ -163,7 +164,7 @@ export function Home() {
               <div className="row">
                 <div className="col-md-12">
                   <img
-                    src="https://static.vecteezy.com/system/resources/previews/026/619/142/non_2x/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg"
+                    src="./assets/Archit1.jpg"
                     alt="wrapkit"
                     className="img-fluid"
                   />
@@ -205,7 +206,7 @@ export function Home() {
               <div className="row">
                 <div className="col-md-12">
                   <img
-                    src="https://static.vecteezy.com/system/resources/previews/026/619/142/non_2x/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg"
+                    src="./public/assets/Achishek.jpg"
                     alt="wrapkit"
                     className="img-fluid"
                   />

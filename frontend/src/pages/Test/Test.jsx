@@ -16,72 +16,67 @@ function Test() {
         <NavBar />
       </div>
       <div className="d-flex">
-        <div className="m-5 p-2">
+        <div className="m-5 p-2 transform  transition duration-300 hover:scale-125 hover:bg-blue-600 ">
           <Link to="/test/imagePrediction">
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   height="140"
-                  image="https://assets-global.website-files.com/5a9423a3f702750001758d4f/60eef1e484ba20a41ad763bf_%230592D0%20(1).png"
+                  image="./public/assets/Image.jpg"
                   alt="image"
                 />
-                <CardContent>
+                <CardContent className="bg-blue-500">
                   <Typography gutterBottom variant="h5" component="div">
-                    Image Prediction
+                    Image Test
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Laudantium quod rerum sint voluptas quibusdam. Unde rem
-                    quasi illo molestiae expedita.
+                  Revolutionizing Evaluation: This test module analyzes handwritten documents, providing instant scores for a seamless and efficient assessment experience.
                   </Typography>
                 </CardContent>
               </CardActionArea>
             </Card>
           </Link>
         </div>
-        <div className="m-5 p-2">
+        <div className="m-5 p-2 transform  transition duration-200 hover:scale-125 hover:bg-blue-600 ">
           <Link to="/test/audioPrediction">
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   height="140"
-                  image="https://assets-global.website-files.com/5a9423a3f702750001758d4f/60eef1e484ba20a41ad763bf_%230592D0%20(1).png"
+                  image="./public/assets/Audio1.jpg"
                   alt="image"
                 />
-                <CardContent>
+                <CardContent className="bg-blue-500">
                   <Typography gutterBottom variant="h5" component="div">
-                    Audio Prediction
+                    Audio Test
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Laudantium quod rerum sint voluptas quibusdam. Unde rem
-                    quasi illo molestiae expedita.
+                  Assessing Your Child's Strengths: This test module processes your child's audio, providing a personalized score for a comprehensive evaluation.
                   </Typography>
                 </CardContent>
               </CardActionArea>
             </Card>
           </Link>
         </div>
-        <div className="m-5 p-2">
+        <div className="m-5 p-2 transform  transition duration-200 hover:scale-125 hover:bg-blue-600 ">
           <Link to="/test/textPrediction">
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   height="140"
-                  image="https://assets-global.website-files.com/5a9423a3f702750001758d4f/60eef1e484ba20a41ad763bf_%230592D0%20(1).png"
+                  image="./public/assets/Text.avif"
                   alt="image"
                 />
-                <CardContent>
+
+                <CardContent className="bg-blue-500">
                   <Typography gutterBottom variant="h5" component="div">
-                    Text Prediction
+                    Text Test
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Laudantium quod rerum sint voluptas quibusdam. Unde rem
-                    quasi illo molestiae expedita.
+                  Assess your writing effortlessly. This test module analyzes your text document, identifies errors, and generates a score – a quick, efficient way to check mistakes.
                   </Typography>
                 </CardContent>
               </CardActionArea>

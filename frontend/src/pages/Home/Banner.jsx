@@ -1,5 +1,6 @@
-import { Carousel } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React from 'react'
+import { Carousel } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Banner() {
   return (
@@ -11,14 +12,13 @@ export default function Banner() {
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="/assets/disgraphia1.png"
+                  src="./public/assets/slider-02.jpg"
+
                   alt="First slide"
                 />
-                <Carousel.Caption>
-                  <h3 className="text-dark">First slide label</h3>
-                  <p className="text-dark">
-                    Nulla vitae elit libero, a pharetra augue mollis interdum.
-                  </p>
+                <Carousel.Caption >
+                  <h3 class='text-dark justify-center'>First slide label</h3>
+                  <p class='text-dark'>Unlocking Potential, Embracing Differences: Advocating for a Dyslexia-Inclusive Future.</p>
                 </Carousel.Caption>
               </Carousel.Item>
 
