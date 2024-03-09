@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar/NavBar";
 
@@ -23,7 +24,7 @@ function Test() {
                 <CardMedia
                   component="img"
                   height="140"
-                  image="./public/assets/Image.jpg"
+                  image="/assets/Image.jpg"
                   alt="image"
                 />
                 <CardContent className="bg-blue-500">
@@ -45,7 +46,7 @@ function Test() {
                 <CardMedia
                   component="img"
                   height="140"
-                  image="./public/assets/Audio1.jpg"
+                  image="/assets/Audio1.jpg"
                   alt="image"
                 />
                 <CardContent className="bg-blue-500">
@@ -67,7 +68,7 @@ function Test() {
                 <CardMedia
                   component="img"
                   height="140"
-                  image="./public/assets/Text.avif"
+                  image="/assets/Text.avif"
                   alt="image"
                 />
 

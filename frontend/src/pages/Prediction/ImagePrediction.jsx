@@ -49,7 +49,7 @@ function ImagePrediction() {
         })
       });
       console.log(response);
-      if (response.success) {
+      if (response.ok) {
         // Handle success
         console.log('Image uploaded successfully.');
         // Write prediction logic

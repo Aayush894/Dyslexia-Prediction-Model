@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary';
 import fs from 'fs';
+import { asyncHandler } from './asyncHandler.js';
 
 cloudinary.config({ 
   cloud_name: 'aayush-shrivastava', 
@@ -8,7 +9,7 @@ cloudinary.config({
   secure: true,
 });
 
-const uploadOnCloudinary = async (req) => {
+const uploadOnCloudinary = asyncHandler(async (req) => {
     console.log(req.body) ; 
 
     try {
@@ -29,12 +30,12 @@ const uploadOnCloudinary = async (req) => {
         fs.unlinkSync(localFilePath);
 
         // Return additional metadata along with the URL
-        return { success: true, url: response.url, public_id: response.public_id };
+        return { ok: true, url: response.url, public_id: response.public_id };
 
     } catch (error) {
         console.error("Error uploading image to Cloudinary:", error);
-        return { success: false, message: "Error uploading image to Cloudinary" };
+        return { ok: false, message: "Error uploading image to Cloudinary" };
     }
-}
+});
 
 export { uploadOnCloudinary };
