@@ -95,7 +95,7 @@ export function Home() {
                       {/* You can rely on our amazing features list and also our
                       customer services will be a great experience. */} 
                     </p>
-                    <ul className="list-inline">
+                    <ul className="list-inline mb-2">
                       <li className="list-inline-item">
                         <Link
                           to="#"
@@ -137,7 +137,7 @@ export function Home() {
                       {/* You can rely on our amazing features list and also our
                       customer services will be a great experience. */}
                     </p>
-                    <ul className="list-inline">
+                    <ul className="list-inline mb-2">
                       <li className="list-inline-item">
                         <Link
                           to="#"
@@ -179,7 +179,7 @@ export function Home() {
                       {/* You can rely on our amazing features list and also our
                       customer services will be a great experience. */}
                     </p>
-                    <ul className="list-inline">
+                    <ul className="list-inline mb-2">
                       <li className="list-inline-item">
                         <Link
                           to="#"
@@ -221,7 +221,7 @@ export function Home() {
                       {/* You can rely on our amazing features list and also our
                       customer services will be a great experience. */}
                     </p>
-                    <ul className="list-inline">
+                    <ul className="list-inline mb-2">
                       <li className="list-inline-item">
                         <Link
                           to="#"

@@ -21,7 +21,7 @@ const SwitchTheme = ({ theme, toggleTheme }) => {
       ) : (
         <button
           onClick={toggleTheme}
-          className="text-blue-500 rounded-full outline-none focus:outline-none focus-visible:ring focus-visible:ring-gray-100 focus:ring-opacity-20"
+          className="text-black-500 rounded-full outline-none focus:outline-none focus-visible:ring focus-visible:ring-gray-100 focus:ring-opacity-20"
         >
           <span className="sr-only">Dark Mode</span>
           <svg

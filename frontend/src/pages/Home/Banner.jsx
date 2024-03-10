@@ -12,7 +12,6 @@ export default function Banner() {
                 <img
                   className="d-block w-100"
                   src="/assets/slider-02.jpg"
-
                   alt="First slide"
                 />
                 <Carousel.Caption >
@@ -24,12 +23,12 @@ export default function Banner() {
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="/assets/disgraphia3.png"
+                  src="/assets/disgraphia2.png"
                   alt="Second slide"
                 />
 
                 <Carousel.Caption>
-                  <h3 className="text-dark">Second slide label</h3>
+                  <h3 className="text-dark justify-center">Second slide label</h3>
                   <p className="text-dark">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   </p>
@@ -39,11 +38,11 @@ export default function Banner() {
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="assets/disgraphia2.png"
+                  src="assets/disgraphia1.png"
                   alt="Third slide"
                 />
                 <Carousel.Caption>
-                  <h3 className="text-dark">Third slide label</h3>
+                  <h3 className="text-dark justify-center">Third slide label</h3>
                   <p className="text-dark">
                     Praesent commodo cursus magna, vel scelerisque nisl
                     consectetur.
