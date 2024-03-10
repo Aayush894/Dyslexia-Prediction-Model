@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, Response
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from gtts import gTTS
 import os
 import random
@@ -9,12 +9,13 @@ from testdir.test import levenshtein, get_feature_array, score
 from flask import jsonify
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+CORS(app)
 
 # Computer will speak almost 10 words
 spoken_words = []
 
 @app.route('/api/fetchWords', methods=['POST'])
+@cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
 def fetch_words():
     # Load the elementary vocabulary from CSV
     global spoken_words
@@ -47,12 +48,19 @@ def load_elementary_vocabulary():
             vocabulary.extend(row)
     return vocabulary
 
+
 # Submit words from form
 @app.route('/api/submitWords', methods=['POST'])
+@cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
 def submit_words():
-    submitted_words = [request.form.get(f'word{i}', '') for i in range(1, 11)]
+    request_data = request.json  
+    submitted_words = request_data  
+
+    # Calculate score using Levenshtein distance (assuming levenshtein function is defined)
     score = levenshtein(spoken_words, submitted_words)
-    
+
+    print("Score is", score) 
+
     response = {
         "ok": True,
         "message": "Score Available",
@@ -60,6 +68,7 @@ def submit_words():
     }
     
     return jsonify(response)
+
 
 # # Submit text from form
 # @app.route('/submit_text', methods=['POST'])

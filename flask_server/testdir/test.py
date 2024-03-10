@@ -7,26 +7,25 @@ from abydos.phonetic import Soundex, Metaphone, Caverphone, NYSIIS
 
 # ****************************************************************
 def levenshtein(s1, s2):
-  if len(s1) < len(s2):
-    return levenshtein(s2, s1)
+    # Initialize a matrix to store the Levenshtein distances
+    matrix = [[0] * (len(s2) + 1) for _ in range(len(s1) + 1)]
 
-  # len(s1) >= len(s2)
-  if len(s2) == 0:
-    return len(s1)
+    # Initialize the first row and column of the matrix
+    for i in range(len(s1) + 1):
+        matrix[i][0] = i
+    for j in range(len(s2) + 1):
+        matrix[0][j] = j
 
-  previous_row = range(len(s2) + 1)
-  for i, c1 in enumerate(s1):
-    current_row = [i + 1]
-    for j, c2 in enumerate(s2):
-      # j+1 instead of j since previous_row and current_row are one character longer
-      insertions = previous_row[j + 1] + 1
-      deletions = current_row[j] + 1       # than s2
-      substitutions = previous_row[j] + (c1 != c2)
-      current_row.append(min(insertions, deletions, substitutions))
-    previous_row = current_row
+    # Compute Levenshtein distance for each pair of substrings
+    for i in range(1, len(s1) + 1):
+        for j in range(1, len(s2) + 1):
+            cost = 0 if s1[i - 1] == s2[j - 1] else 1
+            matrix[i][j] = min(matrix[i - 1][j] + 1,      # Deletion
+                               matrix[i][j - 1] + 1,      # Insertion
+                               matrix[i - 1][j - 1] + cost)  # Substitution
 
-  return previous_row[-1]
-
+    # Return the Levenshtein distance between the last elements of s1 and s2
+    return matrix[len(s1)][len(s2)]
 
 # ***************************************************
 def spelling_accuracy(extracted_text):

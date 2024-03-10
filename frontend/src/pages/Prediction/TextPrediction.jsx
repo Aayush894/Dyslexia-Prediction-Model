@@ -3,7 +3,7 @@ import Footer from "../../components/Footer";
 import { useState, useEffect } from "react";
 
 function TextPrediction() {
-  const [word, setWords] = useState(""); 
+  const [input_word, setInputWords] = useState(""); 
   const [spoken_text, setSpokenText] = useState([]);
   const [score, setScore] = useState(0); 
 
@@ -56,14 +56,15 @@ function TextPrediction() {
     event.preventDefault();
     let inputWords = ""; 
     const formData = new FormData(event.target);
-    const words = {};
+    const words = [];
     
     for (let i = 1; i <= 10; i++) {
-      words[`word${i}`] = formData.get(`word${i}`);
-      inputWords += words[`word${i}`] + " ";
+      const word = formData.get(`word${i}`);
+      words.push(word);
+      inputWords += word + " ";
     }
 
-    setWords(inputWords); 
+    setInputWords(inputWords); 
 
     fetch('http://127.0.0.1:8000/api/submitWords', {
       method: 'POST',
@@ -112,7 +113,7 @@ function TextPrediction() {
             <div className="text-center">
             <div className="mt-8 mb-2">
               <h2 className="text-xl font-bold">What you wrote:</h2>
-              {word ? <p>{word}</p> : <p>No words submitted yet.</p>}
+              {input_word ? <p>{input_word}</p> : <p>No words submitted yet.</p>}
             </div>
 
             <div className="mb-2">
