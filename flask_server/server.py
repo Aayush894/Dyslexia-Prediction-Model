@@ -46,7 +46,9 @@ def load_elementary_vocabulary():
         reader = csv.reader(file)
         for row in reader:
             vocabulary.extend(row)
-    return vocabulary
+    
+    # Select 10 unique words from the vocabulary
+    return random.sample(vocabulary, k=10)
 
 
 # Submit words from form

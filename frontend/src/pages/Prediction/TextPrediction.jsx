@@ -6,10 +6,7 @@ function TextPrediction() {
   const [input_word, setInputWords] = useState(""); 
   const [spoken_text, setSpokenText] = useState([]);
   const [score, setScore] = useState(0); 
-
-  useEffect(() => {
-    fetchSpokenText();
-  }, []); 
+  const [show_text, setShowText] = useState(""); 
 
   const fetchSpokenText = () => {
     fetch('http://127.0.0.1:8000/api/fetchWords', {
@@ -22,8 +19,8 @@ function TextPrediction() {
     })
     .then(response => response.json())
     .then(data => {
-      const spokenText = data.random_words ; 
-      setSpokenText(spokenText) ; 
+      const spokenText = data.random_words; 
+      setSpokenText(spokenText); 
       
       console.log(data.message);
     })
@@ -33,7 +30,7 @@ function TextPrediction() {
   };
 
   const handleSpeak = (e) => {
-    e.preventDefault() ;
+    e.preventDefault();
 
     // Fetch available voices
     const voices = window.speechSynthesis.getVoices();
@@ -45,6 +42,10 @@ function TextPrediction() {
       utterance.onstart = () => {
         console.log(`Speaking word ${index + 1}: ${word}`);
       };
+      setTimeout(() => {
+        window.speechSynthesis.speak(utterance);
+      }, index * 3000); // Delay 3 seconds for each word
+
       setTimeout(() => {
         window.speechSynthesis.speak(utterance);
       }, index * 3000); // Delay 3 seconds for each word
@@ -65,6 +66,7 @@ function TextPrediction() {
     }
 
     setInputWords(inputWords); 
+    setShowText(spoken_text); 
 
     fetch('http://127.0.0.1:8000/api/submitWords', {
       method: 'POST',
@@ -85,6 +87,10 @@ function TextPrediction() {
       console.error('Error:', error);
     });
   };
+
+  useEffect(() => {
+    fetchSpokenText();
+  }, []);  
 
   return (
     <>
@@ -118,7 +124,7 @@ function TextPrediction() {
 
             <div className="mb-2">
               <h2 className="text-xl font-bold">What Google Assistant said:</h2>
-              {spoken_text.length > 0 ? <p>{spoken_text.join(' ')}</p> : <p>No text spoken yet.</p>}
+              {show_text.length > 0 ? <p>{show_text.join(' ')}</p> : <p>No text spoken yet.</p>}
             </div>
 
             <div className="mb-2">
