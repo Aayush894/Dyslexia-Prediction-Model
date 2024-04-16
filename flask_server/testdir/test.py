@@ -3,8 +3,38 @@ import language_tool_python
 import requests
 import pandas as pd
 import os
+from flask import Flask, jsonify, request, render_template
+import speech_recognition as sr
+from gtts import gTTS
+import os
+import random
+import csv
+import time
+from flask import redirect, url_for
+from flask import Response
+from flask import session
+from pathlib import Path
+from textblob import TextBlob
+# import streamlit as st
+from PIL import Image
+import os
+import language_tool_python
+import requests
+import pandas as pd
+import random
+import speech_recognition as sr
+import pyttsx3
+import time
+import eng_to_ipa as ipa
+import requests
 from abydos.phonetic import Soundex, Metaphone, Caverphone, NYSIIS
+import pickle as pkl
+import numpy as np
 
+
+
+# model loaded
+loaded_model = pkl.load(open("Decision_tree_model.sav", 'rb'))
 # ****************************************************************
 def levenshtein(s1, s2):
     # Initialize a matrix to store the Levenshtein distances
@@ -138,43 +168,16 @@ def get_feature_array(path: str):
   feature_array.append(percentage_of_phonetic_accuraccy(extracted_text))
   return feature_array
 
-# ****************************************************************************************
-def generate_csv(folder: str, label: int, csv_name: str):
-  arr = []
-  for image in os.listdir(folder):
-    path = os.path.join(folder, image)
-    feature_array = get_feature_array(path)
-    feature_array.append(label)
-    # print(feature_array)
-    arr.append(feature_array)
-    print(feature_array)
-  print(arr)
-  pd.DataFrame(arr, columns=["spelling_accuracy", "gramatical_accuracy", " percentage_of_corrections",
-                "percentage_of_phonetic_accuraccy", "presence_of_dyslexia"]).to_csv("test1.csv")
-
-# ********************************
-def score(input):
-  if input[0] <= 96.40350723266602:
-    var0 = [0.0, 1.0]
-  else:
-    if input[1] <= 99.1046028137207:
-        var0 = [0.0, 1.0]
-    else:
-      if input[2] <= 2.408450722694397:
-        if input[2] <= 1.7936508059501648:
-          var0 = [1.0, 0.0]
-        else:
-          var0 = [0.0, 1.0]
-      else:
-        var0 = [1.0, 0.0]
-  return var0
-
 
 # Example usage of your functions:
-extracted_text = 'your_extracted_text_here'
-feature_array = get_feature_array(extracted_text)
-result = score(feature_array)
-if result[0] == 1:
+
+extracted_text = 'your_extracted_text_here_from_image'
+
+features = get_feature_array(extracted_text)
+features_array = np.array([features])
+prediction = loaded_model.predict(features_array)
+
+if prediction[0] == 0:
     print("There's a very slim chance that this person is suffering from dyslexia or dysgraphia.")
 else:
     print("There's a high chance that this person is suffering from dyslexia or dysgraphia")

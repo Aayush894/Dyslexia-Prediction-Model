@@ -72,26 +72,16 @@ def submit_words():
     return jsonify(response)
 
 
-# # Submit text from form
-# @app.route('/submit_text', methods=['POST'])
-# def submit_text():
-#     if request.method == 'POST':
-#         user_text = request.form['user_text']
-#         print("User submitted text:", user_text)
 
-#         # Use the user_text as input for get_feature_array
-#         feature_array = get_feature_array(user_text)
-#         result = score(feature_array)
 
-#         if result[0] == 1:
-#             word = "From the tests on this handwriting sample, there is a very slim chance that this person is suffering from dyslexia or dysgraphia"
-#             print("From the tests on this handwriting sample, there is a very slim chance that this person is suffering from dyslexia or dysgraphia")
-#         else:
-#             word = "From the tests on this handwriting sample, there is a very high chance that this person is suffering from dyslexia or dysgraphia"
-#             print("From the tests on this handwriting sample, there is a very high chance that this person is suffering from dyslexia or dysgraphia")
 
-#     # Render index.html and pass the prediction word
-#     return render_template('index.html', prediction=word)
+
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
