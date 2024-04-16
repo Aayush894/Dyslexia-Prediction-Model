@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, Response
+from flask import Flask, request, render_template, Response, jsonify, redirect, url_for, session
 from flask_cors import CORS, cross_origin
 from gtts import gTTS
 import os
@@ -10,35 +10,12 @@ from textblob import TextBlob
 import language_tool_python
 import requests
 import pandas as pd
-import os
-from flask import Flask, jsonify, request, render_template
 import speech_recognition as srS
-import os
-import random
-import csv
-import time
-from flask import redirect, url_for
-from flask import Response
-from flask import session
 from pathlib import Path
-from textblob import TextBlob
-# import streamlit as st
 from PIL import Image
-import os
-import language_tool_python
-import requests
-import pandas as pd
-import random
-import speech_recognition as sr
 import pyttsx3
-import time
 import eng_to_ipa as ipa
-import requests
 from abydos.phonetic import Soundex, Metaphone, Caverphone, NYSIIS
-import pickle as pkl
-import numpy as np
-from flask import Flask
-from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
@@ -249,11 +226,12 @@ def submit_words():
 
 
 @app.route('/api/submit_text', methods=['GET', 'POST'])
-@cross_origin(origin='http://localhost:8000')  # Allow requests from localhost:3000
+@cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
 def submit_text():
     # text extracted will be here
+    print(request)
     request_data = request.json  
-    extracted_text = request_data.text  
+    extracted_text = request_data.get('text')
 
     # extracted_text = 'I wot a sil-Plat It was var kol I that tht was voir -kol the blat was'
 
@@ -276,7 +254,6 @@ def submit_text():
     response = {
         "ok": True,
         "message": "Score Available",
-        # "score": score,
         "result": result,
     }
 

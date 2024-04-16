@@ -1,4 +1,4 @@
-import Footer from '../../components/Footer'
+import Footer from "../../components/Footer";
 
 function AudioPrediction() {
   return (
@@ -8,7 +8,7 @@ function AudioPrediction() {
         <Footer />
       </div>
     </>
-  )
+  );
 }
 
-export default AudioPrediction
+export default AudioPrediction;
