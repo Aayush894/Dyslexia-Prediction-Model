@@ -2,13 +2,17 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/NavBar/NavBar"
 import { useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function ImagePrediction() {
   const [imageUrl, setImageUrl] = useState(null);
   const [imageAlt, setImageAlt] = useState(null);
 
-  const navigate = useNavigate();
+  const [cloudinaryUrl, setCloudinaryUrl] = useState(""); 
+  const [text, setText] = useState(""); 
+  // const [result, setResult] = useState(""); 
+
+  // const navigate = useNavigate();
 
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
@@ -39,33 +43,77 @@ function ImagePrediction() {
   const handleImageSubmit = async () => {
     console.log(imageAlt);
     try {
-      const response = await fetch("http://localhost:5000/api/uploadOnCloudinary", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const url = "http://localhost:5000/api/uploadOnCloudinary" ;
+
+      fetch(url, {
+        mode: 'cors',
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
           imageAlt: imageAlt,
         })
-      });
-      console.log(response);
-      if (response.ok) {
-        // Handle success
-        console.log('Image uploaded successfully.');
-        // Write prediction logic
-        const json = await response.json();
-        const cloudinaryUrl = json.url;
-        const publicId = json.public_id; // Additional metadata
+      }).then( response => response.json())
+      .then( (data)=> {
+        setCloudinaryUrl(data.url) ; 
+        console.log(data.url);
+        return data.url ; 
+      })
+      .then( (url) => {
+        try {
+          fetch(textConverturl, {
+            mode: 'cors',
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({
+              url: url,
+            })
+          })
+            .then( response => response.json())
+            .then( (data)=> { 
+              console.log(data); 
+            })
+        } catch {
+          console.error('Error extarcting text from the link:');
+        }
+      })
+      .then( (text) => {
+        console.log(text) ; 
+      })
 
-        console.log(cloudinaryUrl, publicId);
+      const textConverturl = "http://localhost:5000/api/convertText" ; 
 
-        navigate("/");
-      } else {
-        console.error('Error uploading image:', response);
-      }
+      console.log(cloudinaryUrl) ; 
+
+      fetch(textConverturl, {
+        mode: 'cors',
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+          url: cloudinaryUrl,
+        })
+      }).then( response => response.json())
+      .then( (data)=> {
+        setText(data.text) ; 
+        console.log(text); 
+      })
+
+      // console.log(text) ;
+
+      // const resulturl = "http://localhost:8000/submit_text" ;
+
+      // fetch(resulturl, {
+      //   mode: 'cors',
+      //   method: 'POST',
+      //   headers: {'Content-Type':'application/json'},
+      //   text,
+      // }).then( response => response.json())
+      // .then( (data)=> {
+      //   result = data.result ; 
+      //   console.log(result); 
+      // })
+
     } catch (error) {
       console.error('Error uploading image to Cloudinary:', error);
-      navigate("/");
     }
   };
 

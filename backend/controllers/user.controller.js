@@ -432,6 +432,35 @@ const GoogleloginUser = asyncHandler(async (req, res) => {
 
 })
 
+const convertImageToText = asyncHandler(async (req, res) => {
+    const url = req.body.url ; 
+
+    var myHeaders = new Headers();
+    myHeaders.append("apikey", "I6WIDHSqFTkrapsMfS1HwbAyJPszUkcd");
+
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+      headers: myHeaders
+    };
+
+    let text = "" ; 
+
+    await fetch(`https://api.apilayer.com/image_to_text/url?url=${url}`, requestOptions)
+      .then(response => response.text())
+      .then(textresult => text = textresult)
+      .catch(error => console.log('error', error));
+
+    console.log(text) ; 
+
+    res.json({
+      status: true, 
+      text: text, 
+      message: "text fetch successfully",
+    })
+
+})
+
 export {
   sendEmail,
   registerUser,
@@ -441,4 +470,5 @@ export {
   UserProfile,
   uploadImage,
   GoogleloginUser,
+  convertImageToText,
 };

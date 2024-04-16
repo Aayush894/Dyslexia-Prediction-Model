@@ -33,6 +33,29 @@ def spelling_accuracy(extracted_text):
   return ((len(extracted_text) - (levenshtein(extracted_text, spell_corrected)))/(len(extracted_text)+1))*100
 
 
+# ***************************************************Custom Spelling_accuracy
+# from spellchecker import SpellChecker
+
+# def calculate_spelling_accuracy(text):
+#     # Initialize the spell checker
+#     spell = SpellChecker()
+
+#     # Split the text into individual words
+#     words = text.split()
+
+#     # Find the words that may be misspelled
+#     misspelled = spell.unknown(words)
+
+#     # Calculate the spelling accuracy
+#     spelling_accuracy = (len(words) - len(misspelled)) / len(words)
+
+#     return spelling_accuracy
+
+# # Test the function
+# text = "This is a smple txt with some misspelled wrds."
+# print(f"Spelling Accuracy: {calculate_spelling_accuracy(text)}")
+
+
 # ***************************************************
 my_tool = language_tool_python.LanguageTool('en-US')
 
@@ -47,7 +70,24 @@ def gramatical_accuracy(extracted_text):
           len(correct_text_set - extracted_text_set))
   return ((len(spell_corrected) - n)/(len(spell_corrected)+1))*100
 
-# ****************************************************
+# **************************************************** Grammatical Accuracy 
+# import language_tool_python
+
+# def calculate_grammatical_accuracy(text):
+#     # Initialize the language tool
+#     tool = language_tool_python.LanguageTool('en-US')
+
+#     # Get the list of matches (errors) in the text
+#     matches = tool.check(text)
+
+#     # Calculate the grammatical accuracy
+#     grammatical_accuracy = (len(text.split()) - len(matches)) / len(text.split())
+
+#     return grammatical_accuracy
+
+# # Test the function
+# text = "This is a text with some gramatical errors."
+# print(f"Grammatical Accuracy: {calculate_grammatical_accuracy(text)}")
 
 # text correction API authentication
 api_key_textcorrection = "eaeb9fb5a72f4e529111856dfabd43aa"

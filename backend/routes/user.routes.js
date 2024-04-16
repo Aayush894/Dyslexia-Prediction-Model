@@ -8,6 +8,7 @@ import {
   UserProfile,
   uploadImage,
   GoogleloginUser,
+  convertImageToText,
 } from "../controllers/user.controller.js";
 import path from 'path'; 
 import fs from 'fs'; 
@@ -64,6 +65,9 @@ router.route("/sendemail").post(sendEmail) ;
 router.route("/profile").get(UserProfile) ; 
 
 router.post('/upload', clearTempDirectory, upload.single('image'), uploadImage);
+
 router.post('/uploadOnCloudinary', uploadOnCloudinary); 
+
+router.post('/convertText', convertImageToText) ; 
 
 export default router;
