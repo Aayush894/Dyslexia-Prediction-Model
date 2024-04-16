@@ -34,7 +34,7 @@ import numpy as np
 
 
 # model loaded
-loaded_model = pkl.load(open("Decision_tree_model.sav", 'rb'))
+loaded_model = pkl.load(open("/home/abhishek/Documents/Aayush_Dyslexia/Dysgraphia-Prediction-Model/flask_server/Decision_tree_model.sav", 'rb'))
 # ****************************************************************
 def levenshtein(s1, s2):
     # Initialize a matrix to store the Levenshtein distances
@@ -172,7 +172,7 @@ def get_feature_array(path: str):
 
 # Example usage of your functions:
 
-extracted_text = 'your_extracted_text_here_from_image'
+extracted_text = 'I wot a sil-Plat It was var kol I that tht was voir -kol the blat was'
 
 features = get_feature_array(extracted_text)
 features_array = np.array([features])

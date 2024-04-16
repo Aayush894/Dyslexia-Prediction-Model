@@ -248,8 +248,11 @@ def submit_words():
 @cross_origin(origin='http://localhost:8000')  # Allow requests from localhost:3000
 def submit_text():
     # text extracted will be here
-    request_data = request.json  
-    extracted_text = request_data  
+    # request_data = request.json  
+    # extracted_text = request_data  
+
+    extracted_text = 'I wot a sil-Plat It was var kol I that tht was voir -kol the blat was'
+    
 
     features = get_feature_array(extracted_text)
     features_array = np.array([features])
