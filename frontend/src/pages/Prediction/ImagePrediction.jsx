@@ -8,8 +8,6 @@ function ImagePrediction() {
   const [imageUrl, setImageUrl] = useState(null);
   const [imageAlt, setImageAlt] = useState(null);
 
-  const [cloudinaryUrl, setCloudinaryUrl] = useState(""); 
-  const [text, setText] = useState(""); 
   // const [result, setResult] = useState(""); 
 
   // const navigate = useNavigate();
@@ -53,12 +51,12 @@ function ImagePrediction() {
           imageAlt: imageAlt,
         })
       }).then( response => response.json())
-      .then( (data)=> {
-        setCloudinaryUrl(data.url) ; 
+      .then( (data)=> { 
         console.log(data.url);
         return data.url ; 
       })
       .then( (url) => {
+        const textConverturl = "http://localhost:5000/api/convertText"
         try {
           fetch(textConverturl, {
             mode: 'cors',
@@ -71,33 +69,56 @@ function ImagePrediction() {
             .then( response => response.json())
             .then( (data)=> { 
               console.log(data); 
+              // Parse the 'text' property to extract the JSON data
+              const textData = JSON.parse(data.text);
+              // Access the 'all_text' property from the parsed JSON data
+              const allText = textData.all_text;
+              console.log(allText);
+
+              return allText ; 
+            })
+            .then( (text) => {
+              const resultUrl = "http://localhost:8000/api/submit_text"
+              try {
+                  fetch(resultUrl, {
+                    mode: 'cors',
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({
+                      text: text,
+                    })
+                  })
+                    .then( response => response.json())
+                    .then( (data)=> { 
+                      console.log(data.result);
+                    })
+
+                  } catch {
+                    console.error('Error while fetching result:');
+                  }
             })
         } catch {
           console.error('Error extarcting text from the link:');
         }
       })
-      .then( (text) => {
-        console.log(text) ; 
-      })
 
-      const textConverturl = "http://localhost:5000/api/convertText" ; 
+      // const textConverturl = "http://localhost:5000/api/convertText" ; 
 
-      console.log(cloudinaryUrl) ; 
+      // console.log(cloudinaryUrl) ; 
 
-      fetch(textConverturl, {
-        mode: 'cors',
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({
-          url: cloudinaryUrl,
-        })
-      }).then( response => response.json())
-      .then( (data)=> {
-        setText(data.text) ; 
-        console.log(text); 
-      })
+      // fetch(textConverturl, {
+      //   mode: 'cors',
+      //   method: 'POST',
+      //   headers: {'Content-Type':'application/json'},
+      //   body: JSON.stringify({
+      //     url: cloudinaryUrl,
+      //   })
+      // }).then( response => response.json())
+      // .then( (data)=> {
+      //   setText(data.text) ; 
+      //   console.log(text); 
+      // })
 
-      // console.log(text) ;
 
       // const resulturl = "http://localhost:8000/submit_text" ;
 

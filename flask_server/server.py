@@ -12,8 +12,7 @@ import requests
 import pandas as pd
 import os
 from flask import Flask, jsonify, request, render_template
-import speech_recognition as sr
-from gtts import gTTS
+import speech_recognition as srS
 import os
 import random
 import csv
@@ -38,11 +37,16 @@ import requests
 from abydos.phonetic import Soundex, Metaphone, Caverphone, NYSIIS
 import pickle as pkl
 import numpy as np
+from flask import Flask
+from flask_cors import CORS
 
+app = Flask(__name__)
+CORS(app)
 
-
+loaded_model = None
 # model loaded
-loaded_model = pkl.load(open("/home/abhishek/Documents/Aayush_Dyslexia/Dysgraphia-Prediction-Model/flask_server/Decision_tree_model.sav", 'rb'))
+with open(r"C:\Users\aayus\Desktop\MernStack_Projects\Disgraphia-Prediction\flask_server\Decision_tree_model.sav", 'rb') as file:
+  loaded_model = pkl.load(file)
 
 # code for test.py starts here 
 # ****************************************************************
@@ -244,15 +248,14 @@ def submit_words():
     return jsonify(response)
 
 
-@app.route('/api/submit_text', methods=['GET'])
+@app.route('/api/submit_text', methods=['GET', 'POST'])
 @cross_origin(origin='http://localhost:8000')  # Allow requests from localhost:3000
 def submit_text():
     # text extracted will be here
-    # request_data = request.json  
-    # extracted_text = request_data  
+    request_data = request.json  
+    extracted_text = request_data.text  
 
-    extracted_text = 'I wot a sil-Plat It was var kol I that tht was voir -kol the blat was'
-    
+    # extracted_text = 'I wot a sil-Plat It was var kol I that tht was voir -kol the blat was'
 
     features = get_feature_array(extracted_text)
     features_array = np.array([features])
