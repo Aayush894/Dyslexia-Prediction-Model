@@ -4,8 +4,11 @@ from gtts import gTTS
 import os
 import random
 import csv
+import pickle as pkl
+import numpy as np
+from testdir.test import levenshtein, get_feature_array, score,calculate_score,percentage_of_phonetic_accuraccy,percentage_of_corrections,gramatical_accuracy,spelling_accuracy
+loaded_model = pkl.load(open("Decision_tree_model.sav", 'rb'))
 
-from testdir.test import levenshtein, get_feature_array, score
 from flask import jsonify
 
 app = Flask(__name__)
@@ -35,7 +38,6 @@ def fetch_words():
     }
 
     return jsonify(response)
-
 
 def load_elementary_vocabulary():
     vocabulary = []
@@ -72,16 +74,41 @@ def submit_words():
     return jsonify(response)
 
 
+@app.route('/api/submit_text', methods=['GET'])
+@cross_origin(origin='http://localhost:8000')  # Allow requests from localhost:3000
+def submit_text():
+    # text extracted will be here
+    request_data = request.json  
+    extracted_text = request_data  
+
+    features = get_feature_array(extracted_text)
+    features_array = np.array([features])
+    prediction = loaded_model.predict(features_array)
+
+    result = "" 
+
+    if prediction[0] == 0:
+        result = "There's a very slim chance that this person is suffering from dyslexia or dysgraphia."
+    else:
+        result = "There's a high chance that this person is suffering from dyslexia or dysgraphia"
+
+    # Calculate score using Levenshtein distance (assuming levenshtein function is defined)
+    # score = levenshtein(spoken_words, submitted_words)
+
+    # print("Score is", score) 
+
+    response = {
+        "ok": True,
+        "message": "Score Available",
+        "score": score,
+        "result": result,
+    }
+
+    return jsonify(response)
 
 
 
-
-
-
-
-
-
-
+# for writing disabilities code is here below
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

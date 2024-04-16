@@ -1,6 +1,8 @@
 import numpy as np
 import pickle as pkl
 
+# ye bss sample hai
+
 # Load the trained Decision Tree model
 loaded_model = pkl.load(open("Decision_tree_model.sav", 'rb'))
 
