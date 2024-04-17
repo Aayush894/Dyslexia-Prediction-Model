@@ -1,6 +1,7 @@
 import Footer from "../../components/Footer";
 import Navbar from "../../components/NavBar/NavBar";
 import { useState } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
 
 // import { useNavigate } from "react-router-dom";
 
@@ -8,6 +9,7 @@ function ImagePrediction() {
   const [imageUrl, setImageUrl] = useState(null);
   const [imageAlt, setImageAlt] = useState(null);
 
+  const [processing, setProcessing] = useState(false);
   const [result, setResult] = useState(null);
 
   // const navigate = useNavigate();
@@ -39,7 +41,8 @@ function ImagePrediction() {
   };
 
   const handleImageSubmit = async () => {
-    console.log(imageAlt);
+    setProcessing(true);
+
     try {
       const url = "http://localhost:5000/api/uploadOnCloudinary";
 
@@ -92,7 +95,7 @@ function ImagePrediction() {
                     .then((response) => response.json())
                     .then((data) => {
                       setResult(data.result);
-
+                      setProcessing(false);
                       // console.log(data.result);
                     })
                     .catch((err) => {
@@ -182,19 +185,30 @@ function ImagePrediction() {
             </div>
           </div>
         </div>
+      </div>
 
-        <div>
-          {result ? (
-            <p className="mb-10 text-center">
-              <b>Your result is:&nbsp;&nbsp;&nbsp;</b>
-              <i>{result}</i>
-            </p>
-          ) : (
-            <p className="mb-10 text-center">
-              <b>No test taken Yet!!!.</b>
-            </p>
-          )}
-        </div>
+      <div>
+        {processing ? (
+          <p className="mb-10 text-center">
+            Processing...
+            <div>
+              <CircularProgress />
+            </div>
+          </p>
+        ) : (
+          <div>
+            {result ? (
+              <p className="mb-10 text-center">
+                <b>Your result is:&nbsp;&nbsp;&nbsp;</b>
+                <i>{result}</i>
+              </p>
+            ) : (
+              <p className="mb-10 text-center">
+                <b>No test taken Yet!!!.</b>
+              </p>
+            )}
+          </div>
+        )}
       </div>
 
       <div>

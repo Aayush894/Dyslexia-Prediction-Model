@@ -175,7 +175,7 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 
   const user = await User.findOne({
-     email,
+    email,
   });
 
   if (!user) {
@@ -385,6 +385,10 @@ const UserProfile = asyncHandler(async (req, res) => {
 const uploadImage = asyncHandler(async (req, res) => {
   const imagePath = req.file.path; // Path to the uploaded image file
 
+  if (imagePath === undefined || imagePath === "") {
+    throw new ApiError(400, "Image Path not found");
+  }
+
   res.json({ imagePath: imagePath, ok: true });
 });
 
@@ -394,7 +398,7 @@ const GoogleloginUser = asyncHandler(async (req, res) => {
     return res.status(400).json({ errors: error.array() });
   }
 
-  const { email} = req.body;
+  const { email } = req.body;
 
   if (!email) {
     throw new ApiError(400, "email is required");
@@ -411,7 +415,7 @@ const GoogleloginUser = asyncHandler(async (req, res) => {
   }
 
   const user = await User.findOne({
-     email,
+    email,
   });
 
   if (!user) {
@@ -429,37 +433,40 @@ const GoogleloginUser = asyncHandler(async (req, res) => {
     .status(200)
     .cookie("authToken", authToken, options)
     .json({ success: true, authToken });
-
-})
+});
 
 const convertImageToText = asyncHandler(async (req, res) => {
-    const url = req.body.url ; 
+  const url = req.body.url;
 
-    var myHeaders = new Headers();
-    myHeaders.append("apikey", "I6WIDHSqFTkrapsMfS1HwbAyJPszUkcd");
+  var myHeaders = new Headers();
+  myHeaders.append("apikey", process.env.IMAGE_TO_TEXT_API_KEY);
 
-    var requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-      headers: myHeaders
-    };
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
+    headers: myHeaders,
+  };
 
-    let text = "" ; 
+  let text = "";
 
-    await fetch(`https://api.apilayer.com/image_to_text/url?url=${url}`, requestOptions)
-      .then(response => response.text())
-      .then(textresult => text = textresult)
-      .catch(error => console.log('error', error));
+  await fetch(
+    `https://api.apilayer.com/image_to_text/url?url=${url}`,
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((textresult) => (text = textresult))
+    .catch((error) => console.log("error", error));
 
-    console.log(text) ; 
+  if (text === "") {
+    throw new ApiError(400, "No text found in the image");
+  }
 
-    res.json({
-      status: true, 
-      text: text, 
-      message: "text fetch successfully",
-    })
-
-})
+  res.json({
+    status: true,
+    text: text,
+    message: "text fetch successfully",
+  });
+});
 
 export {
   sendEmail,

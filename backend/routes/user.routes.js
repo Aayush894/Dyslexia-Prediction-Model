@@ -54,6 +54,7 @@ const router = Router();
 router.route("/signup").post(registerUser);
 
 router.route("/login").post(loginUser);
+
 router.route("/googlelogin").post(GoogleloginUser);
 
 router.route("/update").post(updateUser);
