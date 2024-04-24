@@ -1,0 +1,68 @@
+body {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Styles for the form */
+.question {
+    background-color: #e9eef0;
+    font-size: 25px;
+    font-weight: 400;
+    padding: 2em;
+}
+
+#question {
+    background-color: #73b7c9ff;
+    font-size: 30px;
+    text-align: center;
+    padding: 10px;
+}
+
+.content {
+    background-color: #73b7c955;
+    padding: 10px;
+}
+
+#select {
+    font-weight: 800;
+    border: 2px solid black;
+}
+
+/* Hover effect for spans within the form */
+.question span:hover {
+    background-color: #73b7c9dd;
+    border: 0px;
+}
+
+/* Adjustment for the parallax background */
+.parallax1 {
+    background-image: url("survey.jpeg");
+    min-height: 200px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 5em;
+}
+
+/* Main container for the form */
+.main {
+    background-color: #73b7c9dd;
+    padding: 10px;
+}
+
+/* Additional styling for the warning message */
+#warning {
+    background-color: #e9eef0;
+    font-size: 30px;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Styling for links within the form */
+.question a:link,
+.question a:visited,
+.question a:hover,
+.question a:active {
+    color: black;
+    text-decoration-line: none;
+}

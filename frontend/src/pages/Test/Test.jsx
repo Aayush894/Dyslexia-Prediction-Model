@@ -40,7 +40,7 @@ function Test() {
           </Link>
         </div>
         <div className="m-5 p-2 transform  transition duration-200 hover:scale-125 hover:bg-blue-600 ">
-          <Link to="/test/audioPrediction">
+          <Link to="/test/survey">
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <CardMedia
@@ -51,7 +51,7 @@ function Test() {
                 />
                 <CardContent className="bg-blue-500">
                   <Typography gutterBottom variant="h5" component="div">
-                    Audio Test
+                    Survey Test
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                   Assessing Your Child's Strengths: This test module processes your child's audio, providing a personalized score for a comprehensive evaluation.

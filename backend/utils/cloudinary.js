@@ -9,7 +9,7 @@ cloudinary.config({
   secure: true,
 });
 
-const uploadOnCloudinary = asyncHandler(async (req) => {
+const uploadOnCloudinary = asyncHandler(async (req,res) => {
     console.log(req.body) ; 
 
     try {
@@ -17,24 +17,36 @@ const uploadOnCloudinary = asyncHandler(async (req) => {
         if (!imageAlt) return { success: false, message: "No imageAlt provided" }; 
 
         const localFilePath = `public/temp/${imageAlt}`; 
+        
+         console.log(localFilePath) ; 
 
         // Upload the file on Cloudinary
-        const response = await cloudinary.uploader.upload(localFilePath, {
+        const data = await cloudinary.uploader.upload(localFilePath, {
             resource_type: 'auto'
         });
 
         // File has been successfully uploaded
-        console.log("File is uploaded on Cloudinary", response.url);
+        console.log("File is uploaded on Cloudinary");
 
         // Delete the local file
         fs.unlinkSync(localFilePath);
-
+        console.log(data)
         // Return additional metadata along with the URL
-        return { ok: true, url: response.url, public_id: response.public_id };
+        res.status(201).json({
+            success: true,
+            url: data.url,
+            public_id: data.public_id 
+            
+        })
+        
 
     } catch (error) {
         console.error("Error uploading image to Cloudinary:", error);
-        return { ok: false, message: "Error uploading image to Cloudinary" };
+        res.status(400).json({
+            success: false,
+            message:error.message
+
+        })
     }
 });
 

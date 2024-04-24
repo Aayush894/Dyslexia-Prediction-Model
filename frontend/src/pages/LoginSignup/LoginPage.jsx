@@ -34,14 +34,14 @@ export default function LoginPage() {
 
   const onLoginSuccess = async (res) => {
     const decoded = jwtDecode(String(res.credential));
-    const userEmail = decoded.email ; 
-    
-    // is verified 
-    const isVerified = decoded.email_verified ; 
-    console.log(userEmail, isVerified); 
+    const userEmail = decoded.email;
 
-    if(!isVerified) {
-      console.error("Email not verified"); 
+    // is verified
+    const isVerified = decoded.email_verified;
+    console.log(userEmail, isVerified);
+
+    if (!isVerified) {
+      console.error("Email not verified");
     }
 
     const response = await fetch("http://localhost:5000/api/googlelogin", {
@@ -52,8 +52,8 @@ export default function LoginPage() {
       body: JSON.stringify({
         email: userEmail,
       }),
-    })
-    
+    });
+
     const json = await response.json();
     console.log(json);
     if (!json.success) {
@@ -63,7 +63,6 @@ export default function LoginPage() {
       localStorage.setItem("authToken", json.authToken);
       navigate("/");
     }
-
   };
 
   const onLoginError = (error) => {

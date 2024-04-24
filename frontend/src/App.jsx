@@ -17,7 +17,7 @@ import UpdateUser from "./pages/Update/UpdateUser.jsx";
 import UpdatePass from "./pages/Update/UpdatePass.jsx";
 import About from "./pages/About/About.jsx";
 
-import AudioPrediction from './pages/Prediction/AudioPrediction.jsx'
+import Survey from './pages/Prediction/Survey/Survey.jsx'
 import ImagePrediction from './pages/Prediction/ImagePrediction.jsx'
 import TextPrediction from './pages/Prediction/TextPrediction.jsx'
 
@@ -41,7 +41,7 @@ function App() {
             <Route exact path="/about" element={<About />} />
 
             <Route exact path="/test/imagePrediction" element={<ImagePrediction />} />
-            <Route exact path="/test/audioPrediction" element={<AudioPrediction />} />
+            <Route exact path="/test/survey" element={<Survey />} />
             <Route exact path="/test/textPrediction" element={<TextPrediction />} />
 
           </Routes>
