@@ -20,6 +20,7 @@ import About from "./pages/About/About.jsx";
 import Survey from './pages/Prediction/Survey/Survey.jsx'
 import ImagePrediction from './pages/Prediction/ImagePrediction.jsx'
 import TextPrediction from './pages/Prediction/TextPrediction.jsx'
+import Quiz from "./pages/Prediction/Quiz/Quiz.jsx";
 
 function App() {
   const clientId =
@@ -43,6 +44,8 @@ function App() {
             <Route exact path="/test/imagePrediction" element={<ImagePrediction />} />
             <Route exact path="/test/survey" element={<Survey />} />
             <Route exact path="/test/textPrediction" element={<TextPrediction />} />
+            <Route exact path="/test/quiz" element={<Quiz />} />
+
 
           </Routes>
         </div>

@@ -22,7 +22,7 @@ CORS(app)
 
 loaded_model = None
 # model loaded
-with open(r"C:\Users\aayus\Desktop\MernStack_Projects\DyslexiLens\flask_server\Decision_tree_model.sav", 'rb') as file:
+with open(r"D:\MernStack_Projects\DyslexiLens\flask_server\Decision_tree_model.sav", 'rb') as file:
   loaded_model = pkl.load(file)
 
 # code for test.py starts here 
