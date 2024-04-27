@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "../../../components/Footer";
 import NavBar from "../../../components/NavBar/NavBar";
 import { useState, useRef} from "react";
@@ -65,22 +65,58 @@ function Question({ id, text, options }) {
 
 function Survey() {
   const formRef = useRef(null);
+  const [isSurveyAttended, setSurveyAttended] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = formRef.current;
     if (form instanceof HTMLFormElement) {
       const formData = new FormData(form);
+
+      const surveyData = {};
+
       formData.forEach((value, key) => {
+        surveyData[key] = value;
         console.log(`${key}: ${value}`);
       });
-      // Add your form submission logic here
+      // send the data to the database 
+
+
+      localStorage.setItem("isSurveyFilled", "true");
       console.log("Form submitted!");
     } else {
       console.error("Form element not found");
     }
+
+    
   };
 
+  useEffect(() => {
+    if (localStorage.getItem('authToken') !== null ){
+      const isSurveyFilled = localStorage.getItem("isSurveyFilled");
+      setSurveyAttended(isSurveyFilled === "true" ? true : false);
+    }
+  }, []); 
+
+  if (localStorage.getItem('authToken') === null ){
+    return (
+      <>
+        <div> <NavBar /> </div>
+        <div> Please Login to fill the survey </div>
+        <div> <Footer /> </div>
+      </>
+    ); 
+  }
+  else if (isSurveyAttended === 'true') {
+    return (
+      <>
+        <div> <NavBar /> </div>
+        <div> You have already filled the survey </div>
+        <div> <Footer /> </div>
+      </>
+    );
+  }
+  else {
   return (
     <>
       <div>
@@ -316,6 +352,6 @@ function Survey() {
       </div>
     </>
   );
-}
+}}
 
 export default Survey;
