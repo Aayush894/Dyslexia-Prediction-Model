@@ -16,9 +16,17 @@ from PIL import Image
 import pyttsx3
 import eng_to_ipa as ipa
 from abydos.phonetic import Soundex, Metaphone, Caverphone, NYSIIS
+import pickle
 
 app = Flask(__name__)
 CORS(app)
+
+quiz_model = None
+
+# please update this location brother *******************************************************************
+with open('/home/abhishek/Documents/Aayush_Dyslexia/Dysgraphia-Prediction-Model/flask_server/RandomForestQuizModel.pkl', 'rb') as file:
+  quiz_model = pickle.load(file)
+
 
 loaded_model = None
 # model loaded
@@ -233,6 +241,13 @@ def submit_text():
     request_data = request.json  
     extracted_text = request_data.get('text')
 
+@app.route('/api/submit_text', methods=['GET','POST'])
+@cross_origin(origin='http://localhost:8000')  # Allow requests from localhost:3000
+def submit_text():
+    # text extracted will be here
+    request_data = request.json  
+    extracted_text = request_data.text
+
     # extracted_text = 'I wot a sil-Plat It was var kol I that tht was voir -kol the blat was'
 
     features = get_feature_array(extracted_text)
@@ -259,6 +274,45 @@ def submit_text():
 
     return jsonify(response)
 
+
+@app.route('/api/submit_quiz', methods=['GET','POST'])
+@cross_origin(origin='http://localhost:8000')  # Allow requests from localhost:3000
+def submit_quiz():
+  request_data = request.json  
+  extracted_array = request_data.array
+  # i have an array and time 
+  lang_vocab = (extracted_array[1] + extracted_array[2] + extracted_array[3] + extracted_array[4] + extracted_array[5] + extracted_array[6] + extracted_array[8])/28
+  memory = (extracted_array[2]+ extracted_array[9])/8
+  speed = 0.5
+  visual = (extracted_array[1] + extracted_array[3] + extracted_array[4] + extracted_array[6])/16
+  audio = (extracted_array[7]+extracted_array[10])/8
+  survey = (lang_vocab + memory + speed + visual + audio)/80
+  result = get_result(lang_vocab, memory, speed, visual, audio, survey)
+
+  response = {
+    "ok": True,
+    "message": "Score Available",
+    "result": result
+  }
+  return jsonify(response)
+
+
+def get_result(lang_vocab, memory, speed, visual, audio, survey):
+  #2D numpy array created with the values input by the user.
+  array = np.array([[lang_vocab, memory, speed, visual, audio, survey]])
+  #The output given by model is converted into an int and stored in label.
+  label = int(quiz_model.predict(array))
+  #Giving final output to user depending upon the model prediction.
+  if(label == 0):
+    output = "There is a high chance of the applicant to have dyslexia."
+  elif(label == 1):
+    output = "There is a moderate chance of the applicant to have dyslexia."
+  else:
+    output = "There is a low chance of the applicant to have dyslexia."
+  return output
+
+
+   
 
 
 # for writing disabilities code is here below
