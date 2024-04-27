@@ -279,7 +279,7 @@ def submit_text():
 @cross_origin(origin='http://localhost:8000')  # Allow requests from localhost:3000
 def submit_quiz():
   request_data = request.json  
-  extracted_array = request_data.array
+  extracted_array = request_data.quiz
   # i have an array and time 
   lang_vocab = (extracted_array[1] + extracted_array[2] + extracted_array[3] + extracted_array[4] + extracted_array[5] + extracted_array[6] + extracted_array[8])/28
   memory = (extracted_array[2]+ extracted_array[9])/8
