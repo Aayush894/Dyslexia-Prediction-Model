@@ -11,7 +11,7 @@ import pickle
 from sklearn.metrics import classification_report
 
 #Reading the dataset
-data=pd.read_csv('labeled_dysx.csv')
+data=pd.read_csv('flask_server/quizData/labeled_dysx.csv')
 #Value to be predicted by the model.
 y=data.Label 
 #Input taken by the model.
