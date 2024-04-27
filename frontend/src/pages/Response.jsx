@@ -1,6 +1,7 @@
-function Response() {
+/* eslint-disable react/prop-types */
+function Response( props ) {
     return (
-    <div>Response</div>
+    <div>{props.message}</div>
   )
 }
 
