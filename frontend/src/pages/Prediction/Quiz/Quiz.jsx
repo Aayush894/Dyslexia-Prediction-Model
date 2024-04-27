@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import NavBar from "../../../components/NavBar/NavBar";
 import Footer from "../../../components/Footer";
-import Response from "../../Response";
 import React, { useState, useRef, useEffect } from "react";
 
 function Question({ id, text, options, imgSrc, audioSrc }) {
@@ -81,28 +80,28 @@ function Quiz() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = formRef.current;
-    const endTime = new Date().getTime() ; 
-    let data = [] ;
+    const endTime = new Date().getTime();
+    let data = {};
     if (form instanceof HTMLFormElement) {
       const formData = new FormData(form);
-
+  
       formData.forEach((value, key) => {
         if (value[0] === "4") {
-          data[key[1]-1] = 4 ;
+          data[key] = 4;
           console.log(`${key}: ${4}`);
         } else {
-          data[key[1]-1] = 0 ;
+          data[key] = 0;
           console.log(`${key}: ${0}`);
         }
       });
-
-      const time = endTime - startTime ;
+  
+      const time = endTime - startTime;
       console.log(time);
       console.log(data);
-
+  
       try {
-        const url="http://localhost:8000/api/submit_quiz" ; 
-
+        const url = "http://localhost:8000/api/submit_quiz";
+  
         fetch(url, {
           mode: "cors",
           method: "POST",
@@ -112,21 +111,32 @@ function Quiz() {
             time: time,
           }),
         })
-          .then((response) => response.json())
-          .then( (result) => setResult(result))
-          .catch((error) => {
-            console.error("Error submitting quiz:", error);
-          });
+        .then((response) => response.json())
+        .then((data) => {
+          // Check if the request was successful
+          if (data.ok) {
+            // Access the result message
+            const resultMessage = data.result;
+            console.log("Result:", resultMessage);
+            setResult(resultMessage);
+          } else {
+            console.error("Error:", data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error submitting quiz:", error);
+        });
 
       } catch (error) {
         throw new Error(400, "invalid Response");
       }
-
+  
       console.log("Form submitted!");
     } else {
       console.error("Form element not found");
     }
   };
+  
 
   useEffect(() => { 
     setStartTime(new Date().getTime()) ; 
@@ -297,7 +307,7 @@ function Quiz() {
     return(
     <>
     <div> <NavBar /> </div>
-    <div> <Response message={result}/> </div>
+    <div> {result} </div>
     <div> <Footer /> </div>
     </>
     );

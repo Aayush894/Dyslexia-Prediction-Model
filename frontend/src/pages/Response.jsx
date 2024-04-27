@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
 function Response( props ) {
     return (
-    <div>{props.message}</div>
+      <>
+      <div>{props}</div>
+      </>
+    // <div>{props.message}</div>
   )
 }
 
