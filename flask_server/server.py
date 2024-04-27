@@ -24,7 +24,7 @@ CORS(app)
 quiz_model = None
 
 # please update this location brother *******************************************************************
-with open('/home/abhishek/Documents/Aayush_Dyslexia/Dysgraphia-Prediction-Model/flask_server/RandomForestQuizModel.pkl', 'rb') as file:
+with open(r"D:\MernStack_Projects\DyslexiLens\flask_server\RandomForestQuizModel.pkl", 'rb') as file:
   quiz_model = pickle.load(file)
 
 
@@ -232,17 +232,8 @@ def submit_words():
     
     return jsonify(response)
 
-
-@app.route('/api/submit_text', methods=['GET', 'POST'])
-@cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
-def submit_text():
-    # text extracted will be here
-    print(request)
-    request_data = request.json  
-    extracted_text = request_data.get('text')
-
 @app.route('/api/submit_text', methods=['GET','POST'])
-@cross_origin(origin='http://localhost:8000')  # Allow requests from localhost:3000
+@cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
 def submit_text():
     # text extracted will be here
     request_data = request.json  
@@ -276,8 +267,25 @@ def submit_text():
 
 
 @app.route('/api/submit_quiz', methods=['GET','POST'])
-@cross_origin(origin='http://localhost:8000')  # Allow requests from localhost:3000
+@cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
 def submit_quiz():
+
+  data = request.json  
+  print(data)
+  extracted_object = data['quiz']
+  print("Quiz array:", extracted_object)
+
+  time_value = data['time']
+  print("Time value:", time_value)
+
+  # # i have an array and time 
+  lang_vocab = (extracted_object['q1'] + extracted_object['q2'] + extracted_object['q3'] + extracted_object['q4'] + extracted_object['q5'] + extracted_object['q6'] + extracted_object['q8'])/28
+  memory = (extracted_object['q2']+ extracted_object['q9'])/8
+  speed = 1 - (time_value / 60000) ; 
+  # speed = 0.5
+  visual = (extracted_object['q1'] + extracted_object['q3'] + extracted_object['q4'] + extracted_object['q6'])/16
+  audio = (extracted_object['q7']+extracted_object['q10'])/8
+
   request_data = request.json  
   extracted_array = request_data.quiz
   # i have an array and time 
@@ -286,6 +294,7 @@ def submit_quiz():
   speed = 0.5
   visual = (extracted_array[1] + extracted_array[3] + extracted_array[4] + extracted_array[6])/16
   audio = (extracted_array[7]+extracted_array[10])/8
+
   survey = (lang_vocab + memory + speed + visual + audio)/80
   result = get_result(lang_vocab, memory, speed, visual, audio, survey)
 
@@ -318,4 +327,5 @@ def get_result(lang_vocab, memory, speed, visual, audio, survey):
 # for writing disabilities code is here below
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+  print("server is running on port 8000")
+  app.run(debug=True, port=8000)
