@@ -1,5 +1,10 @@
 from quizModel import model
+import pickle
 import numpy as np
+
+
+with open('/home/abhishek/Documents/Aayush_Dyslexia/Dysgraphia-Prediction-Model/flask_server/RandomForestQuizModel.pkl', 'rb') as file:
+  model = pickle.load(file)
 
 def get_result(lang_vocab, memory, speed, visual, audio, survey):
   # Create a 2D numpy array with the values input by the user.
