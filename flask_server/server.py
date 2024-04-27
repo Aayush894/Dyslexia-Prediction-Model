@@ -225,7 +225,6 @@ def submit_words():
     return jsonify(response)
 
 
-<<<<<<< HEAD
 @app.route('/api/submit_text', methods=['GET', 'POST'])
 @cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
 def submit_text():
@@ -233,14 +232,13 @@ def submit_text():
     print(request)
     request_data = request.json  
     extracted_text = request_data.get('text')
-=======
+
 @app.route('/api/submit_text', methods=['GET','POST'])
 @cross_origin(origin='http://localhost:8000')  # Allow requests from localhost:3000
 def submit_text():
     # text extracted will be here
     request_data = request.json  
     extracted_text = request_data.text
->>>>>>> main
 
     # extracted_text = 'I wot a sil-Plat It was var kol I that tht was voir -kol the blat was'
 
