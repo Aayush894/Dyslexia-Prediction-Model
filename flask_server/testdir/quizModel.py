@@ -51,3 +51,21 @@ print(model.best_params_)
 print('Best value of n_estimator for RandomForest model is:')
 print(model.best_params_)
 
+
+
+# for generating model from above code 
+# # Save the trained model to a file
+# with open('model.pkl', 'wb') as file:
+#     pickle.dump(model, file)
+
+# # Load the trained model from the saved file
+# with open('model.pkl', 'rb') as file:
+#     loaded_model = pickle.load(file)
+
+# # Now 'loaded_model' contains your trained model, and you can use it for predictions
+# # For example:
+# # predictions_loaded = loaded_model.predict(X_test)
+
+# # Optionally, you can print the loaded model's best parameters
+# print('Best value of n_estimator for loaded RandomForest model is:')
+# print(loaded_model.best_params_)
