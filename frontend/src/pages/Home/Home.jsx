@@ -6,7 +6,7 @@ import NavBar from "../../components/NavBar/NavBar.jsx";
 import Footer from "../../components/Footer";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-
+import Banner from "./Banner.jsx"
 export function Home() {
   const navigate = useNavigate();
 
@@ -55,72 +55,11 @@ export function Home() {
         <NavBar />
       </div>
 
-      <div className="relative flex h-screen content-center items-center justify-center pt-16 pb-32">
-        <div className="absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center" />
-        <div className="absolute top-0 h-full w-full bg-indigo-700 bg-cover bg-center" />
-        <div className="max-w-8xl container relative mx-auto">
-          <div className="flex flex-wrap items-center">
-            <div className="ml-auto mr-auto w-full px-4 text-center lg:w-8/12">
-              <h1 className="text-white mb-6 font-black">
-                Your story starts with us.
-              </h1>
-              <p className="text-white opacity-80">
-                This is a simple example of a Landing Page you can build using
-                Material Tailwind. It features multiple components based on the
-                Tailwind CSS and Material Design by Google.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div className="mt-2">
+        <Banner/>
       </div>
 
-      <section className="-mt-32 bg-white px-4 pb-20 pt-4">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
-          <div className="mt-32 flex flex-wrap items-center">
-            <div className="mx-auto -mt-8 w-full px-4 md:w-5/12">
-              <h3 className="text-blue-gray mb-3 font-bold">
-                Lorem ipsum dolor sit amet.
-              </h3>
-              <p className="text-blue-gray-500 mb-8">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-                maiores iure ullam itaque soluta doloribus quia ad quaerat
-                dolore dignissimos quasi at alias cumque veritatis eum ex,
-                aspernatur inventore pariatur.
-                <br />
-                <br />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos
-                eveniet rem sed minus rerum, nemo molestiae reiciendis cum
-                placeat perferendis, harum beatae velit? Illo minima sed, totam
-                laborum dolorum similique.
-              </p>
-              <button className="btn btn-primary">Read More</button>
-            </div>
-            <div className="mx-auto mt-24 flex w-full justify-center px-4 md:w-4/12 lg:mt-0">
-              <div className="shadow-lg border shadow-gray-500/10 rounded-lg">
-                <div className="relative h-56">
-                  <img
-                    alt="Card Image"
-                    src="/img/teamwork.png"
-                    className="h-full w-full"
-                  />
-                </div>
-                <div className="p-4">
-                  <p className="text-blue-gray font-normal mb-2">Enterprise</p>
-                  <h5 className="text-blue-gray font-bold mb-3 mt-2">
-                    Top Notch Services
-                  </h5>
-                  <p className="text-blue-gray-500 font-normal">
-                    The Arctic Ocean freezes every winter and much of the
-                    sea-ice then thaws every summer, and that process will
-                    continue whatever happens.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  
 
       {/* Team Info */}
       <section className="py-5 team4" id="team">
@@ -135,27 +74,28 @@ export function Home() {
               </h6>
             </div>
           </div>
+          
           <div className="row">
             <div className="col-lg-3 col-md-6 mb-2 shadow-sm">
               <div className="row">
                 <div className="col-md-12">
                   <img
-                    src="https://static.vecteezy.com/system/resources/previews/026/619/142/non_2x/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg"
+                    src="/assets/Profile_pic.png"
                     alt="wrapkit"
                     className="img-fluid"
                   />
                 </div>
-                <div className="col-md-12 text-center">
+                <div className="col-md-12 text-center ">
                   <div className="pt-2">
                     <h5 className="mt-4 font-weight-medium mb-0">
                       Aayush Kumar Shrivastava
                     </h5>
                     <h6 className="subtitle mb-3">Backend Developer</h6>
                     <p>
-                      You can rely on our amazing features list and also our
-                      customer services will be a great experience.
+                      {/* You can rely on our amazing features list and also our
+                      customer services will be a great experience. */} 
                     </p>
-                    <ul className="list-inline">
+                    <ul className="list-inline mb-2">
                       <li className="list-inline-item">
                         <Link
                           to="#"
@@ -182,7 +122,7 @@ export function Home() {
               <div className="row">
                 <div className="col-md-12">
                   <img
-                    src="https://static.vecteezy.com/system/resources/previews/026/619/142/non_2x/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg"
+                    src="./assets/Kartik.jpg"
                     alt="wrapkit"
                     className="img-fluid"
                   />
@@ -194,10 +134,10 @@ export function Home() {
                     </h5>
                     <h6 className="subtitle mb-3">Frontend Developer</h6>
                     <p>
-                      You can rely on our amazing features list and also our
-                      customer services will be a great experience.
+                      {/* You can rely on our amazing features list and also our
+                      customer services will be a great experience. */}
                     </p>
-                    <ul className="list-inline">
+                    <ul className="list-inline mb-2">
                       <li className="list-inline-item">
                         <Link
                           to="#"
@@ -224,7 +164,7 @@ export function Home() {
               <div className="row">
                 <div className="col-md-12">
                   <img
-                    src="https://static.vecteezy.com/system/resources/previews/026/619/142/non_2x/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg"
+                    src="./assets/Archit1.jpg"
                     alt="wrapkit"
                     className="img-fluid"
                   />
@@ -236,10 +176,10 @@ export function Home() {
                     </h5>
                     <h6 className="subtitle mb-3">Machine Learning</h6>
                     <p>
-                      You can rely on our amazing features list and also our
-                      customer services will be a great experience.
+                      {/* You can rely on our amazing features list and also our
+                      customer services will be a great experience. */}
                     </p>
-                    <ul className="list-inline">
+                    <ul className="list-inline mb-2">
                       <li className="list-inline-item">
                         <Link
                           to="#"
@@ -266,7 +206,7 @@ export function Home() {
               <div className="row">
                 <div className="col-md-12">
                   <img
-                    src="https://static.vecteezy.com/system/resources/previews/026/619/142/non_2x/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg"
+                    src="/assets/Achishek.jpg"
                     alt="wrapkit"
                     className="img-fluid"
                   />
@@ -278,10 +218,10 @@ export function Home() {
                     </h5>
                     <h6 className="subtitle mb-3">Machine Learning</h6>
                     <p>
-                      You can rely on our amazing features list and also our
-                      customer services will be a great experience.
+                      {/* You can rely on our amazing features list and also our
+                      customer services will be a great experience. */}
                     </p>
-                    <ul className="list-inline">
+                    <ul className="list-inline mb-2">
                       <li className="list-inline-item">
                         <Link
                           to="#"
@@ -308,12 +248,12 @@ export function Home() {
       </section>
 
       {/* contact Info */}
-      <div className="container mx-auto pt-16">
+      <div className="container mx-auto pt-16 mb-20">
         <h3 className=" row justify-content-center mb-12 display-5">
           Contact us
         </h3>
         <div className="lg:flex">
-          <div className="xl:w-2/5 lg:w-2/5 bg-indigo-700 py-16 xl:rounded-bl rounded-tl rounded-tr xl:rounded-tr-none">
+          <div className="xl:w-2/5 lg:w-2/5 py-16 xl:rounded-bl rounded-tl rounded-tr xl:rounded-tr-none bg-blue-400">
             <div className="xl:w-5/6 xl:px-0 px-8 mx-auto">
               <h1 className="xl:text-4xl text-3xl pb-4 text-white font-bold">
                 Get in touch
@@ -400,7 +340,7 @@ export function Home() {
                       value={formData.name}
                       onChange={handleChange}
                       className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border bg-white"
-                      autoComplete={true}
+                      autoComplete="true"
                     />
                   </div>
                 </div>
@@ -419,7 +359,7 @@ export function Home() {
                       value={formData.email}
                       onChange={handleChange}
                       className="focus:outline-none focus:border focus:border-indigo-700 font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border bg-white"
-                      autoComplete={true}
+                      autoComplete="true"
                     />
                   </div>
                 </div>
@@ -458,7 +398,7 @@ export function Home() {
                     onChange={handleChange}
                     className="border-gray-300 border mb-4 rounded py-2 text-sm outline-none resize-none px-3 focus:border focus:border-indigo-700 bg-white"
                     rows={5}
-                    autoComplete={true}
+                    autoComplete="true"
                     id="message"
                   />
                 </div>

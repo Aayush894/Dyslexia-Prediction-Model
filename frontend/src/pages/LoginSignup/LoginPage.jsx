@@ -32,9 +32,37 @@ export default function LoginPage() {
     }
   };
 
-  const onLoginSuccess = (res) => {
+  const onLoginSuccess = async (res) => {
     const decoded = jwtDecode(String(res.credential));
-    console.log(decoded);
+    const userEmail = decoded.email;
+
+    // is verified
+    const isVerified = decoded.email_verified;
+    console.log(userEmail, isVerified);
+
+    if (!isVerified) {
+      console.error("Email not verified");
+    }
+
+    const response = await fetch("http://localhost:5000/api/googlelogin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: userEmail,
+      }),
+    });
+
+    const json = await response.json();
+    console.log(json);
+    if (!json.success) {
+      alert("Enter Valid Credentials");
+    } else {
+      localStorage.setItem("userEmail", userEmail);
+      localStorage.setItem("authToken", json.authToken);
+      navigate("/");
+    }
   };
 
   const onLoginError = (error) => {
@@ -51,7 +79,7 @@ export default function LoginPage() {
           <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <Link
               to="/"
-              className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
+              className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100 font-sans"
             >
               DysLexiLens
             </Link>

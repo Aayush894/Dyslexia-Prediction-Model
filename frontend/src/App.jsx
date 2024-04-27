@@ -9,13 +9,18 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 // components imports
 import Home from "./pages/Home/Home.jsx";
 import LoginPage from "./pages/LoginSignup/LoginPage.jsx";
-import Signup from "./pages/Signup.jsx";
+import Signup from "./pages/LoginSignup/SignupPage.jsx";
 import Test from "./pages/Test/Test.jsx";
 import TestRecord from "./pages/TestRecord.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
 import UpdateUser from "./pages/Update/UpdateUser.jsx";
 import UpdatePass from "./pages/Update/UpdatePass.jsx";
 import About from "./pages/About/About.jsx";
+
+import Survey from './pages/Prediction/Survey/Survey.jsx'
+import ImagePrediction from './pages/Prediction/ImagePrediction.jsx'
+import TextPrediction from './pages/Prediction/TextPrediction.jsx'
+import Quiz from "./pages/Prediction/Quiz/Quiz.jsx";
 
 function App() {
   const clientId =
@@ -35,6 +40,13 @@ function App() {
             <Route exact path="/updatePass" element={<UpdatePass />} />
             <Route exact path="/updateUser" element={<UpdateUser />} />
             <Route exact path="/about" element={<About />} />
+
+            <Route exact path="/test/imagePrediction" element={<ImagePrediction />} />
+            <Route exact path="/test/survey" element={<Survey />} />
+            <Route exact path="/test/textPrediction" element={<TextPrediction />} />
+            <Route exact path="/test/quiz" element={<Quiz />} />
+
+
           </Routes>
         </div>
       </Router>

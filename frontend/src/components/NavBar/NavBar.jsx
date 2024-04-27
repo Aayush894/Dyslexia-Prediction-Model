@@ -34,7 +34,7 @@ const Navbar = () => {
                 {localStorage.getItem("authToken") ? (
                   <Link className="navbar-brand" to="/profile">
                     <img
-                      src="./assets/avatar_icon.png"
+                      src="/assets/avatar_icon.png"
                       alt="Avatar Logo"
                       style={{ width: 40, height: 40, borderRadius: "50%" }}
                     />
@@ -43,7 +43,7 @@ const Navbar = () => {
                   ""
                 )}
                 <Link to="/">
-                  <span className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100 font-sans">
+                  <span className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100 font-sans ml-2">
                     <span>DysLexiLens</span>
                   </span>
                 </Link>
@@ -88,12 +88,12 @@ const Navbar = () => {
                       >
                         About
                       </Link>
-                      <Link
-                        to="/"
+                      <a
+                        href="http://localhost:3000/#team"
                         className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
                       >
                         Team
-                      </Link>
+                      </a>
                       <Link
                         to="/test"
                         className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
@@ -149,12 +149,12 @@ const Navbar = () => {
               >
                 About
               </Link>
-              <Link
-                to="/"
+              <a
+                href="http://localhost:3000/#team"
                 className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
               >
                 Team
-              </Link>
+              </a>
               <Link
                 to="/test"
                 className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"

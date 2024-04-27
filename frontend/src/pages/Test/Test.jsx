@@ -1,130 +1,121 @@
+/* eslint-disable react/no-unescaped-entities */
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar/NavBar";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
+import { Link } from "react-router-dom";
+
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
+
 function Test() {
-  const [credentials, setCredentials] = useState({ vocabScore: "", memScore: "", speedScore: "", visualScore: "", audioScore: "", surveyScore: "" });
-  const navigate = useNavigate();
-
-  const url = "";
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(credentials) ;
-
-    // const response = await fetch(url, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     vocabScore: credentials.vocabScore,
-    //     memScore: credentials.memScore,
-    //     speedScore: credentials.speedScore, 
-    //     visualScore:credentials.visualScore ,
-    //     audioScore: credentials.audioScore,
-    //     surveyScore: credentials.surveyScore,
-    //   }),
-    // });
-
-    // const json = await response.json();
-
-    // if (!json.success) {
-    //   alert("Enter Valid Credentials");
-    // } else {
-    //   localStorage.setItem("userEmail", credentials.email);
-    //   localStorage.setItem("authToken", json.authToken);
-    //   navigate("/");
-    // }
-  };
-
-  const onChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
-
   return (
     <>
-      <div className="vh-100 d-flex flex-column">
+      <div>
         <NavBar />
-        <div className=" d-flex flex-column bd-highlight mb-1 flex-grow-1 justify-content-center align-items-center">
-        <span className="p-2 bd-highlight display-5">Please Enter the following Score</span>
-        <span className="p-2 bd-highlight dipalay-6">NOTE: Enter the following Score between 0 and 1</span>
+      </div>
+      <div className="d-flex">
+        <div className="m-5 p-2 transform  transition duration-300 hover:scale-125 hover:bg-blue-600 ">
+          <Link to="/test/imagePrediction">
+            <Card sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="/assets/Image.jpg"
+                  alt="image"
+                />
+                <CardContent className="bg-blue-500">
+                  <Typography gutterBottom variant="h5" component="div">
+                    Image Test
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Revolutionizing Evaluation: This test module analyzes
+                    handwritten documents, providing instant scores for a
+                    seamless and efficient assessment experience.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Link>
         </div>
-        <div className="flex-grow-1 d-flex justify-content-center align-items-center">
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="formGroupExampleInput1">Language Vocubulary Score</label>
-              <input
-                type="text"
-                className="form-control"
-                id="formGroupExampleInput1"
-                placeholder="Example input"
-                name="vocabScore" // Added name attribute
-                value={credentials.vocabScore} // Added value attribute
-                onChange={onChange}
-              />
-        
-              <label htmlFor="formGroupExampleInput2">Memory Score</label>
-              <input
-                type="text"
-                className="form-control"
-                id="formGroupExampleInput2"
-                placeholder="Another input"
-                name="memScore" // Added name attribute
-                value={credentials.memScore} // Added value attribute
-                onChange={onChange}
-              />
-          
-              <label htmlFor="formGroupExampleInput3">Speed Score</label>
-              <input
-                type="text"
-                className="form-control"
-                id="formGroupExampleInput3"
-                placeholder="Another input"
-                name="speedScore" // Added name attribute
-                value={credentials.speedScore} // Added value attribute
-                onChange={onChange}
-              />
-          
-              <label htmlFor="formGroupExampleInput4">Visual Discrimination Score</label>
-              <input
-                type="text"
-                className="form-control"
-                id="formGroupExampleInput4"
-                placeholder="Another input"
-                name="visualScore" // Added name attribute
-                value={credentials.visualScore} // Added value attribute
-                onChange={onChange}
-              />
-          
-              <label htmlFor="formGroupExampleInput5">Audio Discrimination Score</label>
-              <input
-                type="text"
-                className="form-control"
-                id="formGroupExampleInput5"
-                placeholder="Another input"
-                name="audioScore" // Added name attribute
-                value={credentials.audioScore} // Added value attribute
-                onChange={onChange}
-              />
-        
-              <label htmlFor="formGroupExampleInput6">Survey Score</label>
-              <input
-                type="text"
-                className="form-control"
-                id="formGroupExampleInput6"
-                placeholder="Another input"
-                name="surveyScore" // Added name attribute
-                value={credentials.surveyScore} // Added value attribute
-                onChange={onChange}
-              />
-            </div>
-            <div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </div>
-          </form>
+        <div className="m-5 p-2 transform  transition duration-200 hover:scale-125 hover:bg-blue-600 ">
+          <Link to="/test/textPrediction">
+            <Card sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="/assets/Text.avif"
+                  alt="image"
+                />
+
+                <CardContent className="bg-blue-500">
+                  <Typography gutterBottom variant="h5" component="div">
+                    Text Test
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Assess your writing effortlessly. This test module analyzes
+                    your text document, identifies errors, and generates a score
+                    – a quick, efficient way to check mistakes.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Link>
         </div>
+        <div className="m-5 p-2 transform  transition duration-300 hover:scale-125 hover:bg-blue-600 ">
+          <Link to="/test/quiz">
+            <Card sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="/assets/Quiz.jpg"
+                  alt="image"
+                />
+                <CardContent className="bg-blue-500">
+                  <Typography gutterBottom variant="h5" component="div">
+                    Quiz Test
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Revolutionizing Evaluation: This test module analyzes
+                    handwritten documents, providing instant scores for a
+                    seamless and efficient assessment experience.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Link>
+        </div>
+        <div className="m-5 p-2 transform  transition duration-200 hover:scale-125 hover:bg-blue-600 ">
+          <Link to="/test/survey">
+            <Card sx={{ maxWidth: 345 }}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="/assets/Audio1.jpg"
+                  alt="image"
+                />
+                <CardContent className="bg-blue-500">
+                  <Typography gutterBottom variant="h5" component="div">
+                    Parent Survey
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Assessing Your Child's Strengths: This test module processes
+                    your child's audio, providing a personalized score for a
+                    comprehensive evaluation.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Link>
+        </div>
+      </div>
+      <div>
         <Footer />
       </div>
     </>

@@ -16,8 +16,8 @@ const sendEmail = async (req, res) => {
       pass: process.env.SMTP_PASSWORD,
     },
     tls: {
-      rejectUnauthorized: true, 
-      ciphers: 'SSLv3',
+      rejectUnauthorized: true,
+      ciphers: "SSLv3",
     },
   });
 
@@ -43,7 +43,6 @@ const sendEmail = async (req, res) => {
     res.status(500).send("Error sending email");
   }
 };
-
 
 const registerUser = asyncHandler(async (req, res) => {
   const errors = validationResult(req);
@@ -159,17 +158,11 @@ const loginUser = asyncHandler(async (req, res) => {
     return res.status(400).json({ errors: error.array() });
   }
 
-  const { email, username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!email && !username) {
-    throw new ApiError(400, "username or email is required");
+  if (!email) {
+    throw new ApiError(400, "email is required");
   }
-
-  // check for valid username format ie. only in lowercase
-  const isValidUsername = (username) => {
-    const usernameRegex = /^[a-z]+\d*$/;
-    return usernameRegex.test(username);
-  };
 
   // check for valid email id
   const isValidEmail = (email) => {
@@ -177,16 +170,12 @@ const loginUser = asyncHandler(async (req, res) => {
     return emailRegex.test(email);
   };
 
-  if (username && !isValidUsername(username)) {
-    throw new ApiError(400, "Enter valid username");
-  }
-
-  if (email && !isValidEmail(email)) {
+  if (!isValidEmail(email)) {
     throw new ApiError(400, "Invalid email address");
   }
 
   const user = await User.findOne({
-    $or: [{ username }, { email }],
+    email,
   });
 
   if (!user) {
@@ -392,6 +381,93 @@ const UserProfile = asyncHandler(async (req, res) => {
     });
   }
 });
+
+const uploadImage = asyncHandler(async (req, res) => {
+  const imagePath = req.file.path; // Path to the uploaded image file
+
+  if (imagePath === undefined || imagePath === "") {
+    throw new ApiError(400, "Image Path not found");
+  }
+
+  res.json({ imagePath: imagePath, ok: true });
+});
+
+const GoogleloginUser = asyncHandler(async (req, res) => {
+  const error = validationResult(req);
+  if (!error.isEmpty()) {
+    return res.status(400).json({ errors: error.array() });
+  }
+
+  const { email } = req.body;
+
+  if (!email) {
+    throw new ApiError(400, "email is required");
+  }
+
+  // check for valid email id
+  const isValidEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail.com$/;
+    return emailRegex.test(email);
+  };
+
+  if (!isValidEmail(email)) {
+    throw new ApiError(400, "Invalid email address");
+  }
+
+  const user = await User.findOne({
+    email,
+  });
+
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+
+  const authToken = await user.generateAuthToken();
+
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
+
+  return res
+    .status(200)
+    .cookie("authToken", authToken, options)
+    .json({ success: true, authToken });
+});
+
+const convertImageToText = asyncHandler(async (req, res) => {
+  const url = req.body.url;
+
+  var myHeaders = new Headers();
+  myHeaders.append("apikey", process.env.IMAGE_TO_TEXT_API_KEY);
+
+  var requestOptions = {
+    method: "GET",
+    redirect: "follow",
+    headers: myHeaders,
+  };
+
+  let text = "";
+
+  await fetch(
+    `https://api.apilayer.com/image_to_text/url?url=${url}`,
+    requestOptions
+  )
+    .then((response) => response.text())
+    .then((textresult) => (text = textresult))
+    .catch((error) => console.log("error", error));
+
+  if (text === "") {
+    throw new ApiError(400, "No text found in the image");
+  }
+
+  res.json({
+    status: true,
+    text: text,
+    message: "text fetch successfully",
+  });
+});
+
 export {
   sendEmail,
   registerUser,
@@ -399,4 +475,7 @@ export {
   updatePass,
   updateUser,
   UserProfile,
+  uploadImage,
+  GoogleloginUser,
+  convertImageToText,
 };
