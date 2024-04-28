@@ -189,23 +189,23 @@ function ImagePrediction() {
 
       <div>
         {processing ? (
-          <p className="mb-10 text-center">
+          <div className="mb-10 text-center">
             Processing...
             <div>
               <CircularProgress />
             </div>
-          </p>
+          </div>
         ) : (
           <div>
             {result ? (
-              <p className="mb-10 text-center">
+              <div className="mb-10 text-center">
                 <b>Your result is:&nbsp;&nbsp;&nbsp;</b>
                 <i>{result}</i>
-              </p>
+              </div>
             ) : (
-              <p className="mb-10 text-center">
+              <div className="mb-10 text-center">
                 <b>No test taken Yet!!!.</b>
-              </p>
+              </div>
             )}
           </div>
         )}
