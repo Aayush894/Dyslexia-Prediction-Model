@@ -59,7 +59,9 @@ export function Home() {
         <Banner/>
       </div>
 
-  
+      <br /> 
+      <hr /> 
+      <br />
 
       {/* Team Info */}
       <section className="py-5 team4" id="team">
@@ -246,6 +248,10 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      <br /> 
+      <hr /> 
+      <br />
 
       {/* contact Info */}
       <div className="container mx-auto pt-16 mb-20">

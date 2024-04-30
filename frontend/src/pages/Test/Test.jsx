@@ -100,7 +100,7 @@ function Test() {
                 <CardMedia
                   component="img"
                   height="140"
-                  image="/assets/Audio1.jpg"
+                  image="/assets/family.jpg"
                   alt="image"
                 />
                 <CardContent className="bg-blue-500">

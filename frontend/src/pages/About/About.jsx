@@ -26,7 +26,7 @@ function About() {
           <div className="lg:mt-14 sm:mt-10 mt-12">
             <img
               className="lg:block hidden w-full"
-              src="https://i.ibb.co/GvwJnvn/Group-736.png"
+              src="./assets/about_page1.png"
               alt="Group of people Chilling"
             />
             <img
