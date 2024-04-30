@@ -1,27 +1,28 @@
 .outer-card-component {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-    gap: 20px; 
-    margin:20px; 
-    padding: 10px;
-    justify-items: center; 
-    align-items: center; 
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+  gap: 50px; 
+  margin: 20px; 
+  padding: 20px;
+  justify-items: center; 
+  align-items: center; 
+}
+
+.card-component {
+  position: relative; /* Ensure relative positioning for z-index */
+  transition: transform 0.2s, border-color 0.2s; /* Add transition for smooth zoom effect and border color change */
+  border: 1px solid #6366F1; /* Initial transparent border */
+}
+
 .card-component:hover {
-    margin: 15px;
-    padding: 5px;
-    grid-column: span 1;
-    min-width: 150px;
-    max-width: 300px; 
-    min-height: 250px; 
-    max-height: 500px; 
-    animation-duration: 0.5s;
+  transform: scale(1.2); /* Zoom effect on hover */
+  border-color: #6366F1; /* Dark border color on hover */
+  border-radius: 10px;
+  border-width: 5px;
 }
-  
+
 @media screen and (max-width: 768px) {
-    .outer-card-component {
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
+  .outer-card-component {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
 }
-  

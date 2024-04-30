@@ -20,9 +20,9 @@ function Test() {
       </div>
       {/* className="m-5 p-2 transform  transition duration-200 hover:scale-125 hover:bg-blue-600 " */}
       <div className="outer-card-component">
-        <div>
+        <div className = "card-component">
           <Link to="/test/imagePrediction">
-            <Card className = "card-component">
+            <Card>
               <CardActionArea>
                 <CardMedia
                   component="img"
@@ -44,9 +44,9 @@ function Test() {
             </Card>
           </Link>
         </div>
-        <div>
+        <div className = "card-component">
           <Link to="/test/textPrediction">
-            <Card  className="card-component">
+            <Card>
               <CardActionArea>
                 <CardMedia
                   component="img"
@@ -69,9 +69,9 @@ function Test() {
             </Card>
           </Link>
         </div>
-        <div>
+        <div className = "card-component">
           <Link to="/test/quiz">
-            <Card  className="card-component">
+            <Card>
               <CardActionArea>
                 <CardMedia
                   component="img"
@@ -93,9 +93,9 @@ function Test() {
             </Card>
           </Link>
         </div>
-        <div>
+        <div className = "card-component">
           <Link to="/test/survey">
-            <Card  className="card-component">
+            <Card>
               <CardActionArea>
                 <CardMedia
                   component="img"
