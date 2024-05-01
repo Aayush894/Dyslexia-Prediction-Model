@@ -1,8 +1,8 @@
-from flask_server.testdir.model_training_quiz.quizModel import model
+# from flask_server.testdir.model_training_quiz.quizModel import model
 import pickle
 import numpy as np
 
-with open('/home/abhishek/Documents/Aayush_Dyslexia/Dysgraphia-Prediction-Model/flask_server/testdir/Random_Forest_Model.sav', 'rb') as file:
+with open('/home/abhishek/Documents/Aayush_Dyslexia/Dysgraphia-Prediction-Model/flask_server/testdir/model_training_quiz/Random_Forest_Model.sav', 'rb') as file:
   model = pickle.load(file)
 
 def get_result(lang_vocab, memory, speed, visual, audio, survey):
