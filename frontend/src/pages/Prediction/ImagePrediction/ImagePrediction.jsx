@@ -94,6 +94,7 @@ function ImagePrediction() {
                   })
                     .then((response) => response.json())
                     .then((data) => {
+                      console.log(data.result);
                       setResult(data.result);
                       setProcessing(false);
                       // console.log(data.result);
@@ -180,7 +181,7 @@ function ImagePrediction() {
                   <img
                     src={imageUrl}
                     alt={imageAlt}
-                    className="max-w-full max-h-full border-4 border-blue-500 rounded-lg shadow-xl"
+                    className="max-w-full max-h-full border-2 border-blue-300 rounded-lg shadow-xl"
                     style={{ objectFit: "contain" }}
                   />
                 ) : (
@@ -213,7 +214,7 @@ function ImagePrediction() {
           {processing ? (
             <div className="text-center">
               <p className="mb-4 text-lg font-semibold">Processing...</p>
-              <div className="mb-4">
+              <div>
                 <CircularProgress />
               </div>
             </div>
