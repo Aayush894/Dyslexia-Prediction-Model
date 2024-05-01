@@ -24,7 +24,7 @@ CORS(app)
 quiz_model = None
 
 # please update this location brother *******************************************************************
-with open(r"/home/abhishek/Documents/Aayush_Dyslexia/Dysgraphia-Prediction-Model/flask_server/RandomForestQuizModel.pkl", 'rb') as file:
+with open(r"/home/abhishek/Documents/Aayush_Dyslexia/Dysgraphia-Prediction-Model/flask_server/Random_Forest_Model.sav", 'rb') as file:
   quiz_model = pickle.load(file)
 
 
