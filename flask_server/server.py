@@ -22,14 +22,14 @@ CORS(app)
 
 quiz_model = None
 
-# please update this location brother *******************************************************************
+
 with open(r"D:\MernStack_Projects\DyslexiLens\flask_server\RandomForestQuizModel.pkl", 'rb') as file:
   quiz_model = pkl.load(file)
 
 
 loaded_model = None
 # model loaded
-with open(r"D:\MernStack_Projects\DyslexiLens\flask_server\Decision_tree_model.sav", 'rb') as file:
+with open(r"D:\MernStack_Projects\DyslexiLens/flask_server/Decision_tree_model.sav", 'rb') as file:
   loaded_model = pkl.load(file)
 
 # code for test.py starts here 
@@ -261,12 +261,22 @@ def submit_text():
 @cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
 def submit_quiz():
   data = request.json  
-  print(data)
-  extracted_object = data['quiz']
+  # print(data)
+
+  # Check if the request data exists
+  # if not data:
+  #   return jsonify({"ok": False, "message": "No data received"})
+
+
+  extracted_object = data.get('quiz')
   print("Quiz array:", extracted_object)
 
-  time_value = data['time']
+  time_value = data.get('time')
   print("Time value:", time_value)
+
+  # Check if both 'quiz' and 'time' attributes exist
+  # if not extracted_object or not time_value:
+  #   return jsonify({"ok": False, "message": "Incomplete data received"})
 
   # # i have an array and time 
   lang_vocab = (extracted_object['q1'] + extracted_object['q2'] + extracted_object['q3'] + extracted_object['q4'] + extracted_object['q5'] + extracted_object['q6'] + extracted_object['q8'])/28
@@ -275,6 +285,17 @@ def submit_quiz():
   # speed = 0.5
   visual = (extracted_object['q1'] + extracted_object['q3'] + extracted_object['q4'] + extracted_object['q6'])/16
   audio = (extracted_object['q7']+extracted_object['q10'])/8
+
+  # request_data = request.json  
+  # extracted_array = request_data.quiz
+  # # i have an array and time 
+
+  # lang_vocab = (extracted_array[1] + extracted_array[2] + extracted_array[3] + extracted_array[4] + extracted_array[5] + extracted_array[6] + extracted_array[8])/28
+  # memory = (extracted_array[2]+ extracted_array[9])/8
+  # speed = 0.5
+  # visual = (extracted_array[1] + extracted_array[3] + extracted_array[4] + extracted_array[6])/16
+  # audio = (extracted_array[7]+extracted_array[10])/8
+
   survey = (lang_vocab + memory + speed + visual + audio)/80
   result = get_result(lang_vocab, memory, speed, visual, audio, survey)
 
