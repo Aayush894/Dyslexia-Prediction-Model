@@ -18,7 +18,7 @@ import UpdatePass from "./pages/Update/UpdatePass.jsx";
 import About from "./pages/About/About.jsx";
 
 import Survey from './pages/Prediction/Survey/Survey.jsx'
-import ImagePrediction from './pages/Prediction/ImagePrediction.jsx'
+import ImagePrediction from './pages/Prediction/ImagePrediction/ImagePrediction.jsx'
 import TextPrediction from './pages/Prediction/TextPrediction.jsx'
 import Quiz from "./pages/Prediction/Quiz/Quiz.jsx";
 

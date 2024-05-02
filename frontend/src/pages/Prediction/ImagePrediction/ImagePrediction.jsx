@@ -1,5 +1,5 @@
-import Footer from "../../components/Footer";
-import Navbar from "../../components/NavBar/NavBar";
+import Footer from "../../../components/Footer";
+import Navbar from "../../../components/NavBar/NavBar.jsx";
 import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -94,6 +94,7 @@ function ImagePrediction() {
                   })
                     .then((response) => response.json())
                     .then((data) => {
+                      console.log(data.result);
                       setResult(data.result);
                       setProcessing(false);
                       // console.log(data.result);
@@ -124,8 +125,8 @@ function ImagePrediction() {
       </div>
 
       <div className="mt-2 ml-2 justify-center">
-        <div className="flex mt-10 ml-10 justify-center ">
-          <div className="max-w-2xl rounded-lg shadow-xl bg-gray-50 m-5">
+        <div className="flex flex-col md:flex-row md:mt-12 md:ml-10 justify-center">
+          <div className="max-w-2xl w-80 md:w-50 h-100 rounded-lg shadow-xl bg-gray-50 mt-20">
             <div className="m-4">
               <label className="inline-block mb-2 text-gray-500">
                 File Upload
@@ -169,46 +170,69 @@ function ImagePrediction() {
               </button>
             </div>
           </div>
-          <div className="col-md-6 m-5">
-            <div className="border p-4 m-2 justify-center">
-              <h4 className="mb-4 text-center">Preview</h4>
-              <div className="text-center mb-4">
-                The resulting image will be displayed here
+          <div className="col-md-6">
+            <div className="p-4">
+              <div className="mb-4 text-center">
+                <b>Preview</b>
               </div>
-              {imageUrl && (
-                <img
-                  src={imageUrl}
-                  alt={imageAlt}
-                  className="img-fluid displayed-image"
-                />
-              )}
+              <div className="flex justify-center items-center h-80 overflow-hidden">
+                {" "}
+                {imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    alt={imageAlt}
+                    className="max-w-full max-h-full border-2 border-blue-300 rounded-lg shadow-xl"
+                    style={{ objectFit: "contain" }}
+                  />
+                ) : (
+                  <div className="text-gray-400 text-center w-80 border-4 border-dashed border-gray-300 rounded-lg p-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-16 h-16 mb-2 mx-auto"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      />
+                    </svg>
+                    <p className="text-sm">No image uploaded</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div>
-        {processing ? (
-          <p className="mb-10 text-center">
-            Processing...
-            <div>
-              <CircularProgress />
+      <div className="flex items-center justify-center mt-10">
+        <div className="max-w-md w-full md:max-w-xl rounded-lg shadow-xl bg-gray-50 p-6">
+          {processing ? (
+            <div className="text-center">
+              <p className="mb-4 text-lg font-semibold">Processing...</p>
+              <div>
+                <CircularProgress />
+              </div>
             </div>
-          </p>
-        ) : (
-          <div>
-            {result ? (
-              <p className="mb-10 text-center">
-                <b>Your result is:&nbsp;&nbsp;&nbsp;</b>
-                <i>{result}</i>
-              </p>
-            ) : (
-              <p className="mb-10 text-center">
-                <b>No test taken Yet!!!.</b>
-              </p>
-            )}
-          </div>
-        )}
+          ) : (
+            <div className="text-center">
+              {result ? (
+                <div className="mb-4">
+                  <b>Your result is: </b>
+                  <span className="italic">{result}</span>
+                </div>
+              ) : (
+                <div className="mb-4">
+                  <b>No test taken yet!</b>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       <div>

@@ -10,16 +10,19 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
+import './test.css';
+
 function Test() {
   return (
     <>
       <div>
         <NavBar />
       </div>
-      <div className="d-flex">
-        <div className="m-5 p-2 transform  transition duration-300 hover:scale-125 hover:bg-blue-600 ">
+      {/* className="m-5 p-2 transform  transition duration-200 hover:scale-125 hover:bg-blue-600 " */}
+      <div className="outer-card-component">
+        <div className = "card-component">
           <Link to="/test/imagePrediction">
-            <Card sx={{ maxWidth: 345 }}>
+            <Card>
               <CardActionArea>
                 <CardMedia
                   component="img"
@@ -41,14 +44,14 @@ function Test() {
             </Card>
           </Link>
         </div>
-        <div className="m-5 p-2 transform  transition duration-200 hover:scale-125 hover:bg-blue-600 ">
+        <div className = "card-component">
           <Link to="/test/textPrediction">
-            <Card sx={{ maxWidth: 345 }}>
+            <Card>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   height="140"
-                  image="/assets/Text.avif"
+                  image="/assets/Text.jpg"
                   alt="image"
                 />
 
@@ -66,9 +69,9 @@ function Test() {
             </Card>
           </Link>
         </div>
-        <div className="m-5 p-2 transform  transition duration-300 hover:scale-125 hover:bg-blue-600 ">
+        <div className = "card-component">
           <Link to="/test/quiz">
-            <Card sx={{ maxWidth: 345 }}>
+            <Card>
               <CardActionArea>
                 <CardMedia
                   component="img"
@@ -90,14 +93,14 @@ function Test() {
             </Card>
           </Link>
         </div>
-        <div className="m-5 p-2 transform  transition duration-200 hover:scale-125 hover:bg-blue-600 ">
+        <div className = "card-component">
           <Link to="/test/survey">
-            <Card sx={{ maxWidth: 345 }}>
+            <Card>
               <CardActionArea>
                 <CardMedia
                   component="img"
                   height="140"
-                  image="/assets/Audio1.jpg"
+                  image="/assets/family.jpg"
                   alt="image"
                 />
                 <CardContent className="bg-blue-500">

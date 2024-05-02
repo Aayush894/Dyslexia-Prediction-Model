@@ -1,0 +1,31 @@
+.outer-card-component {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+  gap: 50px; 
+  margin: 20px; 
+  padding: 20px;
+  justify-items: center; 
+  align-items: center; 
+}
+
+.card-component {
+  position: relative; /* Ensure relative positioning for z-index */
+  transition: transform 0.2s, border-color 0.2s; /* Add transition for smooth zoom effect and border color change */
+  border-radius: 6px;
+  margin-top: 10px;
+  overflow: hidden;/* Initial transparent border */
+}
+
+.card-component:hover {
+  transform: scale(1.2); /* Zoom effect on hover */
+  /* border-color: #6366F1; Dark border color on hover */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(27, 151, 239, 0.5); /* Add a subtle shadow on hover */
+  border-width: 1px;
+}
+
+@media screen and (max-width: 768px) {
+  .outer-card-component {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}

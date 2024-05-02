@@ -16,21 +16,20 @@ from PIL import Image
 import pyttsx3
 import eng_to_ipa as ipa
 from abydos.phonetic import Soundex, Metaphone, Caverphone, NYSIIS
-import pickle
 
 app = Flask(__name__)
 CORS(app)
 
 quiz_model = None
 
-# please update this location brother *******************************************************************
-with open(r"/home/abhishek/Documents/Aayush_Dyslexia/Dysgraphia-Prediction-Model/flask_server/testdir/model_training_quiz/Random_Forest_Model.sav", 'rb') as file:
-  quiz_model = pickle.load(file)
+
+with open(r"D:\MernStack_Projects\DyslexiLens\flask_server\RandomForestQuizModel.pkl", 'rb') as file:
+  quiz_model = pkl.load(file)
 
 
 loaded_model = None
 # model loaded
-with open(r"/home/abhishek/Documents/Aayush_Dyslexia/Dysgraphia-Prediction-Model/flask_server/Decision_tree_model.sav", 'rb') as file:
+with open(r"D:\MernStack_Projects\DyslexiLens/flask_server/Decision_tree_model.sav", 'rb') as file:
   loaded_model = pkl.load(file)
 
 # code for test.py starts here 
@@ -156,10 +155,7 @@ def calculate_score(extracted_phonetics, spell_corrected_phonetics):
 def get_feature_array(extracted_text):
   # path is the path of image, but i am using text.
   feature_array = []
-#   extracted_text = image_to_text(path)
-  # *****************************************************************************************
-#   extracted_text = 'knowing the time of separation and the activity of the lead-210 solution, the ingrauth Of the bismuth-210 can be calculated. The absolute activity of the reference standards can be calculated from the known activity of the lead-210 solution and the chemical yleld, but this calculation is unneces necessary. Provided the same lead carrier solution is used to prepare and the reference standards For the analyses.'
-  
+
   # *****************************************************************************************
   feature_array.append(spelling_accuracy(extracted_text))
   feature_array.append(gramatical_accuracy(extracted_text))
@@ -170,12 +166,10 @@ def get_feature_array(extracted_text):
 
 from flask import jsonify
 
-app = Flask(__name__)
-CORS(app)
-
 # Computer will speak almost 10 words
 spoken_words = []
 
+# Fetch words from the elementary vocabulary *******************************************
 @app.route('/api/fetchWords', methods=['POST'])
 @cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
 def fetch_words():
@@ -212,7 +206,7 @@ def load_elementary_vocabulary():
     return random.sample(vocabulary, k=10)
 
 
-# Submit words from form
+# Submit words from form *******************************************
 @app.route('/api/submitWords', methods=['POST'])
 @cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
 def submit_words():
@@ -232,14 +226,14 @@ def submit_words():
     
     return jsonify(response)
 
+# ****************************************************************
 @app.route('/api/submit_text', methods=['GET','POST'])
 @cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
 def submit_text():
     # text extracted will be here
+    print(request)
     request_data = request.json  
-    extracted_text = request_data.text
-
-    # extracted_text = 'I wot a sil-Plat It was var kol I that tht was voir -kol the blat was'
+    extracted_text = request_data.get('text')
 
     features = get_feature_array(extracted_text)
     features_array = np.array([features])
@@ -252,10 +246,6 @@ def submit_text():
     else:
         result = "There's a high chance that this person is suffering from dyslexia or dysgraphia"
 
-    # Calculate score using Levenshtein distance (assuming levenshtein function is defined)
-    # score = levenshtein(spoken_words, submitted_words)
-
-    # print("Score is", score) 
 
     response = {
         "ok": True,
@@ -266,10 +256,10 @@ def submit_text():
     return jsonify(response)
 
 
+# ****************************************************************
 @app.route('/api/submit_quiz', methods=['GET','POST'])
 @cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
 def submit_quiz():
-
   data = request.json  
   # print(data)
 
@@ -296,7 +286,6 @@ def submit_quiz():
   visual = (extracted_object['q1'] + extracted_object['q3'] + extracted_object['q4'] + extracted_object['q6'])/16
   audio = (extracted_object['q7']+extracted_object['q10'])/8
 
-
   # request_data = request.json  
   # extracted_array = request_data.quiz
   # # i have an array and time 
@@ -317,7 +306,7 @@ def submit_quiz():
   }
   return jsonify(response)
 
-
+# ****************************************************************
 def get_result(lang_vocab, memory, speed, visual, audio, survey):
   #2D numpy array created with the values input by the user.
   array = np.array([[lang_vocab, memory, speed, visual, audio, survey]])
@@ -332,12 +321,7 @@ def get_result(lang_vocab, memory, speed, visual, audio, survey):
     output = "There is a low chance of the applicant to have dyslexia."
   return output
 
-
-   
-
-
-# for writing disabilities code is here below
-
+# ****************************************************************
 if __name__ == '__main__':
   print("server is running on port 8000")
   app.run(debug=True, port=8000)
