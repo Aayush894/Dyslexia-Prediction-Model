@@ -30,9 +30,11 @@ app.use(express.static('public'));
 
 // routes import
 import userRouter from "./routes/user.routes.js";
+import predictionRouter from './routes/prediction.routes.js'; 
 
 app.use(express.json());
 app.use("/api", userRouter);
+app.use("/api", predictionRouter); 
 
 // http://localhost:5000/api/v1/users/register
 

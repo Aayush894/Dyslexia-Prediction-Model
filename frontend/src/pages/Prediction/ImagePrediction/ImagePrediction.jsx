@@ -3,8 +3,6 @@ import Navbar from "../../../components/NavBar/NavBar.jsx";
 import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
-// import { useNavigate } from "react-router-dom";
-
 function ImagePrediction() {
   const [imageUrl, setImageUrl] = useState(null);
   const [imageAlt, setImageAlt] = useState(null);
@@ -12,14 +10,13 @@ function ImagePrediction() {
   const [processing, setProcessing] = useState(false);
   const [result, setResult] = useState(null);
 
-  // const navigate = useNavigate();
 
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append("image", file);
 
-    await fetch("http://localhost:5000/api/upload", {
+    await fetch("/api/upload", {
       method: "POST",
       body: formData,
     })
@@ -42,79 +39,68 @@ function ImagePrediction() {
 
   const handleImageSubmit = async () => {
     setProcessing(true);
-
+  
     try {
-      const url = "http://localhost:5000/api/uploadOnCloudinary";
-
-      fetch(url, {
-        mode: "cors",
+      const uploadUrl = "/api/uploadOnCloudinary";
+  
+      // Upload image to Cloudinary
+      const response = await fetch(uploadUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           imageAlt: imageAlt,
         }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // console.log(data.url);
-          return data.url;
-        })
-        .then((url) => {
-          const textConverturl = "http://localhost:5000/api/convertText";
-          try {
-            fetch(textConverturl, {
-              mode: "cors",
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                url: url,
-              }),
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                console.log(data);
-                // Parse the 'text' property to extract the JSON data
-                const textData = JSON.parse(data.text);
-                // Access the 'all_text' property from the parsed JSON data
-                const allText = textData.all_text;
-                // console.log(allText);
-
-                return allText;
-              })
-              .then((text) => {
-                const resultUrl = "http://localhost:8000/api/submit_text";
-                try {
-                  fetch(resultUrl, {
-                    mode: "cors",
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                      text: text,
-                    }),
-                  })
-                    .then((response) => response.json())
-                    .then((data) => {
-                      console.log(data.result);
-                      setResult(data.result);
-                      setProcessing(false);
-                      // console.log(data.result);
-                    })
-                    .catch((err) => {
-                      console.error(
-                        "Error while taking result response",
-                        err.message
-                      );
-                    });
-                } catch {
-                  console.error("Error while fetching result:");
-                }
-              });
-          } catch {
-            console.error("Error extarcting text from the link:");
-          }
-        });
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to upload image to Cloudinary");
+      }
+  
+      const uploadData = await response.json();
+      const imageUrl = uploadData.url;
+  
+      const textConvertUrl = "/api/convertText";
+  
+      // Convert image to text
+      const textResponse = await fetch(textConvertUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          url: imageUrl,
+        }),
+      });
+  
+      if (!textResponse.ok) {
+        throw new Error("Failed to convert image to text");
+      }
+  
+      const textData = await textResponse.json();
+      const allText = JSON.parse(textData.text).all_text;
+  
+      const resultUrl = "/api/ImagePrediction";
+  
+      // Perform image prediction based on extracted text
+      const predictionResponse = await fetch(resultUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: allText }),
+      });
+  
+      if (!predictionResponse.ok) {
+        throw new Error("Failed to fetch prediction result");
+      }
+  
+      const predictionData = await predictionResponse.json();
+  
+      if (predictionData && predictionData.result) {
+        setResult(predictionData.result);
+      } else {
+        throw new Error("Invalid prediction result");
+      }
     } catch (error) {
-      console.error("Error uploading image to Cloudinary:", error);
+      console.error("Error:", error.message);
+    } finally {
+      setProcessing(false);
     }
   };
 

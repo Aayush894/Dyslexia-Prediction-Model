@@ -23,13 +23,13 @@ CORS(app)
 quiz_model = None
 
 
-with open(r"D:\MernStack_Projects\DyslexiLens\flask_server\RandomForestQuizModel.pkl", 'rb') as file:
+with open(r"D:\MernStack_Projects\DyslexiLens\flask_server\Random_Forest_Model.sav", 'rb') as file:
   quiz_model = pkl.load(file)
 
 
 loaded_model = None
 # model loaded
-with open(r"D:\MernStack_Projects\DyslexiLens/flask_server/Decision_tree_model.sav", 'rb') as file:
+with open(r"D:\MernStack_Projects\DyslexiLens\flask_server\Decision_tree_model.sav", 'rb') as file:
   loaded_model = pkl.load(file)
 
 # code for test.py starts here 
@@ -228,7 +228,7 @@ def submit_words():
 
 # ****************************************************************
 @app.route('/api/submit_text', methods=['GET','POST'])
-@cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
+@cross_origin(origin='http://localhost:5000')  # Allow requests from localhost:3000
 def submit_text():
     # text extracted will be here
     print(request)
