@@ -30,7 +30,7 @@ export function Home() {
   const sendEmail = async () => {
     console.log("Submit conatct details");
 
-    await fetch(`http://localhost:5000/api/sendemail`, {
+    await fetch('/api/sendemail', {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
@@ -61,7 +61,7 @@ export function Home() {
       </div>
 
       {/* Team Info */}
-      <section className="py-5 team4" id="team">
+      <section className="py-5" id="team">
         <div className="container">
           <div className="row justify-content-center mb-4">
             <div className="col-md-7 text-center">
@@ -75,7 +75,7 @@ export function Home() {
           </div>
 
           <div className="row">
-            <div className="col-lg-3 col-md-6 mb-4">
+            <div className="col-lg-3 col-md-6 col-sm-6 mb-4">
               <div className="card shadow-sm">
                 <img
                   src="/assets/Profile_pic.png"
@@ -103,7 +103,7 @@ export function Home() {
               </div>
             </div>
 
-            <div className="col-lg-3 col-md-6 mb-4">
+            <div className="col-lg-3 col-md-6 col-sm-6 mb-4">
               <div className="card shadow-sm">
                 <img
                   src="/assets/Kartik.jpg"
@@ -131,7 +131,7 @@ export function Home() {
               </div>
             </div>
 
-            <div className="col-lg-3 col-md-6 mb-4">
+            <div className="col-lg-3 col-md-6 col-sm-6 mb-4">
               <div className="card shadow-sm">
                 <img
                   src="/assets/Abhishek.jpg"
@@ -159,7 +159,7 @@ export function Home() {
               </div>
             </div>
 
-            <div className="col-lg-3 col-md-6 mb-4">
+            <div className="col-lg-3 col-md-6 col-sm-6 mb-4">
               <div className="card shadow-sm">
                 <img
                   src="/assets/Archit1.jpg"

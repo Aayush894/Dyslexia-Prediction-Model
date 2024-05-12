@@ -44,6 +44,7 @@ function Test() {
             </Card>
           </Link>
         </div>
+        
         <div className = "card-component">
           <Link to="/test/quiz">
             <Card>
@@ -68,6 +69,7 @@ function Test() {
             </Card>
           </Link>
         </div>
+
         <div className = "card-component">
           <Link to="/test/survey">
             <Card>
@@ -86,6 +88,32 @@ function Test() {
                     Assessing Your Child's Strengths: This test module processes
                     your child's audio, providing a personalized score for a
                     comprehensive evaluation.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Link>
+        </div>
+
+        <div className = "card-component">
+          <Link to="/test">
+            <Card>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="/assets/Text.jpg"
+                  alt="image"
+                />
+
+                <CardContent className="bg-blue-500">
+                  <Typography gutterBottom variant="h5" component="div">
+                    Integrated Test
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Assess your writing effortlessly. This test module analyzes
+                    your text document, identifies errors, and generates a score
+                    – a quick, efficient way to check mistakes.
                   </Typography>
                 </CardContent>
               </CardActionArea>

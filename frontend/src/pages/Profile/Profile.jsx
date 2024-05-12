@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
 
 const Profile = () => {
-  const url = "http://localhost:5000/api/profile";
+  const url = "/api/profile";
   const [user, setUser] = useState({});
 
   const navigate = useNavigate() ; 

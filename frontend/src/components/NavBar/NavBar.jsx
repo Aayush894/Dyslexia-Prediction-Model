@@ -94,18 +94,24 @@ const Navbar = () => {
                       >
                         Team
                       </a> */}
-                      <Link
-                        to="/test"
-                        className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
-                      >
-                        Test
-                      </Link>
-                      <Link
-                        to="/testrecord "
-                        className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
-                      >
-                        History
-                      </Link>
+                      {localStorage.getItem("authToken") ? (
+                        <>
+                          <Link
+                            to="/test"
+                            className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
+                          >
+                            Test
+                          </Link>
+                          <Link
+                            to="/testrecord"
+                            className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
+                          >
+                            History
+                          </Link>
+                        </>
+                      ) : (
+                        ""
+                      )}
                     </div>
 
                     {!localStorage.getItem("authToken") ? (
@@ -155,18 +161,24 @@ const Navbar = () => {
               >
                 Team
               </a> */}
-              <Link
-                to="/test"
-                className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
-              >
-                Test
-              </Link>
-              <Link
-                to="/testrecord"
-                className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
-              >
-                History
-              </Link>
+              {localStorage.getItem("authToken") ? (
+                <>
+                  <Link
+                    to="/test"
+                    className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
+                  >
+                    Test
+                  </Link>
+                  <Link
+                    to="/testrecord"
+                    className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
+                  >
+                    History
+                  </Link>
+                </>
+              ) : (
+                ""
+              )}
             </li>
           </ul>
         </div>

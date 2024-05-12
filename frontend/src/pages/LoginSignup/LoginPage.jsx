@@ -10,7 +10,7 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/login", {
+    const response = await fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export default function LoginPage() {
       console.error("Email not verified");
     }
 
-    const response = await fetch("http://localhost:5000/api/googlelogin", {
+    const response = await fetch("/api/googlelogin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
