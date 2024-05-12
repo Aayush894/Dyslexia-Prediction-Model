@@ -10,15 +10,11 @@ cloudinary.config({
 });
 
 const uploadOnCloudinary = asyncHandler(async (req,res) => {
-    console.log(req.body) ; 
-
     try {
         const imageAlt = req.body.imageAlt;
         if (!imageAlt) return { success: false, message: "No imageAlt provided" }; 
 
-        const localFilePath = `public/temp/${imageAlt}`; 
-        
-         console.log(localFilePath) ; 
+        const localFilePath = `backend/public/temp/${imageAlt}`; 
 
         // Upload the file on Cloudinary
         const data = await cloudinary.uploader.upload(localFilePath, {
@@ -30,8 +26,7 @@ const uploadOnCloudinary = asyncHandler(async (req,res) => {
 
         // Delete the local file
         fs.unlinkSync(localFilePath);
-        console.log(data)
-        // Return additional metadata along with the URL
+
         res.status(201).json({
             success: true,
             url: data.url,

@@ -2,8 +2,6 @@ import { Router } from "express";
 import {
   loginUser,
   registerUser,
-  updateUser,
-  updatePass,
   sendEmail,
   UserProfile,
   uploadImage,
@@ -18,7 +16,7 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public/temp'); // Set the destination folder
+    cb(null, 'backend/public/temp'); // Set the destination folder
   },
   filename: (req, file, cb) => {
     const fileName = file.originalname.trim(); 
@@ -28,7 +26,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const tempDir = path.join('public', 'temp');
+const tempDir = path.join('backend', 'public', 'temp');
 
 const deleteFilesInDir = (dirPath) => {
   const files = fs.readdirSync(dirPath);
@@ -56,10 +54,6 @@ router.route("/signup").post(registerUser);
 router.route("/login").post(loginUser);
 
 router.route("/googlelogin").post(GoogleloginUser);
-
-router.route("/update").post(updateUser);
-
-router.route("/updatePass").post(updatePass);
 
 router.route("/sendemail").post(sendEmail) ;
 

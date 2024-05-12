@@ -23,7 +23,7 @@ function ImagePrediction() {
       .then((response) => {
         if (response.ok) {
           // Handle success
-          console.log("Image uploaded successfully.");
+          // console.log("Image uploaded successfully.");
           // Display the uploaded image
           setImageUrl(URL.createObjectURL(file));
           setImageAlt(file.name);
@@ -76,8 +76,10 @@ function ImagePrediction() {
   
       const textData = await textResponse.json();
       const allText = JSON.parse(textData.text).all_text;
-  
-      const resultUrl = "/api/ImagePrediction";
+
+      console.log(allText);
+
+      const resultUrl = "/api/imagePrediction";
   
       // Perform image prediction based on extracted text
       const predictionResponse = await fetch(resultUrl, {
@@ -91,7 +93,7 @@ function ImagePrediction() {
       }
   
       const predictionData = await predictionResponse.json();
-  
+
       if (predictionData && predictionData.result) {
         setResult(predictionData.result);
       } else {
@@ -99,6 +101,7 @@ function ImagePrediction() {
       }
     } catch (error) {
       console.error("Error:", error.message);
+      setResult("Something went wrong. Please try again.");
     } finally {
       setProcessing(false);
     }

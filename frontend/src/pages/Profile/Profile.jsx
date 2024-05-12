@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./index.css";
+import "./profile.css";
 
 const Profile = () => {
   const url = "/api/profile";
@@ -34,11 +34,11 @@ const Profile = () => {
     fetchInfo();
   }, []);
 
-  const handleContact = ( ) => {
-    navigate('/contact') ; 
+  const handleTest = ( ) => {
+    navigate('/test') ; 
   }
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className="container">
@@ -67,7 +67,7 @@ const Profile = () => {
                   />
                   <div className="mt-3">
                     <h4>{user.username}</h4>
-                    <button className="btn btn-outline-primary" onClick={handleContact} >Contact Us</button>
+                    <button className="btn btn-outline-primary" onClick={handleTest} >Test</button>
                   </div>
                 </div>
               </div>

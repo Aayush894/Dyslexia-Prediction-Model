@@ -13,8 +13,6 @@ import Signup from "./pages/LoginSignup/SignupPage.jsx";
 import Test from "./pages/Test/Test.jsx";
 import TestRecord from "./pages/TestRecord.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
-import UpdateUser from "./pages/Update/UpdateUser.jsx";
-import UpdatePass from "./pages/Update/UpdatePass.jsx";
 import About from "./pages/About/About.jsx";
 
 import Survey from './pages/Prediction/Survey/Survey.jsx'
@@ -36,8 +34,6 @@ function App() {
             <Route exact path="/test" element={<Test />} />
             <Route exact path="/testrecord" element={<TestRecord />} />
             <Route exact path="/profile" element={<Profile />} />
-            <Route exact path="/updatePass" element={<UpdatePass />} />
-            <Route exact path="/updateUser" element={<UpdateUser />} />
             <Route exact path="/about" element={<About />} />
 
             <Route exact path="/test/imagePrediction" element={<ImagePrediction />} />

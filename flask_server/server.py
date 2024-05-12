@@ -258,7 +258,7 @@ def submit_text():
 
 # ****************************************************************
 @app.route('/api/submit_quiz', methods=['GET','POST'])
-@cross_origin(origin='http://localhost:3000')  # Allow requests from localhost:3000
+@cross_origin(origin='http://localhost:5000')  # Allow requests from localhost:5000
 def submit_quiz():
   data = request.json  
   # print(data)

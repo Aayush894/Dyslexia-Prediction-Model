@@ -88,19 +88,19 @@ function Quiz() {
       formData.forEach((value, key) => {
         if (value[0] === "4") {
           data[key] = 4;
-          console.log(`${key}: ${4}`);
+          // console.log(`${key}: ${4}`);
         } else {
           data[key] = 0;
-          console.log(`${key}: ${0}`);
+          // console.log(`${key}: ${0}`);
         }
       });
   
       const time = endTime - startTime;
-      console.log(time);
-      console.log(data);
+      // console.log(time);
+      // console.log(data);
   
       try {
-        const url = "http://localhost:8000/api/submit_quiz";
+        const url = "/api/quizPrediction";
   
         fetch(url, {
           mode: "cors",
@@ -115,9 +115,8 @@ function Quiz() {
         .then((data) => {
           // Check if the request was successful
           if (data.ok) {
-            // Access the result message
             const resultMessage = data.result;
-            console.log("Result:", resultMessage);
+            // console.log("Result:", resultMessage);
             setResult(resultMessage);
           } else {
             console.error("Error:", data.message);
@@ -131,7 +130,7 @@ function Quiz() {
         throw new Error(400, "invalid Response");
       }
   
-      console.log("Form submitted!");
+      // console.log("Form submitted!");
     } else {
       console.error("Form element not found");
     }

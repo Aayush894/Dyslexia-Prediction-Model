@@ -38,7 +38,7 @@ export default function LoginPage() {
 
     // is verified
     const isVerified = decoded.email_verified;
-    console.log(userEmail, isVerified);
+    // console.log(userEmail, isVerified);
 
     if (!isVerified) {
       console.error("Email not verified");
@@ -55,7 +55,7 @@ export default function LoginPage() {
     });
 
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
     if (!json.success) {
       alert("Enter Valid Credentials");
     } else {
@@ -66,6 +66,7 @@ export default function LoginPage() {
   };
 
   const onLoginError = (error) => {
+    alert("Login Failed")
     console.log("Login Failed", error);
   };
 
