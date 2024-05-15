@@ -5,9 +5,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon backend/index.js",
-    "dev": "nodemon backend/index.js"
+    "server": "nodemon backend/index.js",
+    "start": "node backend/index.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Aayush Kumar Shrivastava",
   "license": "ISC",
