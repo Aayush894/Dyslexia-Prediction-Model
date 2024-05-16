@@ -1,5 +1,6 @@
 import Footer from "../../../components/Footer";
 import Navbar from "../../../components/NavBar/NavBar.jsx";
+import { Cloudinary } from "@cloudinary/url-gen";
 import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -10,54 +11,62 @@ function ImagePrediction() {
   const [processing, setProcessing] = useState(false);
   const [result, setResult] = useState(null);
 
-
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append("image", file);
 
-    await fetch("/api/upload", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Handle success
-          // console.log("Image uploaded successfully.");
-          // Display the uploaded image
-          setImageUrl(URL.createObjectURL(file));
-          setImageAlt(file.name);
-        } else {
-          // Handle error
-          console.error("Error uploading image:", response.statusText);
-        }
-      })
-      .catch((error) => {
+    if (file) {
+      try {
+        // Display the uploaded image preview
+        setImageUrl(URL.createObjectURL(file));
+        setImageAlt(file.name);
+      } catch (error) {
         console.error("Error uploading image:", error);
-      });
+      }
+    }
   };
 
   const handleImageSubmit = async () => {
+    if (!imageUrl) {
+      console.error("No image uploaded.");
+      return;
+    }
+
     setProcessing(true);
-  
+
     try {
-      const uploadUrl = "/api/uploadOnCloudinary";
-  
-      // Upload image to Cloudinary
-      const response = await fetch(uploadUrl, {
+      const cloudinaryDetails = fetch("/api/getCloudinaryConfigurations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          imageAlt: imageAlt,
-        }),
+      })
+
+      const { cloudName, uploadPreset } = await cloudinaryDetails.json();
+      
+      // Replace with your Cloudinary cloud name
+      const cloudinary = new Cloudinary({ cloud: { cloudName } });
+
+      const uploadResponse = await cloudinary.upload(imageUrl, {
+        uploadPreset: uploadPreset, // Replace with your Cloudinary upload preset
       });
+
+      const imageUrl = uploadResponse.secure_url;
+ 
+      // // Upload image to Cloudinary
+      // const response = await fetch(uploadUrl, {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({
+      //     body: formData,
+      //   }),
+      // });
   
-      if (!response.ok) {
-        throw new Error("Failed to upload image to Cloudinary");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Failed to upload image to Cloudinary");
+      // }
   
-      const uploadData = await response.json();
-      const imageUrl = uploadData.url;
+      // const uploadData = await response.json();
+      // const imageUrl = uploadData.url;
   
       const textConvertUrl = "/api/convertText";
   
