@@ -96,7 +96,7 @@ function Test() {
         </div>
 
         <div className = "card-component">
-          <Link to="/test">
+          <Link to="/test/integratedTest">
             <Card>
               <CardActionArea>
                 <CardMedia

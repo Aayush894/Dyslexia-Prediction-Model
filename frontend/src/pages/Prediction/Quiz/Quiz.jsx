@@ -2,19 +2,12 @@
 import NavBar from "../../../components/NavBar/NavBar";
 import Footer from "../../../components/Footer";
 import React, { useState, useRef, useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 function Question({ id, text, options, imgSrc, audioSrc }) {
   const [selectedOption, setSelectedOption] = useState(null);
-  const handleOptionClick = (optionValue) => {
-    // Clear all selected options for this question
-    const radios = document.getElementsByName(`q${id}`);
-    radios.forEach((radio) => {
-      if (radio.checked) {
-        radio.checked = false;
-      }
-    });
 
-    // Set the selected option based on the clicked radio button
+  const handleOptionClick = (optionValue) => {
     setSelectedOption(optionValue);
   };
 
@@ -75,77 +68,68 @@ function Question({ id, text, options, imgSrc, audioSrc }) {
 function Quiz() {
   const formRef = useRef(null);
   const [result, setResult] = useState("");
-  const [startTime, setStartTime] = useState(0) ; 
-  
+  const [startTime, setStartTime] = useState(0);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = formRef.current;
     const endTime = new Date().getTime();
     let data = {};
-    if (form instanceof HTMLFormElement) {
+
+    try {
+      if (!(form instanceof HTMLFormElement)) {
+        throw new Error("Form element not found");
+      }
+
       const formData = new FormData(form);
-  
+
       formData.forEach((value, key) => {
         if (value[0] === "4") {
           data[key] = 4;
-          // console.log(`${key}: ${4}`);
         } else {
           data[key] = 0;
-          // console.log(`${key}: ${0}`);
         }
       });
-  
-      const time = endTime - startTime;
-      // console.log(time);
-      // console.log(data);
-  
-      try {
-        const url = "/api/quizPrediction";
-  
-        fetch(url, {
-          mode: "cors",
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            quiz: data,
-            time: time,
-          }),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-          // Check if the request was successful
-          if (data.ok) {
-            const resultMessage = data.result;
-            // console.log("Result:", resultMessage);
-            setResult(resultMessage);
-          } else {
-            console.error("Error:", data.message);
-          }
-        })
-        .catch((error) => {
-          console.error("Error submitting quiz:", error);
-        });
 
-      } catch (error) {
-        throw new Error(400, "invalid Response");
+      const time = endTime - startTime;
+      const url = "/api/quizPrediction";
+
+      const response = await fetch(url, {
+        mode: "cors",
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          quiz: data,
+          time: time,
+        }),
+      });
+
+      const responseData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(responseData.message || "Error submitting quiz");
       }
-  
-      // console.log("Form submitted!");
-    } else {
-      console.error("Form element not found");
+
+      const resultMessage = responseData.result;
+      setResult(resultMessage);
+      toast.success("Quiz submitted successfully!");
+
+    } catch (error) {
+      toast.error("Error: " + error.message);
+      console.error("Error submitting quiz:", error);
     }
   };
-  
 
-  useEffect(() => { 
-    setStartTime(new Date().getTime()) ; 
-  }, []) ;
+  useEffect(() => {
+    setStartTime(new Date().getTime());
+  }, []);
 
-  if (result == "") {
+  if (result === "") {
     return (
       <>
         <div>
           <NavBar />
+          <Toaster />
         </div>
         <div>
           <div className="parallax1">
@@ -166,7 +150,7 @@ function Quiz() {
                   id={1}
                   text="Check whether these two alphabets are same or not?"
                   options={[
-                    { value: "4a", label: "Yes" }, // Unique values for options
+                    { value: "4a", label: "Yes" },
                     { value: "0a", label: "No" },
                   ]}
                   imgSrc={["/assets/o.png", "/assets/0.jpeg"]}
@@ -177,7 +161,7 @@ function Quiz() {
                   id={2}
                   text="Guess the fruit in the picture below."
                   options={[
-                    { value: "4b", label: "Grapes" }, // Unique values for options
+                    { value: "4b", label: "Grapes" },
                     { value: "0b", label: "Orange" },
                     { value: "0c", label: "Banana" },
                     { value: "0d", label: "Mango" },
@@ -301,17 +285,20 @@ function Quiz() {
         </div>
       </>
     );
-  }
-  else {
-    return(
-    <>
-    <div> <NavBar /> </div>
-    <div> {result} </div>
-    <div> <Footer /> </div>
-    </>
+  } else {
+    return (
+      <>
+        <div>
+          <NavBar />
+          <Toaster />
+        </div>
+        <div>{result}</div>
+        <div>
+          <Footer />
+        </div>
+      </>
     );
   }
-  
 }
 
 export default Quiz;

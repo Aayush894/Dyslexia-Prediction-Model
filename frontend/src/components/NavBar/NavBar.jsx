@@ -3,10 +3,12 @@ import ThemeChanger from "./SwitchTheme.jsx";
 import { Disclosure } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const {setAuthUser} = useAuthContext();
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -17,6 +19,9 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
+    localStorage.removeItem("userEmail");
+
+    setAuthUser(null);
     navigate("/");
   };
 
@@ -82,12 +87,12 @@ const Navbar = () => {
                       >
                         Home
                       </Link>
-                      <Link
+                      {/* <Link
                         to="/about"
                         className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
                       >
                         About
-                      </Link>
+                      </Link> */}
                       {/* <a
                         href="http://localhost:3000/#team"
                         className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
@@ -120,7 +125,7 @@ const Navbar = () => {
                           to="/login"
                           className="w-full px-4 mt-auto text-center text-white bg-indigo-600 rounded-md lg:ml-5"
                         >
-                          Get Started
+                          Log In
                         </Link>
                       </div>
                     ) : (
@@ -149,12 +154,12 @@ const Navbar = () => {
               >
                 Home
               </Link>
-              <Link
+              {/* <Link
                 to="/about"
                 className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
               >
                 About
-              </Link>
+              </Link> */}
               {/* <a
                 href="http://localhost:3000/#team"
                 className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
@@ -190,7 +195,7 @@ const Navbar = () => {
                 to="/login"
                 className="w-full px-4 py-2 mt-auto text-center text-white bg-indigo-600 rounded-md lg:ml-5"
               >
-                Get Started
+                Log In
               </Link>
             </div>
           ) : (

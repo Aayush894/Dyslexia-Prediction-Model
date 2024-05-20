@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import "./profile.css";
 
 const Profile = () => {
@@ -26,6 +27,7 @@ const Profile = () => {
       })
       .then((response) => setUser(response.user))
       .catch((error) => {
+        toast.error("Error fetching user data");
         console.error("Error fetching user data:", error);
       });
   };

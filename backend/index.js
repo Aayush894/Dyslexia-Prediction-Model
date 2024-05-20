@@ -4,9 +4,9 @@ import connectDB from "./db/db.js";
 import { app } from "./app.js";
 import express from "express";
 
-const __dirname = path.resolve();
-
 dotenv.config();
+
+const __dirname = path.resolve();
 
 dotenv.config({
   path: "./.env",

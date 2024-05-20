@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
+import toast from "react-hot-toast";
 
 function Signup() {
   const [credentials, setCredentials] = useState({
@@ -9,33 +10,43 @@ function Signup() {
     password: "",
     age: "",
     phoneno: "",
-  }); // Changed address to phoneNo
+  });
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: credentials.username,
-        email: credentials.email,
-        password: credentials.password,
-        age: credentials.age,
-        phoneno: credentials.phoneno,
-      }),
-    });
+    try {
+      if (Validate({ ...credentials })) return; 
 
-    const json = await response.json();
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: credentials.username,
+          email: credentials.email,
+          password: credentials.password,
+          age: credentials.age,
+          phoneno: credentials.phoneno,
+        }),
+      });
 
-    if (!json.success) {
-      console.log(json.message);
-      alert("Enter Valid Credentials");
+      const json = await response.json();
+      
+      if (!json.success) {
+        console.log(json.message);
+        throw new Error(json.message);
+      } else {
+        toast.success("Signup Successful!");
+        navigate("/login");
+        
+      }
+    } catch (error) {
+      console.error("Error while fetching or processing result:", error);
+      toast.error("Server Error", error.message);
     }
-    navigate("/login");
   };
 
   const onChange = (e) => {
@@ -49,7 +60,7 @@ function Signup() {
           <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 mb-20 mt-10">
             <Link
               to="/"
-              className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100 font-sans mt-10"
+              className="flex items-center space-x-2 text-4xl font-medium text-indigo-500 dark:text-gray-100 font-sans mt-10"
             >
               DysLexiLens
             </Link>
@@ -141,7 +152,7 @@ function Signup() {
                       type="number"
                       name="age"
                       id="age"
-                      placeholder="18"
+                      placeholder="age"
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       value={credentials.age}
                       onChange={onChange}
@@ -179,3 +190,43 @@ function Signup() {
 }
 
 export default Signup;
+
+const Validate = (credentials) => {
+  if (!credentials.username) {
+    toast.error("Username is required");
+    return true ;
+  }
+  if (!credentials.email) {
+    toast.error("Email is required");
+    return true ;
+  }
+  if (!credentials.password) {
+    toast.error("Password is required");
+    return true ;
+  }
+  if (!credentials.phoneno) {
+    toast.error("Phone Number is required");
+    return true ;
+  }
+  if (!credentials.age) {
+    toast.error("Age is required");
+    return true ;
+  }
+  
+
+  if (credentials.username.length) {
+    const usernameRegex = /^[a-zA-Z]+\d*$/;
+    if (!usernameRegex.test(credentials.username)) {
+      toast.error("Username must consist of lowercase  or uppercase letters followed by digits");
+      return true ;
+    }
+  }
+
+  if (credentials.password.length < 4) {
+    toast.error("Password must be atleast 4 characters long");
+    return true ;
+  }
+
+  return false ;
+
+}

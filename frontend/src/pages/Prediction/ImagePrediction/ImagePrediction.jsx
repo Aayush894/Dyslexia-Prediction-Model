@@ -1,72 +1,100 @@
 import Footer from "../../../components/Footer";
 import Navbar from "../../../components/NavBar/NavBar.jsx";
-import { Cloudinary } from "@cloudinary/url-gen";
 import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
+import toast from "react-hot-toast";
+// import axios from "axios";
 
 function ImagePrediction() {
   const [imageUrl, setImageUrl] = useState(null);
-  const [imageAlt, setImageAlt] = useState(null);
-
+  const [image, setImage] = useState(null);
   const [processing, setProcessing] = useState(false);
   const [result, setResult] = useState(null);
 
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append("image", file);
 
     if (file) {
       try {
         // Display the uploaded image preview
         setImageUrl(URL.createObjectURL(file));
-        setImageAlt(file.name);
+        setImage(file);
+        return Promise.resolve(); // Resolve the Promise after setting the state
       } catch (error) {
+        toast.error("Error uploading image");
         console.error("Error uploading image:", error);
+        return Promise.reject(error); // Reject the Promise if an error occurs
       }
     }
   };
 
+  const uploadImage = async (cloudName, uploadPreset) => {
+    console.log(cloudName, uploadPreset, image);
+
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", uploadPreset);
+    data.append("cloud_name", cloudName);
+    try {
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, {
+        method: "POST",
+        body: data,
+      });
+
+      const uploadData = await res.json();
+      return uploadData;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      throw new Error("Failed to upload image to Cloudinary");
+    }
+  };
+
+  // const deleteImage = async (publicIds) => {
+  //   try {
+  //     const res = await fetch("/api/deleteImage", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ publicIds }),
+  //     });
+  
+  //     if (!res.ok) {
+  //       throw new Error("Failed to delete image from Cloudinary");
+  //     }
+  
+  //     const deleteData = await res.json();
+  //     return deleteData;
+  //   } catch (error) {
+  //     console.error("Error deleting image:", error);
+  //     throw new Error("Failed to delete image from Cloudinary");
+  //   }
+  // };
+  
+
   const handleImageSubmit = async () => {
     if (!imageUrl) {
+      toast.error("No image uploaded.");
       console.error("No image uploaded.");
       return;
     }
-
+  
     setProcessing(true);
-
+  
     try {
-      const cloudinaryDetails = fetch("/api/getCloudinaryConfigurations", {
+      const cloudinaryDetails = await fetch("/api/getCloudinaryConfigurations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-      })
-
-      const { cloudName, uploadPreset } = await cloudinaryDetails.json();
-      
-      // Replace with your Cloudinary cloud name
-      const cloudinary = new Cloudinary({ cloud: { cloudName } });
-
-      const uploadResponse = await cloudinary.upload(imageUrl, {
-        uploadPreset: uploadPreset, // Replace with your Cloudinary upload preset
       });
-
-      const imageUrl = uploadResponse.secure_url;
- 
-      // // Upload image to Cloudinary
-      // const response = await fetch(uploadUrl, {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({
-      //     body: formData,
-      //   }),
-      // });
   
-      // if (!response.ok) {
-      //   throw new Error("Failed to upload image to Cloudinary");
-      // }
+      const { cloudName, uploadPreset } = await cloudinaryDetails.json();
   
-      // const uploadData = await response.json();
-      // const imageUrl = uploadData.url;
+      const uploadResponse = await uploadImage(cloudName, uploadPreset);
+  
+      if (!uploadResponse.secure_url) {
+        throw new Error("Failed to upload image to Cloudinary");
+      }
+  
+      const uploadedImageUrl = uploadResponse.secure_url;
+      // const publicId = uploadResponse.public_id;
   
       const textConvertUrl = "/api/convertText";
   
@@ -75,7 +103,7 @@ function ImagePrediction() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          url: imageUrl,
+          url: uploadedImageUrl,
         }),
       });
   
@@ -85,9 +113,9 @@ function ImagePrediction() {
   
       const textData = await textResponse.json();
       const allText = JSON.parse(textData.text).all_text;
-
+  
       console.log(allText);
-
+  
       const resultUrl = "/api/imagePrediction";
   
       // Perform image prediction based on extracted text
@@ -102,19 +130,25 @@ function ImagePrediction() {
       }
   
       const predictionData = await predictionResponse.json();
-
+  
       if (predictionData && predictionData.result) {
         setResult(predictionData.result);
       } else {
         throw new Error("Invalid prediction result");
       }
+  
+      // Delete the image from Cloudinary after prediction
+      // await deleteImage([publicId]);
+  
     } catch (error) {
-      console.error("Error:", error.message);
+      toast.error(error.message);
+      console.error("Error:", error);
       setResult("Something went wrong. Please try again.");
     } finally {
       setProcessing(false);
     }
   };
+  
 
   return (
     <>
@@ -174,11 +208,10 @@ function ImagePrediction() {
                 <b>Preview</b>
               </div>
               <div className="flex justify-center items-center h-80 overflow-hidden">
-                {" "}
                 {imageUrl ? (
                   <img
                     src={imageUrl}
-                    alt={imageAlt}
+                    alt="image"
                     className="max-w-full max-h-full border-2 border-blue-300 rounded-lg shadow-xl"
                     style={{ objectFit: "contain" }}
                   />

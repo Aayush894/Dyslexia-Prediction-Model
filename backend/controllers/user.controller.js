@@ -62,7 +62,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   // check for valid username format ie. only in lowercase
   const isValidUsername = (username) => {
-    const usernameRegex = /^[a-z]+\d*$/;
+    const usernameRegex = /^[a-zA-Z]+\d*$/;
     return usernameRegex.test(username);
   };
 
@@ -166,7 +166,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   // check for valid email id
   const isValidEmail = (email) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail.com$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|kiet\.edu)$/;
     return emailRegex.test(email);
   };
 

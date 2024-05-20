@@ -7,13 +7,15 @@ import Footer from "../../components/Footer";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Banner from "./Banner.jsx";
+import toast from 'react-hot-toast'; 
+
 export function Home() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phoneno: "",
+    subject: "",
     message: "",
   });
 
@@ -27,8 +29,13 @@ export function Home() {
 
   const form = useRef();
 
-  const sendEmail = async () => {
-    console.log("Submit conatct details");
+  const sendEmail = async (event) => {
+    event.preventDefault();
+    
+    const isValidateRequest = isValidate(formData);
+    if (!isValidateRequest) {
+      return;
+    }
 
     await fetch('/api/sendemail', {
       method: "POST",
@@ -366,3 +373,25 @@ export function Home() {
 }
 
 export default Home;
+
+
+const isValidate = (formData) => { 
+  if (!formData.name) {
+    toast.error("Please enter your name");
+    return false;
+  }
+  if (!formData.email || !formData.email.includes("@gmail.com")){
+    toast.error("Please enter your email");
+    return false;
+  }
+  if (!formData.subject) {
+    toast.error("Please enter your phone number");
+    return false;
+  }
+  if (!formData.message) {
+    toast.error("Please enter your message");
+    return false;
+  }
+
+  return true;
+}
