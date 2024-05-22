@@ -4,6 +4,9 @@ import {
   quizPrediction,
 } from "../controllers/prediction.controller.js";
 import { v2 as cloudinary } from "cloudinary";
+import dotenv from 'dotenv';
+
+dotenv.config(); // Load environment variables
 
 const router = Router();
 
@@ -28,24 +31,39 @@ router.post("/getCloudinaryConfigurations", (req, res) => {
 });
 
 router.post("/deleteImage", async (req, res) => {
-  const { publicIds } = req.body; // Expecting an array of publicIds
+  const { publicId } = req.body;
 
-  if (!publicIds || !Array.isArray(publicIds)) {
-    return res
-      .status(400)
-      .json({ error: "No publicIds provided or publicIds is not an array" });
+  if (!publicId) {
+    return res.status(400).json({ error: "Invalid publicId" });
   }
 
   try {
-    const result = await cloudinary.api.delete_resources(publicIds, {
-      type: "upload",
-      resource_type: "image",
-    });
-    res.status(200).json({ result });
+    const isDeleted = await deleteImage(publicId);
+
+    if (isDeleted) {
+      return res.json({ ok: "true" });
+    } else {
+      return res.status(500).json({ error: "Failed to delete image" });
+    }
   } catch (error) {
-    console.error("Error deleting image:", error);
-    res.status(500).json({ error: "Failed to delete image" });
+    return res.status(500).json({ error: error.message });
   }
 });
+
+const deleteImage = async (publicId) => {
+  try {
+    const result = await cloudinary.uploader.destroy(publicId, { resource_type: "image" });
+    if (result.result === "ok") {
+      console.log('Image deleted successfully:', result);
+      return true;
+    } else {
+      console.error('Failed to delete image:', result);
+      return false;
+    }
+  } catch (error) {
+    console.error('Error deleting image:', error);
+    return false;
+  }
+}
 
 export default router;

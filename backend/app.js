@@ -14,9 +14,9 @@ const limiter = rateLimit({
 
 app.use(
   cors({
-    origin: "http://127.0.0.1:3000",
+    origin: "http://127.0.0.1:5000",
     // credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
     exposedHeaders: ["Content-Length", "Authorization"],
   })

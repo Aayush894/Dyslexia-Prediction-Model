@@ -49,25 +49,25 @@ function ImagePrediction() {
     }
   };
 
-  // const deleteImage = async (publicIds) => {
-  //   try {
-  //     const res = await fetch("/api/deleteImage", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ publicIds }),
-  //     });
+  const deleteImage = async (publicId) => {
+    try {
+      const res = await fetch("/api/deleteImage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ publicId }),
+      });
   
-  //     if (!res.ok) {
-  //       throw new Error("Failed to delete image from Cloudinary");
-  //     }
+      if (!res.ok) {
+        throw new Error("Failed to delete image from Cloudinary");
+      }
   
-  //     const deleteData = await res.json();
-  //     return deleteData;
-  //   } catch (error) {
-  //     console.error("Error deleting image:", error);
-  //     throw new Error("Failed to delete image from Cloudinary");
-  //   }
-  // };
+      const deleteData = await res.json();
+      return deleteData;
+    } catch (error) {
+      console.error("Error deleting image:", error);
+      throw new Error("Failed to delete image from Cloudinary");
+    }
+  };
   
 
   const handleImageSubmit = async () => {
@@ -94,7 +94,7 @@ function ImagePrediction() {
       }
   
       const uploadedImageUrl = uploadResponse.secure_url;
-      // const publicId = uploadResponse.public_id;
+      const publicId = uploadResponse.public_id;
   
       const textConvertUrl = "/api/convertText";
   
@@ -136,9 +136,9 @@ function ImagePrediction() {
       } else {
         throw new Error("Invalid prediction result");
       }
-  
+
       // Delete the image from Cloudinary after prediction
-      // await deleteImage([publicId]);
+      await deleteImage(publicId);
   
     } catch (error) {
       toast.error(error.message);
