@@ -6,7 +6,7 @@ const imagePrediction = async (req, res) => {
     // console.log("Text received:", text);
 
     // const resultUrl = "https://serverdeploy-0xzn.onrender.com/api/submit_text";
-    const resultUrl = "http://192.168.43.208:8000/api/submit_text";
+    const resultUrl = process.env.IMAGE_URL;
 
     const response = await fetch(resultUrl, {
       method: "POST",
@@ -37,7 +37,7 @@ const quizPrediction = async (req, res) => {
     const data = req.body.quiz;
     const time = req.body.time;
 
-    const resultUrl = "http://192.168.43.208:8000/api/submit_quiz";
+    const resultUrl = process.env.QUIZ_URL;
 
     const response = await fetch(resultUrl, {
       mode: "cors",
