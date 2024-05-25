@@ -6,32 +6,49 @@ const imagePrediction = async (req, res) => {
     const { text } = req.body; // Extract 'text' from request body
     console.log("text:", text) ; 
 
-    const resultUrl = process.env.IMAGE_URL;
-    if (!resultUrl) {
-      throw new Error("IMAGE_URL is not defined in environment variables");
-    }
+    var myHeaders = new Headers();
+    myHeaders.append("apikey", "I6WIDHSqFTkrapsMfS1HwbAyJPszUkcd");
 
-    const response = await axios.post(resultUrl, { text }, {
-      headers: { "Content-Type": "application/json" }
-    });
 
-    console.log("Response status:", response.status);
-    console.log("Response data:", response.data);
+    var requestOptions = {
+      method: 'POST',
+      redirect: 'follow',
+      headers: myHeaders,
+      body: text
+    };
 
-    // if (response.ok === false){
-    //   throw new Error(`HTTP error! status: ${response.status}`);
+    let response = {} ; 
+    fetch("https://api.apilayer.com/text_to_emotion", requestOptions)
+      .then(response => response.text())
+      .then(result =>{ console.log(result); res.status(200).json({ result: result }); })
+      .catch(error => {console.log('error', error); res.status(500).json({ error: "Internal Server Error" })});
+
+    // const resultUrl = process.env.IMAGE_URL;
+    // if (!resultUrl) {
+    //   throw new Error("IMAGE_URL is not defined in environment variables");
     // }
 
-    // const data = await (); // Parse response body as JSON
-    const data = response.data ; 
+    // const response = await axios.post(resultUrl, { text }, {
+    //   headers: { "Content-Type": "application/json" }
+    // });
 
-    console.log(data) ; 
+    // console.log("Response status:", response.status);
+    // console.log("Response data:", response.data);
 
-    if (data && data.result) {
-      res.status(200).json({ result: data.result });
-    } else {
-      throw new Error("Invalid response data");
-    }
+    // // if (response.ok === false){
+    // //   throw new Error(`HTTP error! status: ${response.status}`);
+    // // }
+
+    // // const data = await (); // Parse response body as JSON
+    // const data = response.data ; 
+
+    // console.log(data) ; 
+
+    // if (data && data.result) {
+    //   res.status(200).json({ result: data.result });
+    // } else {
+    //   throw new Error("Invalid response data");
+    // }
   } catch (error) {
     console.error("Error while fetching or processing result:", error.message);
     res.status(500).json({ error: "Internal Server Error" });
