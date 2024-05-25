@@ -2,32 +2,30 @@ import fetch from "node-fetch";
 
 const imagePrediction = async (req, res) => {
   try {
-    const text = req.body.text; // Extract 'text' from request body
-    // console.log("Text received:", text);
+    const { text } = req.body; // Extract 'text' from request body
+    console.log("text:", text) ; 
 
-    // const resultUrl = "https://serverdeploy-0xzn.onrender.com/api/submit_text";
     const resultUrl = process.env.IMAGE_URL;
-    console.log(resultUrl); 
-
-    // const response = await fetch(resultUrl, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ text: text }),
-    // });
-
-    const data = { 
-      ok: true, 
-      result: "There is high chance of Dyslexia", 
-      message: "Score Available"
+    if (!resultUrl) {
+      throw new Error("IMAGE_URL is not defined in environment variables");
     }
+
+    const response = await fetch(resultUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+    });
+
+    console.log(response) ; 
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch");
+    }
+
+    const data = await response.json(); // Parse response body as JSON
+
+    console.log(data) ; 
     
-    // if (!response.ok) {
-    //   throw new Error("Failed to fetch");
-    // }
-
-    // const data = await response.json(); // Parse response body as JSON
-    // // console.log("Response data:", data);
-
     if (data && data.result) {
       res.status(200).json({ result: data.result });
     } else {
@@ -41,19 +39,17 @@ const imagePrediction = async (req, res) => {
 
 const quizPrediction = async (req, res) => {
   try {
-    const data = req.body.quiz;
-    const time = req.body.time;
-
+    const { quiz, time } = req.body;
     const resultUrl = process.env.QUIZ_URL;
+    if (!resultUrl) {
+      throw new Error("QUIZ_URL is not defined in environment variables");
+    }
 
     const response = await fetch(resultUrl, {
       mode: "cors",
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        quiz: data,
-        time: time,
-      }),
+      body: JSON.stringify({ quiz, time }),
     });
 
     if (!response.ok) {
@@ -61,7 +57,6 @@ const quizPrediction = async (req, res) => {
     }
 
     const resultData = await response.json(); // Parse response body as JSON
-    // console.log("Response data:", data);
 
     if (resultData && resultData.result) {
       res.status(200).json({ ok: resultData.ok, result: resultData.result, message: resultData.message });
