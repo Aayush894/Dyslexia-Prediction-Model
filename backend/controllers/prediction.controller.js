@@ -7,19 +7,26 @@ const imagePrediction = async (req, res) => {
 
     // const resultUrl = "https://serverdeploy-0xzn.onrender.com/api/submit_text";
     const resultUrl = process.env.IMAGE_URL;
+    console.log(resultUrl); 
 
-    const response = await fetch(resultUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: text }),
-    });
+    // const response = await fetch(resultUrl, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ text: text }),
+    // });
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch");
+    const data = { 
+      ok: true, 
+      result: "There is high chance of Dyslexia", 
+      message: "Score Available"
     }
+    
+    // if (!response.ok) {
+    //   throw new Error("Failed to fetch");
+    // }
 
-    const data = await response.json(); // Parse response body as JSON
-    // console.log("Response data:", data);
+    // const data = await response.json(); // Parse response body as JSON
+    // // console.log("Response data:", data);
 
     if (data && data.result) {
       res.status(200).json({ result: data.result });
