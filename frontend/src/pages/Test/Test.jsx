@@ -71,31 +71,6 @@ function Test() {
         </div>
 
         <div className = "card-component">
-          <Link to="/test/survey">
-            <Card>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image="/assets/family.jpg"
-                  alt="image"
-                />
-                <CardContent className="bg-blue-500">
-                  <Typography gutterBottom variant="h5" component="div">
-                    Parent Survey
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Assessing Your Child's Strengths: This test module processes
-                    your child's audio, providing a personalized score for a
-                    comprehensive evaluation.
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Link>
-        </div>
-
-        <div className = "card-component">
           <Link to="/test/integratedTest">
             <Card>
               <CardActionArea>
@@ -120,6 +95,33 @@ function Test() {
             </Card>
           </Link>
         </div>
+
+        
+        <div className = "card-component">
+          <Link to="/test/survey">
+            <Card>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image="/assets/family.jpg"
+                  alt="image"
+                />
+                <CardContent className="bg-blue-500">
+                  <Typography gutterBottom variant="h5" component="div">
+                    Parent Survey
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Assessing Your Child's Strengths: This test module processes
+                    your child's audio, providing a personalized score for a
+                    comprehensive evaluation.
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Link>
+        </div>
+
       </div>
       <div>
         <Footer />

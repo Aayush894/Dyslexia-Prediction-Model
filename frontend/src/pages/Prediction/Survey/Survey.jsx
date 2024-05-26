@@ -6,8 +6,6 @@ import NavBar from "../../../components/NavBar/NavBar";
 import { useState, useRef} from "react";
 import "./survey.css";
 
-
-
 function Question({ id, text, options }) {
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -19,7 +17,7 @@ function Question({ id, text, options }) {
 
   const handleClickQuestion = () => {
     setSelectedOption(null); // Reset selected option when the question is clicked
-  };
+  }; 
 
   return (
     <>
@@ -97,6 +95,7 @@ function Survey() {
       setSurveyAttended(isSurveyFilled === "true" ? true : false);
     }
   }, []); 
+  let flag = 1 ;
 
   if (localStorage.getItem('authToken') === null ){
     return (
@@ -119,6 +118,14 @@ function Survey() {
   else {
   return (
     <>
+    {flag ?
+    <div>
+      <NavBar />
+      <div className="text-lg"> This is not open Yet.... Work In Progress</div>
+      <Footer />
+    </div>
+    :
+    <div>
       <div>
         <NavBar />
       </div>
@@ -350,6 +357,8 @@ function Survey() {
       <div>
         <Footer />
       </div>
+      </div>
+  }
     </>
   );
 }}

@@ -19,6 +19,7 @@ import Profile from "./pages/Profile/Profile.jsx";
 import Survey from "./pages/Prediction/Survey/Survey.jsx";
 import ImagePrediction from "./pages/Prediction/ImagePrediction/ImagePrediction.jsx";
 import Quiz from "./pages/Prediction/Quiz/Quiz.jsx";
+import IntegratedTest from './pages/Prediction/IntegratedTest/IntegratedTest.jsx'
 import { useAuthContext } from "./context/AuthContext.jsx";
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
             />
             <Route exact path="/test/survey" element={<Survey />} />
             <Route exact path="/test/quiz" element={<Quiz />} />
+            <Route exact path="/test/integratedTest" element={<IntegratedTest />} />
           </Routes>
         </div>
       </Router>
