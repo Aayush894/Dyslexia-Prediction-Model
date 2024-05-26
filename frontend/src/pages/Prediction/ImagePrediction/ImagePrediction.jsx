@@ -244,7 +244,8 @@ function ImagePrediction() {
         <div className="max-w-md w-full md:max-w-xl rounded-lg shadow-xl bg-gray-50 p-6">
           {processing ? (
             <div className="text-center">
-              <p className="mb-4 text-lg font-semibold">Processing...</p>
+              <p className="mb-4 text-lg font-semibold"><b>Note:</b> It takes at most 5 minutes, Result in</p>
+              <p className="mb-4 text-lg font-semibold">Result in Processing</p>
               <div>
                 <CircularProgress />
               </div>
