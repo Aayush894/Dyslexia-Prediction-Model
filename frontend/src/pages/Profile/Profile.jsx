@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Footer from "../../components/Footer/Footer";
 import "./profile.css";
 
 const Profile = () => {
@@ -43,7 +44,7 @@ const Profile = () => {
   // console.log(user);
 
   return (
-    <div className="container">
+    <>
       <div className="main-body">
         <nav aria-label="breadcrumb" className="main-breadcrumb">
           <ol className="breadcrumb">
@@ -67,9 +68,9 @@ const Profile = () => {
                     className="rounded-circle"
                     width="150"
                   />
-                  <div className="mt-3">
+                  <div className="mt-2">
                     <h4>{user.username}</h4>
-                    <button className="btn btn-outline-primary" onClick={handleTest} >Test</button>
+                    <button className="btn btn-outline-primary mt-2" onClick={handleTest} >Take Test</button>
                   </div>
                 </div>
               </div>
@@ -80,42 +81,40 @@ const Profile = () => {
               <div className="card-body">
                 <div className="row">
                   <div className="col-sm-3">
-                    <h6 className="mb-0">Username</h6>
+                    <h6 className="my-2 text-2xl">Username</h6>
                   </div>
-                  <div className="col-sm-9 text-secondary">{user.username}</div>
+                  <div className="my-2 col-sm-9 text-secondary">{user.username}</div>
                 </div>
                 <hr />
                 <div className="row">
                   <div className="col-sm-3">
-                    <h6 className="mb-0">Email</h6>
+                    <h6 className="my-2 text-2xl">Email</h6>
                   </div>
-                  <div className="col-sm-9 text-secondary">{user.email}</div>
+                  <div className="my-2 col-sm-9 text-secondary">{user.email}</div>
                 </div>
                 <hr />
                 <div className="row">
                   <div className="col-sm-3">
-                    <h6 className="mb-0">Phone</h6>
+                    <h6 className="my-2 text-2xl">Phone</h6>
                   </div>
-                  <div className="col-sm-9 text-secondary">(+91) {user.phoneno}</div>
+                  <div className="my-2 col-sm-9 text-secondary">(+91) {user.phoneno}</div>
                 </div>
                 <hr />
                 <div className="row">
                   <div className="col-sm-3">
-                    <h6 className="mb-0">Age</h6>
+                    <h6 className="my-2 text-2xl">Age</h6>
                   </div>
-                  <div className="col-sm-9 text-secondary">
+                  <div className="my-2 col-sm-9 text-secondary">
                     {user.age}
                   </div>
                 </div>
                 <hr />
                 <div className="row">
-                  <div className="col-sm-12">
-                    <Link
-                      className="btn btn-info "
-                      to="/updateUser"
-                    >
-                      Edit
-                    </Link>
+                  <div className="col-sm-3">
+                    <h6 className="my-2 text-2xl">Bio</h6>
+                  </div>
+                  <div className="my-2 col-sm-9 text-secondary">
+                    {user.bio? user.bio: "No bio provided"}
                   </div>
                 </div>
               </div>
@@ -123,7 +122,8 @@ const Profile = () => {
           </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

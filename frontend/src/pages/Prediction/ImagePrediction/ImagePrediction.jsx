@@ -1,4 +1,4 @@
-import Footer from "../../../components/Footer";
+import Footer from "../../../components/Footer/Footer.jsx";
 import Navbar from "../../../components/NavBar/NavBar.jsx";
 import { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -244,7 +244,8 @@ function ImagePrediction() {
         <div className="max-w-md w-full md:max-w-xl rounded-lg shadow-xl bg-gray-50 p-6">
           {processing ? (
             <div className="text-center">
-              <p className="mb-2 text-lg font-semibold"><b>Note:</b> It takes at most 5 minutes</p>
+              <p className="mb-2 text-lg font-semibold"><b>Note:</b>Model Api is currently deployed on Render so it take initial load time</p>
+              <p className="mb-2 text-lg ml-4 font-semibold">It takes at most 5 minutes</p>
               <p className="mb-4 text-lg font-semibold">Result in Processing</p>
               <div>
                 <CircularProgress />

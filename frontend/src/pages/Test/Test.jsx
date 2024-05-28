@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import Footer from "../../components/Footer";
+import Footer from "../../components/Footer/Footer";
 import NavBar from "../../components/NavBar/NavBar";
 
 import { Link } from "react-router-dom";

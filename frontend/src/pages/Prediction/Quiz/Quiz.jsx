@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import NavBar from "../../../components/NavBar/NavBar";
-import Footer from "../../../components/Footer";
+import Footer from "../../../components/Footer/Footer";
 import React, { useState, useRef, useEffect } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { CircularProgress } from "@mui/material";
 
 function Question({ id, text, options, imgSrc, audioSrc }) {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -69,9 +70,11 @@ function Quiz() {
   const formRef = useRef(null);
   const [result, setResult] = useState("");
   const [startTime, setStartTime] = useState(0);
+  const [processing, setProcessing] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setProcessing(true);
     const form = formRef.current;
     const endTime = new Date().getTime();
     let data = {};
@@ -111,10 +114,12 @@ function Quiz() {
       }
 
       const resultMessage = responseData.result;
+      setProcessing(false);
       setResult(resultMessage);
       toast.success("Quiz submitted successfully!");
 
     } catch (error) {
+      setProcessing(false);
       toast.error("Error: " + error.message);
       console.error("Error submitting quiz:", error);
     }
@@ -123,13 +128,50 @@ function Quiz() {
   useEffect(() => {
     setStartTime(new Date().getTime());
   }, []);
-
-  if (result === "") {
+  if (processing == true) {
     return (
       <>
         <div>
           <NavBar />
-          <Toaster />
+        </div>
+        <div>
+          <div className="parallax1">
+            <div id="warning">
+              <center>
+                This quiz is specially designed for students to test if they are
+                dyslexic or not. Students are advised to attempt all the questions
+                patiently under the surveillance of an elder.
+                <br />
+                ALL THE BEST JUNIOR!
+              </center>
+            </div>
+          </div>
+          <div className="main">
+            <div className="question">
+              <center>
+              <div className="text-center">
+              <p className="mb-2 text-lg font-semibold"><b>Note:</b>Model Api is currently deployed on Render so it take initial load time</p>
+              <p className="mb-2 text-lg ml-4 font-semibold">It takes at most 5 minutes</p>
+              <p className="mb-4 text-lg font-semibold">Result in Processing</p>
+              <div>
+                <CircularProgress />
+              </div>
+            </div>
+              </center>
+            </div>
+          </div>
+        </div>
+        <div>
+          <Footer />
+        </div>
+      </>
+    );
+  }
+  else if (result === "") {
+    return (
+      <>
+        <div>
+          <NavBar />
         </div>
         <div>
           <div className="parallax1">
@@ -290,9 +332,31 @@ function Quiz() {
       <>
         <div>
           <NavBar />
-          <Toaster />
         </div>
-        <div>{result}</div>
+        <div>
+          <div className="parallax1">
+            <div id="warning">
+              <center>
+                This quiz is specially designed for students to test if they are
+                dyslexic or not. Students are advised to attempt all the questions
+                patiently under the surveillance of an elder.
+                <br />
+                ALL THE BEST JUNIOR!
+              </center>
+            </div>
+          </div>
+          <div className="main">
+            <div className="question">
+              <center>
+              <div className="text-center">
+              <p className="mb-2 text-lg font-semibold"><b>Note:</b>Model Api is currently deployed on Render so it take initial load time</p>
+              <p className="mb-2 text-lg ml-4 font-semibold">It takes at most 5 minutes</p>
+              <p className="mb-4 text-lg font-semibold">Result: {result}</p>
+            </div>
+              </center>
+            </div>
+          </div>
+        </div>
         <div>
           <Footer />
         </div>

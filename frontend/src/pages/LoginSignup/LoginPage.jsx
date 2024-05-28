@@ -1,4 +1,4 @@
-import Footer from "../../components/Footer";
+import Footer from "../../components/Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import {jwtDecode} from "jwt-decode";

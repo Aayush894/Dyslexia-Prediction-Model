@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import ThemeChanger from "./SwitchTheme.jsx";
 import { Disclosure } from "@headlessui/react";
@@ -99,7 +100,7 @@ const Navbar = () => {
                       >
                         Team
                       </a> */}
-                      {localStorage.getItem("authToken") ? (
+                      {/* {localStorage.getItem("authToken") ? ( */}
                         <>
                           <Link
                             to="/test"
@@ -108,15 +109,15 @@ const Navbar = () => {
                             Test
                           </Link>
                           <Link
-                            to="/testrecord"
+                            to="/history"
                             className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
                           >
                             History
                           </Link>
                         </>
-                      ) : (
-                        ""
-                      )}
+                      {/* ) : ( */}
+                        {/* "" */}
+                      {/* )} */}
                     </div>
 
                     {!localStorage.getItem("authToken") ? (
@@ -129,7 +130,7 @@ const Navbar = () => {
                         </Link>
                       </div>
                     ) : (
-                      <div className="d-flex">
+                      <div className="d-flex justify-end">
                         <div
                           className="w-full px-4 mt-auto text-center text-white bg-indigo-600 rounded-md lg:ml-5"
                           onClick={handleLogout}
@@ -166,7 +167,7 @@ const Navbar = () => {
               >
                 Team
               </a> */}
-              {localStorage.getItem("authToken") ? (
+              {/* {localStorage.getItem("authToken") ? ( */}
                 <>
                   <Link
                     to="/test"
@@ -175,15 +176,15 @@ const Navbar = () => {
                     Test
                   </Link>
                   <Link
-                    to="/testrecord"
+                    to="/history"
                     className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none"
                   >
                     History
                   </Link>
                 </>
-              ) : (
+              {/* ) : (
                 ""
-              )}
+              )} */}
             </li>
           </ul>
         </div>
@@ -199,7 +200,7 @@ const Navbar = () => {
               </Link>
             </div>
           ) : (
-            <div className="d-flex">
+            <div className="d-flex align-items-end justify-end">
               <div
                 className="w-full px-4 py-2 mt-auto text-center text-white bg-indigo-600 rounded-md lg:ml-5"
                 onClick={handleLogout}
@@ -209,7 +210,7 @@ const Navbar = () => {
             </div>
           )}
 
-          <ThemeChanger theme={theme} toggleTheme={toggleTheme} />
+          {/* <ThemeChanger theme={theme} toggleTheme={toggleTheme} /> */}
         </div>
       </nav>
     </div>

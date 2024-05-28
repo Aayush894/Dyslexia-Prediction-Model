@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
 import React, { useEffect } from "react";
-import Footer from "../../../components/Footer";
+import Footer from "../../../components/Footer/Footer";
 import NavBar from "../../../components/NavBar/NavBar";
 import { useState, useRef} from "react";
 import "./survey.css";
@@ -97,6 +97,19 @@ function Survey() {
   }, []); 
   let flag = 1 ;
 
+  {if (flag == 1)
+    return (
+      <div>
+        <NavBar />
+        <div className="d-flex align-items-center justify-content-center vh-100">
+          <div className="text-center">
+            <span className="display-6 fw-bold">This is not open Yet.... Work In Progress</span>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
   if (localStorage.getItem('authToken') === null ){
     return (
       <>
@@ -118,13 +131,6 @@ function Survey() {
   else {
   return (
     <>
-    {flag ?
-    <div>
-      <NavBar />
-      <div className="text-lg"> This is not open Yet.... Work In Progress</div>
-      <Footer />
-    </div>
-    :
     <div>
       <div>
         <NavBar />
@@ -358,7 +364,6 @@ function Survey() {
         <Footer />
       </div>
       </div>
-  }
     </>
   );
 }}

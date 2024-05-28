@@ -1,7 +1,7 @@
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar/NavBar";
+import Footer from "../../components/Footer/Footer";
+import NavBar from "../../components/NavBar/NavBar";
 
-function TestRecord() {
+function History() {
   return (
     <>
       <div>
@@ -19,4 +19,4 @@ function TestRecord() {
   );
 }
 
-export default TestRecord;
+export default History;
