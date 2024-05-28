@@ -8,7 +8,7 @@ import { useAuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
   const {setAuthUser} = useAuthContext();
 
   const toggleTheme = () => {
