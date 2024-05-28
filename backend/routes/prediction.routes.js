@@ -2,6 +2,8 @@ import { Router } from "express";
 import {
   imagePrediction,
   quizPrediction,
+  deleteImageControler, 
+  wakeUpCall
 } from "../controllers/prediction.controller.js";
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from 'dotenv';
@@ -18,17 +20,24 @@ cloudinary.config({
 });
 
 router.post("/imagePrediction", imagePrediction);
+
 router.post("/quizPrediction", quizPrediction);
 
-router.post("/getCloudinaryConfigurations", (req, res) => {
-  res.json({
-    ok: "true",
-    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
-    uploadPreset: process.env.CLOUDINARY_UPLOAD_PRESET,
-    apiKey: process.env.CLOUDINARY_API_KEY,
-    apiSecret: process.env.CLOUDINARY_API_SECRET,
-  });
-});
+const deleteImage = async (publicId) => {
+  try {
+    const result = await cloudinary.uploader.destroy(publicId, { resource_type: "image" });
+    if (result.result === "ok") {
+      console.log('Image deleted successfully:', result);
+      return true;
+    } else {
+      console.error('Failed to delete image:', result);
+      return false;
+    }
+  } catch (error) {
+    console.error('Error deleting image:', error);
+    return false;
+  }
+};
 
 router.post("/deleteImage", async (req, res) => {
   const { publicId } = req.body;
@@ -50,20 +59,16 @@ router.post("/deleteImage", async (req, res) => {
   }
 });
 
-const deleteImage = async (publicId) => {
-  try {
-    const result = await cloudinary.uploader.destroy(publicId, { resource_type: "image" });
-    if (result.result === "ok") {
-      console.log('Image deleted successfully:', result);
-      return true;
-    } else {
-      console.error('Failed to delete image:', result);
-      return false;
-    }
-  } catch (error) {
-    console.error('Error deleting image:', error);
-    return false;
-  }
-}
+router.post("/wakeupcall", wakeUpCall);
+
+router.post("/getCloudinaryConfigurations", (req, res) => {
+  res.json({
+    ok: "true",
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    uploadPreset: process.env.CLOUDINARY_UPLOAD_PRESET,
+    apiKey: process.env.CLOUDINARY_API_KEY,
+    apiSecret: process.env.CLOUDINARY_API_SECRET,
+  });
+});
 
 export default router;

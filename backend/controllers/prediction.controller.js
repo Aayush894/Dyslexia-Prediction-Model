@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import axios from 'axios';
+import { v2 as cloudinary } from "cloudinary";
 
 const imagePrediction = async (req, res) => {
   try {
@@ -87,4 +88,62 @@ const quizPrediction = async (req, res) => {
   }
 };
 
-export { imagePrediction, quizPrediction };
+const deleteImage = async (publicId) => {
+  try {
+    const result = await cloudinary.uploader.destroy(publicId, { resource_type: "image" });
+    if (result.result === "ok") {
+      console.log('Image deleted successfully:', result);
+      return true;
+    } else {
+      console.error('Failed to delete image:', result);
+      return false;
+    }
+  } catch (error) {
+    console.error('Error deleting image:', error);
+    return false;
+  }
+};
+
+const deleteImageControler = async (req, res) => {
+  const { publicId } = req.body;
+
+  if (!publicId) {
+    return res.status(400).json({ error: "Invalid publicId" });
+  }
+
+  try {
+    const isDeleted = await deleteImage(publicId);
+
+    if (isDeleted) {
+      return res.json({ ok: "true" });
+    } else {
+      return res.status(500).json({ error: "Failed to delete image" });
+    }
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+const wakeUpCall =  async (req, res) => {
+  try {
+    const imageurl = process.env.IMAGE_URL;
+    console.log(imageurl); 
+    
+    const text = "Hello, World! This is a test message. This is used for testing the API. Model API is working fine or not."
+    const response = await fetch(imageurl, {
+      mode: "cors", 
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({text: text}),
+    });
+    const data = await response.json();
+    console.log(data);
+
+    res.status(200).send({ success: true, message: "API Wake-up Call Success", data });
+  } catch (error) {
+    console.error("API Wake-up Call Failed:", error);
+    res.status(500).send({ success: false, message: "API Wake-up Call Failed", error });
+  }
+}; 
+
+export { imagePrediction, quizPrediction, deleteImageControler, wakeUpCall };

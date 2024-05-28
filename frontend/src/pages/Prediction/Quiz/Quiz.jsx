@@ -351,7 +351,7 @@ function Quiz() {
               <div className="text-center">
               <p className="mb-2 text-lg font-semibold"><b>Note:</b>Model Api is currently deployed on Render so it take initial load time</p>
               <p className="mb-2 text-lg ml-4 font-semibold">It takes at most 5 minutes</p>
-              <p className="mb-4 text-lg font-semibold">Result: {result}</p>
+              <p className="mb-4 text-lg"> <span className="font-semibold">Result:</span> {result}</p>
             </div>
               </center>
             </div>
