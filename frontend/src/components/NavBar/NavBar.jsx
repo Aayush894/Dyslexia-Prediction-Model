@@ -29,7 +29,7 @@ const Navbar = () => {
   return (
     <div
       className={`w-full ${
-        theme === "dark" ? "bg-dark text-light" : "bg-light text-dark"
+        theme === "dark" ? "bg-black text-light" : "bg-light text-dark"
       }`}
     >
       <nav className="container relative flex flex-wrap items-center justify-between p-6 mx-auto lg:justify-between xl:px-0">
