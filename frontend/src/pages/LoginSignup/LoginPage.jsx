@@ -5,6 +5,7 @@ import {jwtDecode} from "jwt-decode";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../../context/AuthContext";
+import Swal from 'sweetalert2'
 
 export default function LoginPage() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -34,7 +35,13 @@ export default function LoginPage() {
       localStorage.setItem("authToken", json.authToken);
       setAuthUser(json.authToken); 
 
-      toast.success("Login Successful!");
+      Swal.fire({
+        title: 'Success!',
+        text: 'Login Successful!',
+        icon: 'success',
+        confirmButtonText: 'Cool',
+        timer: 2500
+      })
       navigate("/");
     }
   };
@@ -45,7 +52,13 @@ export default function LoginPage() {
     const isVerified = decoded.email_verified;
 
     if (!isVerified) {
-      toast.error("Email not verified");
+      Swal.fire({
+        title: 'Error!',
+        text: 'Email not verified',
+        icon: 'error',
+        confirmButtonText: 'Cool',
+        timer: 2500
+      })
       return;
     }
 
@@ -66,11 +79,15 @@ export default function LoginPage() {
       localStorage.setItem("userEmail", userEmail);
       localStorage.setItem("authToken", json.authToken);
       setAuthUser(json.authToken);
-
-      toast.success("Google Login Successful!");
+      
+      Swal.fire({
+        title: 'Success!',
+        text: 'Google Login Successful!',
+        icon: 'success',
+        confirmButtonText: 'Cool',
+        timer: 2500
+      });
       navigate("/");
-
-
     }
   };
 
@@ -159,7 +176,7 @@ export default function LoginPage() {
           </div>
         </div>
       </section>
-      <div className="d-flex mx-auto justify-content-center">
+      <div>
         <Footer />
       </div>
     </div>

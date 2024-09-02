@@ -14,7 +14,8 @@ const limiter = rateLimit({
 
 app.use(
   cors({
-    origin: "https://dyslexia-prediction-model-ia3w.onrender.com",
+    // origin: "https://dyslexia-prediction-model-ia3w.onrender.com",
+    origin: "*",
     // credentials: true,
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],

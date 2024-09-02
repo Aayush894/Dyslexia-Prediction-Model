@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import toast from "react-hot-toast";
+import Swal from 'sweetalert2'
 
 function Signup() {
   const [credentials, setCredentials] = useState({
@@ -193,23 +194,53 @@ export default Signup;
 
 const Validate = (credentials) => {
   if (!credentials.username) {
-    toast.error("Username is required");
+    Swal.fire({
+      title: 'Error!',
+      text: 'Username is required',
+      icon: 'error',
+      confirmButtonText: 'Cool',
+      timer: 2500
+    })
     return true ;
   }
   if (!credentials.email) {
-    toast.error("Email is required");
+    Swal.fire({
+      title: 'Error!',
+      text: 'Email is required',
+      icon: 'error',
+      confirmButtonText: 'Cool',
+      timer: 2500
+    })
     return true ;
   }
   if (!credentials.password) {
-    toast.error("Password is required");
+    Swal.fire({
+      title: 'Error!',
+      text: 'Password is required',
+      icon: 'error',
+      confirmButtonText: 'Cool',
+      timer: 2500
+    })
     return true ;
   }
   if (!credentials.phoneno) {
-    toast.error("Phone Number is required");
+    Swal.fire({
+      title: 'Error!',
+      text: 'Phone Number is required',
+      icon: 'error',
+      confirmButtonText: 'Cool',
+      timer: 2500
+    })
     return true ;
   }
   if (!credentials.age) {
-    toast.error("Age is required");
+    Swal.fire({
+      title: 'Error!',
+      text: 'Age is required',
+      icon: 'error',
+      confirmButtonText: 'Cool',
+      timer: 2500
+    })
     return true ;
   }
   
@@ -217,13 +248,25 @@ const Validate = (credentials) => {
   if (credentials.username.length) {
     const usernameRegex = /^[a-zA-Z]+\d*$/;
     if (!usernameRegex.test(credentials.username)) {
-      toast.error("Username must consist of lowercase  or uppercase letters followed by digits");
+      Swal.fire({
+        title: 'Error!',
+        text: 'Username must consist of lowercase  or uppercase letters followed by digits',
+        icon: 'error',
+        confirmButtonText: 'Cool',
+        timer: 2500
+      })
       return true ;
     }
   }
 
   if (credentials.password.length < 4) {
-    toast.error("Password must be atleast 4 characters long");
+    Swal.fire({
+      title: 'Error!',
+      text: 'Password must be atleast 4 characters long',
+      icon: 'error',
+      confirmButtonText: 'Cool',
+      timer: 2500
+    })
     return true ;
   }
 
