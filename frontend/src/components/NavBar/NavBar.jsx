@@ -5,7 +5,7 @@ import { Disclosure } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
-
+import Swal from "sweetalert2";
 const Navbar = () => {
   const navigate = useNavigate();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
@@ -19,11 +19,33 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userEmail");
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, logout!'
+    }).then(function (result) {
+      if (result.isConfirmed) {
+      Swal.fire(
+        'Your has been logged out.',
+        'success'
+      )
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("userEmail");
 
-    setAuthUser(null);
-    navigate("/");
+      setAuthUser(null);
+      navigate("/");
+      } else {
+        Swal.fire(
+          'Cancelled',
+          'You are still logged in',
+          'error'
+        )
+      }
+    }) 
   };
 
   return (

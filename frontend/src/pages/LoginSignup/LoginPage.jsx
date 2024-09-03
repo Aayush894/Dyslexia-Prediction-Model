@@ -42,6 +42,21 @@ export default function LoginPage() {
         confirmButtonText: 'Cool',
         timer: 2500
       })
+
+      const response = fetch('/api/wakeupcall', {
+        method: "POST",
+        body: JSON.stringify({}),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+         },
+      })
+
+      if (response.success) {
+        toast.success("API Wake-up Call Success") 
+      } else {
+        toast.error("API Wake-up Call Failed")
+      }
       navigate("/");
     }
   };

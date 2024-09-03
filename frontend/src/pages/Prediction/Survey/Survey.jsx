@@ -95,7 +95,7 @@ function Survey() {
       setSurveyAttended(isSurveyFilled === "true" ? true : false);
     }
   }, []); 
-  let flag = 1 ;
+  let flag = 0 ;
 
   {if (flag == 1)
     return (
@@ -114,7 +114,11 @@ function Survey() {
     return (
       <>
         <div> <NavBar /> </div>
-        <div> Please Login to fill the survey </div>
+        <div className="d-flex align-items-center justify-content-center vh-100">
+          <div className="text-center">
+            <span className="display-6 fw-bold">Please Login to fill the survey...</span>
+          </div>
+        </div>
         <div> <Footer /> </div>
       </>
     ); 

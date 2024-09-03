@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef} from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar.jsx";
@@ -55,26 +55,6 @@ export function Home() {
         console.log("Error occur while fetching sendmail api", err);
       });
   };
-
-  useEffect(() => {
-    // This effect will run once when the component mounts to wake up the Render API
-    try {
-      const response = fetch('/api/wakeupcall', {
-          method: "POST",
-          body: JSON.stringify({}),
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-      })
-
-      toast.success("API Wake-up Call Success")
-      console.log(response);    
-    } catch (error) {
-        toast.error("API Wake-up Call Failed")
-        console.error(error)
-    }
-  }, []);
 
   return (
     <>
