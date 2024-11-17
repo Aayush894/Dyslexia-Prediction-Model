@@ -6,8 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+    "start": "node index.js"
   },
   "author": "Aayush Kumar Shrivastava",
   "license": "ISC",
