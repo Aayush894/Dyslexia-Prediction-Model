@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
-import ThemeChanger from "./SwitchTheme.jsx";
 import { Disclosure } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
