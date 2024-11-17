@@ -14,7 +14,7 @@ const limiter = rateLimit({
 
 app.use(
   cors({
-    origin: "https://dyslexia-prediction-model-ia3w.onrender.com",
+    origin:["https://dyslexia-prediction-model-ia3w.onrender.com", "https://dyslexilens-app-aayush2005s-projects.vercel.app"],
     // credentials: true,
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -36,6 +36,8 @@ app.use(express.json());
 app.use("/api", userRouter);
 app.use("/api", predictionRouter); 
 
-// http://localhost:5000/api/v1/users/register
+app.get("/healthCheck", (req, res) => {
+  res.send("Server is up and running");
+});
 
 export { app };
