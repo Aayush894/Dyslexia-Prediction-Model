@@ -36,6 +36,8 @@ app.use(express.json());
 app.use("/api", userRouter);
 app.use("/api", predictionRouter); 
 
-// http://localhost:5000/api/v1/users/register
+app.get("/", (req, res) => {
+  res.send("API is running....");
+});
 
 export { app };
