@@ -20,7 +20,7 @@ function Signup() {
     try {
       if (Validate({ ...credentials })) return; 
 
-      const response = await fetch("/api/signup", {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

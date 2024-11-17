@@ -95,7 +95,7 @@ function Quiz() {
       });
 
       const time = endTime - startTime;
-      const url = "/api/quizPrediction";
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/quizPrediction`;
 
       const response = await fetch(url, {
         mode: "cors",

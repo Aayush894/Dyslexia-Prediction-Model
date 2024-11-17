@@ -51,7 +51,7 @@ function ImagePrediction() {
 
   const deleteImage = async (publicId) => {
     try {
-      const res = await fetch("/api/deleteImage", {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/deleteImage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ publicId }),
@@ -80,7 +80,7 @@ function ImagePrediction() {
     setProcessing(true);
   
     try {
-      const cloudinaryDetails = await fetch("/api/getCloudinaryConfigurations", {
+      const cloudinaryDetails = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/getCloudinaryConfigurations`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
@@ -96,7 +96,7 @@ function ImagePrediction() {
       const uploadedImageUrl = uploadResponse.secure_url;
       const publicId = uploadResponse.public_id;
   
-      const textConvertUrl = "/api/convertText";
+      const textConvertUrl = `${import.meta.env.VITE_BACKEND_URL}/api/convertText`;
   
       // Convert image to text
       const textResponse = await fetch(textConvertUrl, {
@@ -116,7 +116,7 @@ function ImagePrediction() {
   
       console.log(allText);
   
-      const resultUrl = "/api/imagePrediction";
+      const resultUrl = `${import.meta.env.VITE_BACKEND_URL}/api/imagePrediction`;
   
       // Perform image prediction based on extracted text
       const predictionResponse = await fetch(resultUrl, {

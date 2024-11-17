@@ -15,7 +15,8 @@ export default function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/login", {
+
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +44,9 @@ export default function LoginPage() {
         timer: 2500
       })
 
-      const response = fetch('/api/wakeupcall', {
+      console.log(`API Wake-up Call: ${import.meta.env.VITE_BACKEND_URL}/api/wakeupcall`);
+
+      const response = fetch(`${import.meta.env.VITE_BACKEND_URL}/api/wakeupcall`, {
         method: "POST",
         body: JSON.stringify({}),
         headers: {
@@ -77,7 +80,7 @@ export default function LoginPage() {
       return;
     }
 
-    const response = await fetch("/api/googlelogin", {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/googlelogin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

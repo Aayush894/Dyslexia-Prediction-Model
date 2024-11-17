@@ -5,12 +5,12 @@ import Footer from "../../components/Footer/Footer";
 import "./profile.css";
 
 const Profile = () => {
-  const url = "/api/profile";
+  const url = `${import.meta.env.VITE_BACKEND_URL}/api/profile`;
   const [user, setUser] = useState({});
 
   const navigate = useNavigate() ; 
 
-  const fetchInfo = () => {
+  const fetchInfo = async () => {
     const authToken = localStorage.getItem("authToken"); // Get authToken from localStorage
 
     return fetch(url, {
@@ -35,7 +35,7 @@ const Profile = () => {
 
   useEffect(() => {
     fetchInfo();
-  }, []);
+  });
 
   const handleTest = ( ) => {
     navigate('/test') ; 

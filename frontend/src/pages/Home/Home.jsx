@@ -37,7 +37,7 @@ export function Home() {
       return;
     }
 
-    await fetch('/api/sendemail', {
+    await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/sendemail`, {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
