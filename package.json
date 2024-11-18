@@ -5,9 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+    "dev": "nodemon backend/index.js",
+    "start": "node backend/index.js"
   },
   "author": "Aayush Kumar Shrivastava",
   "license": "ISC",
