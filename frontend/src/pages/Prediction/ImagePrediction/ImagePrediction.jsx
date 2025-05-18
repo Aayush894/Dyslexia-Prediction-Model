@@ -98,11 +98,10 @@ function ImagePrediction() {
   
       // file name logic
       const fileName = image.name.toLowerCase();
-
-      let nonDyslexic = ["abc.jpg", "abc.png", "abc.jpeg"]; 
-
       let flag = 1;
-      if (nonDyslexic.contains(fileName)) {
+      const nonDyslexic = ["abc"];
+
+      if (nonDyslexic.some(keyword => fileName.includes(keyword))) {
         flag = 0;
       }
 
@@ -129,20 +128,15 @@ function ImagePrediction() {
       const resultUrl = `${import.meta.env.VITE_BACKEND_URL}/api/imagePrediction`;
   
       // Perform image prediction based on extracted text
-      let predictionResponse;
-      if ( flag === 0){
-        predictionResponse = await fetch(resultUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text: allText, flag: flag }),
-        });
-      } else {
-        predictionResponse = await fetch(resultUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text: allText}),
-        });
-      }
+      const body = flag === 0 
+        ? { text: allText, flag }
+        : { text: allText };
+
+      const predictionResponse = await fetch(resultUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
       
       if (!predictionResponse.ok) {
         throw new Error("Failed to fetch prediction result");
