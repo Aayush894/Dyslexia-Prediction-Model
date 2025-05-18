@@ -1,40 +1,17 @@
 from textblob import TextBlob
 import language_tool_python
 import requests
-import pandas as pd
-import os
-from flask import Flask, jsonify, request, render_template
-import speech_recognition as sr
-from gtts import gTTS
-import os
-import random
-import csv
-import time
-from flask import redirect, url_for
-from flask import Response
-from flask import session
-from pathlib import Path
 from textblob import TextBlob
-# import streamlit as st
-from PIL import Image
-import os
 import language_tool_python
 import requests
-import pandas as pd
-import random
-import speech_recognition as sr
-import pyttsx3
-import time
-import eng_to_ipa as ipa
 import requests
 from abydos.phonetic import Soundex, Metaphone, Caverphone, NYSIIS
 import pickle as pkl
 import numpy as np
 
 
-
 # model loaded
-loaded_model = pkl.load(open("/home/abhishek/Documents/Aayush_Dyslexia/Dysgraphia-Prediction-Model/flask_server/Decision_tree_model.sav", 'rb'))
+loaded_model = pkl.load(open("Decision_tree_model.sav", 'rb'))
 # ****************************************************************
 def levenshtein(s1, s2):
     # Initialize a matrix to store the Levenshtein distances

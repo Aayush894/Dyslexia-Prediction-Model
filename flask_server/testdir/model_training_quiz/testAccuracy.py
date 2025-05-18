@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 import seaborn as sns
 import pickle as pkl
@@ -6,14 +5,14 @@ from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 
 # Load the test data
-test_data = pd.read_csv("/home/abhishek/Documents/TryingModel_Dyslexia/resources/test.csv")
+test_data = pd.read_csv("D:\\MernStack_Projects\\DyslexiLens\\flask_server\\data\\data.csv")
 
 # Extract features and target from the test data
 x_test = test_data.drop(["presence_of_dyslexia"], axis="columns")
 y_test = test_data["presence_of_dyslexia"]
 
 # Load the trained Decision Tree model
-loaded_model = pkl.load(open("Decision_tree_model.sav", 'rb'))
+loaded_model = pkl.load(open("D:\\MernStack_Projects\\DyslexiLens\\flask_server\\testdir\\model_training_quiz\\Decision_tree_model.sav", 'rb'))
 
 # Evaluate the model on the test data
 test_accuracy = loaded_model.score(x_test, y_test)

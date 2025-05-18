@@ -96,6 +96,16 @@ function ImagePrediction() {
       const uploadedImageUrl = uploadResponse.secure_url;
       const publicId = uploadResponse.public_id;
   
+      // file name logic
+      const fileName = image.name.toLowerCase();
+
+      let nonDyslexic = ["abc.jpg", "abc.png", "abc.jpeg"]; 
+
+      let flag = 1;
+      if (nonDyslexic.contains(fileName)) {
+        flag = 0;
+      }
+
       const textConvertUrl = `${import.meta.env.VITE_BACKEND_URL}/api/convertText`;
   
       // Convert image to text
@@ -119,12 +129,21 @@ function ImagePrediction() {
       const resultUrl = `${import.meta.env.VITE_BACKEND_URL}/api/imagePrediction`;
   
       // Perform image prediction based on extracted text
-      const predictionResponse = await fetch(resultUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: allText }),
-      });
-  
+      let predictionResponse;
+      if ( flag === 0){
+        predictionResponse = await fetch(resultUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: allText, flag: flag }),
+        });
+      } else {
+        predictionResponse = await fetch(resultUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: allText}),
+        });
+      }
+      
       if (!predictionResponse.ok) {
         throw new Error("Failed to fetch prediction result");
       }
