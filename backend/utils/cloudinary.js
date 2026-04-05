@@ -3,9 +3,9 @@ import fs from 'fs';
 import { asyncHandler } from './asyncHandler.js';
 
 cloudinary.config({ 
-  cloud_name: 'aayush-shrivastava', 
-  api_key: '999711726997752', 
-  api_secret: 'U7jtp8OMsOgPtz8nd4g5jREamCk',
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET,
   secure: true,
 });
 
